@@ -1,0 +1,406 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		CB6EC2660EEC70790012512C /* NSString+URLEscapingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EC2650EEC70790012512C /* NSString+URLEscapingAdditions.m */; };
+		CB6EC3710EECE9030012512C /* MPOAuthSignatureParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EC3700EECE9030012512C /* MPOAuthSignatureParameter.m */; };
+		CB6EC3CC0EED02C60012512C /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = CB6EC3C60EED02C60012512C /* Base64Transcoder.c */; };
+		CB6EC3CD0EED02C60012512C /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = CB6EC3C80EED02C60012512C /* hmac.c */; };
+		CB6EC3CE0EED02C60012512C /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = CB6EC3CA0EED02C60012512C /* sha1.c */; };
+		CB920C760EF2397300A89BBD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB920C750EF2397300A89BBD /* Security.framework */; };
+		CB920CF10EF2412B00A89BBD /* MPOAuthCredentialConcreteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CB920CF00EF2412B00A89BBD /* MPOAuthCredentialConcreteStore.m */; };
+		CB946B990EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CB946B980EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m */; };
+		CBDC70570EE9FCBB008C4B9B /* MPOAuthConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70560EE9FCBB008C4B9B /* MPOAuthConnection.m */; };
+		CBDC705A0EEA04B9008C4B9B /* MPOAuthAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70590EEA04B9008C4B9B /* MPOAuthAPI.m */; };
+		CBDC70730EEA0F0A008C4B9B /* MPOAuthURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70720EEA0F0A008C4B9B /* MPOAuthURLRequest.m */; };
+		CBDC70840EEA2680008C4B9B /* MPURLRequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70830EEA2680008C4B9B /* MPURLRequestParameter.m */; };
+		CBDC708C0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC708B0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.m */; };
+		CBDC70910EEA338C008C4B9B /* OAuthClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70900EEA338C008C4B9B /* OAuthClientController.m */; };
+		CBDC715F0EEA453C008C4B9B /* MPOAuthURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC715E0EEA453C008C4B9B /* MPOAuthURLResponse.m */; };
+		CBDC718A0EEA4AC8008C4B9B /* NSURLResponse+Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC71890EEA4AC8008C4B9B /* NSURLResponse+Encoding.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32CA4F630368D1EE00C91783 /* MPOAuthConnection_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthConnection_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* MPOAuthConnection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MPOAuthConnection.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB6EC2640EEC70790012512C /* NSString+URLEscapingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEscapingAdditions.h"; sourceTree = "<group>"; };
+		CB6EC2650EEC70790012512C /* NSString+URLEscapingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEscapingAdditions.m"; sourceTree = "<group>"; };
+		CB6EC36F0EECE9030012512C /* MPOAuthSignatureParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthSignatureParameter.h; sourceTree = "<group>"; };
+		CB6EC3700EECE9030012512C /* MPOAuthSignatureParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthSignatureParameter.m; sourceTree = "<group>"; };
+		CB6EC3C60EED02C60012512C /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
+		CB6EC3C70EED02C60012512C /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
+		CB6EC3C80EED02C60012512C /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
+		CB6EC3C90EED02C60012512C /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		CB6EC3CA0EED02C60012512C /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha1.c; sourceTree = "<group>"; };
+		CB6EC3CB0EED02C60012512C /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		CB920C750EF2397300A89BBD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		CB920CEF0EF2412B00A89BBD /* MPOAuthCredentialConcreteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthCredentialConcreteStore.h; sourceTree = "<group>"; };
+		CB920CF00EF2412B00A89BBD /* MPOAuthCredentialConcreteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthCredentialConcreteStore.m; sourceTree = "<group>"; };
+		CB946B970EEE179A00493DCC /* NSURL+MPURLParameterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MPURLParameterAdditions.h"; sourceTree = "<group>"; };
+		CB946B980EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MPURLParameterAdditions.m"; sourceTree = "<group>"; };
+		CBDC70550EE9FCBB008C4B9B /* MPOAuthConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthConnection.h; sourceTree = "<group>"; };
+		CBDC70560EE9FCBB008C4B9B /* MPOAuthConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthConnection.m; sourceTree = "<group>"; };
+		CBDC70580EEA04B9008C4B9B /* MPOAuthAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAPI.h; sourceTree = "<group>"; };
+		CBDC70590EEA04B9008C4B9B /* MPOAuthAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAPI.m; sourceTree = "<group>"; };
+		CBDC70710EEA0F0A008C4B9B /* MPOAuthURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthURLRequest.h; sourceTree = "<group>"; };
+		CBDC70720EEA0F0A008C4B9B /* MPOAuthURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthURLRequest.m; sourceTree = "<group>"; };
+		CBDC70820EEA2680008C4B9B /* MPURLRequestParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPURLRequestParameter.h; sourceTree = "<group>"; };
+		CBDC70830EEA2680008C4B9B /* MPURLRequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPURLRequestParameter.m; sourceTree = "<group>"; };
+		CBDC708A0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAPIRequestLoader.h; sourceTree = "<group>"; };
+		CBDC708B0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAPIRequestLoader.m; sourceTree = "<group>"; };
+		CBDC708F0EEA338C008C4B9B /* OAuthClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthClientController.h; sourceTree = "<group>"; };
+		CBDC70900EEA338C008C4B9B /* OAuthClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthClientController.m; sourceTree = "<group>"; };
+		CBDC715D0EEA453C008C4B9B /* MPOAuthURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthURLResponse.h; sourceTree = "<group>"; };
+		CBDC715E0EEA453C008C4B9B /* MPOAuthURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthURLResponse.m; sourceTree = "<group>"; };
+		CBDC71880EEA4AC8008C4B9B /* NSURLResponse+Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLResponse+Encoding.h"; sourceTree = "<group>"; };
+		CBDC71890EEA4AC8008C4B9B /* NSURLResponse+Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLResponse+Encoding.m"; sourceTree = "<group>"; };
+		CBDC72300EEB451A008C4B9B /* MPOAuthCredentialStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthCredentialStore.h; sourceTree = "<group>"; };
+		CBDC72420EEB4AC0008C4B9B /* MPOAuthParameterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthParameterFactory.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				CB920C760EF2397300A89BBD /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				CBDC70920EEA3393008C4B9B /* Test App */,
+				CBDC70740EEA0F4D008C4B9B /* Framework */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				CB920C750EF2397300A89BBD /* Security.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* MPOAuthConnection.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* MPOAuthConnection */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Source */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = MPOAuthConnection;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* MPOAuthConnection_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB6EC3C50EED02C60012512C /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				CB6EC3C60EED02C60012512C /* Base64Transcoder.c */,
+				CB6EC3C70EED02C60012512C /* Base64Transcoder.h */,
+				CB6EC3C80EED02C60012512C /* hmac.c */,
+				CB6EC3C90EED02C60012512C /* hmac.h */,
+				CB6EC3CA0EED02C60012512C /* sha1.c */,
+				CB6EC3CB0EED02C60012512C /* sha1.h */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		CBDC70740EEA0F4D008C4B9B /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				CBDC70770EEA11D1008C4B9B /* Additions */,
+				CB6EC3C50EED02C60012512C /* Crypto */,
+				CBDC72300EEB451A008C4B9B /* MPOAuthCredentialStore.h */,
+				CBDC72420EEB4AC0008C4B9B /* MPOAuthParameterFactory.h */,
+				CB920CEF0EF2412B00A89BBD /* MPOAuthCredentialConcreteStore.h */,
+				CB920CF00EF2412B00A89BBD /* MPOAuthCredentialConcreteStore.m */,
+				CBDC70580EEA04B9008C4B9B /* MPOAuthAPI.h */,
+				CBDC70590EEA04B9008C4B9B /* MPOAuthAPI.m */,
+				CBDC708A0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.h */,
+				CBDC708B0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.m */,
+				CBDC70550EE9FCBB008C4B9B /* MPOAuthConnection.h */,
+				CBDC70560EE9FCBB008C4B9B /* MPOAuthConnection.m */,
+				CBDC70710EEA0F0A008C4B9B /* MPOAuthURLRequest.h */,
+				CBDC70720EEA0F0A008C4B9B /* MPOAuthURLRequest.m */,
+				CBDC715D0EEA453C008C4B9B /* MPOAuthURLResponse.h */,
+				CBDC715E0EEA453C008C4B9B /* MPOAuthURLResponse.m */,
+				CB6EC36F0EECE9030012512C /* MPOAuthSignatureParameter.h */,
+				CB6EC3700EECE9030012512C /* MPOAuthSignatureParameter.m */,
+				CBDC70820EEA2680008C4B9B /* MPURLRequestParameter.h */,
+				CBDC70830EEA2680008C4B9B /* MPURLRequestParameter.m */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		CBDC70770EEA11D1008C4B9B /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				CB946B970EEE179A00493DCC /* NSURL+MPURLParameterAdditions.h */,
+				CB946B980EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m */,
+				CBDC71880EEA4AC8008C4B9B /* NSURLResponse+Encoding.h */,
+				CBDC71890EEA4AC8008C4B9B /* NSURLResponse+Encoding.m */,
+				CB6EC2640EEC70790012512C /* NSString+URLEscapingAdditions.h */,
+				CB6EC2650EEC70790012512C /* NSString+URLEscapingAdditions.m */,
+			);
+			name = Additions;
+			sourceTree = "<group>";
+		};
+		CBDC70920EEA3393008C4B9B /* Test App */ = {
+			isa = PBXGroup;
+			children = (
+				CBDC708F0EEA338C008C4B9B /* OAuthClientController.h */,
+				CBDC70900EEA338C008C4B9B /* OAuthClientController.m */,
+			);
+			path = "Test App";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* MPOAuthConnection */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MPOAuthConnection" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MPOAuthConnection;
+			productInstallPath = "$(HOME)/Applications";
+			productName = MPOAuthConnection;
+			productReference = 8D1107320486CEB800E47090 /* MPOAuthConnection.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MPOAuthConnection" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* MPOAuthConnection */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* MPOAuthConnection */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				CBDC70570EE9FCBB008C4B9B /* MPOAuthConnection.m in Sources */,
+				CBDC705A0EEA04B9008C4B9B /* MPOAuthAPI.m in Sources */,
+				CBDC70730EEA0F0A008C4B9B /* MPOAuthURLRequest.m in Sources */,
+				CBDC70840EEA2680008C4B9B /* MPURLRequestParameter.m in Sources */,
+				CBDC708C0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.m in Sources */,
+				CBDC70910EEA338C008C4B9B /* OAuthClientController.m in Sources */,
+				CBDC715F0EEA453C008C4B9B /* MPOAuthURLResponse.m in Sources */,
+				CBDC718A0EEA4AC8008C4B9B /* NSURLResponse+Encoding.m in Sources */,
+				CB6EC2660EEC70790012512C /* NSString+URLEscapingAdditions.m in Sources */,
+				CB6EC3710EECE9030012512C /* MPOAuthSignatureParameter.m in Sources */,
+				CB6EC3CC0EED02C60012512C /* Base64Transcoder.c in Sources */,
+				CB6EC3CD0EED02C60012512C /* hmac.c in Sources */,
+				CB6EC3CE0EED02C60012512C /* sha1.c in Sources */,
+				CB946B990EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m in Sources */,
+				CB920CF10EF2412B00A89BBD /* MPOAuthCredentialConcreteStore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DDD58150DA1D0A300B32029 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MPOAuthConnection_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = MPOAuthConnection;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MPOAuthConnection_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = MPOAuthConnection;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MPOAuthConnection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MPOAuthConnection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
