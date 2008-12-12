@@ -46,8 +46,8 @@
 																				[consumerSecretField stringValue], kMPOAuthCredentialConsumerSecret,
 																				nil];
 		_oauthAPI = [[MPOAuthAPI alloc] initWithCredentials:credentials
-										  authenticationURL:[NSURL URLWithString:@"https://api.login.yahoo.com/oauth/v2/"]
-												 andBaseURL:[NSURL URLWithString:@"http://social.yahooapis.com/v1/"]];		
+										  authenticationURL:[NSURL URLWithString:[authenticationURLField stringValue]]
+												 andBaseURL:[NSURL URLWithString:[baseURLField stringValue]]];		
 	} else {
 		[_oauthAPI authenticate];
 	}
