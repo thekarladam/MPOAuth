@@ -140,9 +140,9 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 }
 
 - (void)_authenticationRequestForUserPermissionsConfirmationAtURL:(NSURL *)userAuthURL {
-#ifdef TARGET_OS_MAC || TARGET_IPHONE_SIMULATOR
+#ifdef TARGET_OS_MAC
 	[[NSWorkspace sharedWorkspace] openURL:userAuthURL];
-#elif
+#elif TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 	[[UIApplication sharedApplication] openURL:userAuthURL];
 #endif
 }
