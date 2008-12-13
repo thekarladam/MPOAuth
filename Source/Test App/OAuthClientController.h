@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <MPOAuth/MPOAuth.h>
 
 @class MPOAuthAPI;
 

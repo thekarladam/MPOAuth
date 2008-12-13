@@ -14,6 +14,5 @@
 #import <MPOAuth/MPOAuthCredentialStore.h>
 #import <MPOAuth/MPOAuthParameterFactory.h>
 #import <MPOAuth/MPOAuthConnection.h>
-#import <MPOAuth/MPOAuthRequest.h>
-#import <MPOAuth/MPOAuthResponse.h>
-#import <MPOAuth/MPOAuthSignatureParameter.h>
+#import <MPOAuth/MPOAuthURLRequest.h>
+#import <MPOAuth/MPOAuthURLResponse.h>

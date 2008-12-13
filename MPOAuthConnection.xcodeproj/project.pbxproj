@@ -25,19 +25,17 @@
 		CB920E380EF3D04B00A89BBD /* MPOAuthURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC715E0EEA453C008C4B9B /* MPOAuthURLResponse.m */; };
 		CB920E390EF3D04B00A89BBD /* MPOAuthSignatureParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EC3700EECE9030012512C /* MPOAuthSignatureParameter.m */; };
 		CB920E3A0EF3D04B00A89BBD /* MPURLRequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70830EEA2680008C4B9B /* MPURLRequestParameter.m */; };
-		CB920E3C0EF3D0B000A89BBD /* MPOAuthCredentialStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC72300EEB451A008C4B9B /* MPOAuthCredentialStore.h */; };
-		CB920E3E0EF3D0B000A89BBD /* MPOAuthAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC70580EEA04B9008C4B9B /* MPOAuthAPI.h */; };
-		CB920E3F0EF3D0B000A89BBD /* MPOAuthAPIRequestLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC708A0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.h */; };
-		CB920E400EF3D0B000A89BBD /* MPOAuthConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC70550EE9FCBB008C4B9B /* MPOAuthConnection.h */; };
-		CB920E410EF3D0B000A89BBD /* MPOAuthURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC70710EEA0F0A008C4B9B /* MPOAuthURLRequest.h */; };
-		CB920E420EF3D0B000A89BBD /* MPOAuthURLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC715D0EEA453C008C4B9B /* MPOAuthURLResponse.h */; };
-		CB920E430EF3D0B000A89BBD /* MPOAuthSignatureParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = CB6EC36F0EECE9030012512C /* MPOAuthSignatureParameter.h */; };
-		CB920E440EF3D0B000A89BBD /* MPURLRequestParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC70820EEA2680008C4B9B /* MPURLRequestParameter.h */; };
-		CB920E450EF3D0C500A89BBD /* MPOAuthParameterFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC72420EEB4AC0008C4B9B /* MPOAuthParameterFactory.h */; };
+		CB920E3C0EF3D0B000A89BBD /* MPOAuthCredentialStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC72300EEB451A008C4B9B /* MPOAuthCredentialStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB920E3E0EF3D0B000A89BBD /* MPOAuthAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC70580EEA04B9008C4B9B /* MPOAuthAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB920E3F0EF3D0B000A89BBD /* MPOAuthAPIRequestLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC708A0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB920E400EF3D0B000A89BBD /* MPOAuthConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC70550EE9FCBB008C4B9B /* MPOAuthConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB920E410EF3D0B000A89BBD /* MPOAuthURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC70710EEA0F0A008C4B9B /* MPOAuthURLRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB920E420EF3D0B000A89BBD /* MPOAuthURLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC715D0EEA453C008C4B9B /* MPOAuthURLResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB920E450EF3D0C500A89BBD /* MPOAuthParameterFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC72420EEB4AC0008C4B9B /* MPOAuthParameterFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB920E6E0EF3D17C00A89BBD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB920C750EF2397300A89BBD /* Security.framework */; };
-		CB920E720EF3D1E700A89BBD /* MPOAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = CB920E700EF3D1E700A89BBD /* MPOAuth.h */; };
-		CB920EAF0EF3D63300A89BBD /* MPOAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB920EAD0EF3D62700A89BBD /* MPOAuth.framework */; };
-		CB920EB10EF3D67300A89BBD /* MPOAuth.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CB920EAD0EF3D62700A89BBD /* MPOAuth.framework */; };
+		CB920E720EF3D1E700A89BBD /* MPOAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = CB920E700EF3D1E700A89BBD /* MPOAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB920ED60EF3DFFE00A89BBD /* MPOAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB920E280EF3D02600A89BBD /* MPOAuth.framework */; };
+		CB920EDA0EF3E01900A89BBD /* MPOAuth.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CB920E280EF3D02600A89BBD /* MPOAuth.framework */; };
 		CBDC70910EEA338C008C4B9B /* OAuthClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70900EEA338C008C4B9B /* OAuthClientController.m */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +56,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CB920EB10EF3D67300A89BBD /* MPOAuth.framework in CopyFiles */,
+				CB920EDA0EF3E01900A89BBD /* MPOAuth.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +89,6 @@
 		CB920E280EF3D02600A89BBD /* MPOAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPOAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB920E290EF3D02600A89BBD /* MPOAuth-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MPOAuth-Info.plist"; sourceTree = "<group>"; };
 		CB920E700EF3D1E700A89BBD /* MPOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuth.h; sourceTree = "<group>"; };
-		CB920EAD0EF3D62700A89BBD /* MPOAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPOAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB946B970EEE179A00493DCC /* NSURL+MPURLParameterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MPURLParameterAdditions.h"; sourceTree = "<group>"; };
 		CB946B980EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MPURLParameterAdditions.m"; sourceTree = "<group>"; };
 		CBDC70550EE9FCBB008C4B9B /* MPOAuthConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthConnection.h; sourceTree = "<group>"; };
@@ -120,7 +117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				CB920EAF0EF3D63300A89BBD /* MPOAuth.framework in Frameworks */,
+				CB920ED60EF3DFFE00A89BBD /* MPOAuth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +146,6 @@
 			children = (
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				CB920C750EF2397300A89BBD /* Security.framework */,
-				CB920EAD0EF3D62700A89BBD /* MPOAuth.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -292,8 +288,6 @@
 				CB920E400EF3D0B000A89BBD /* MPOAuthConnection.h in Headers */,
 				CB920E410EF3D0B000A89BBD /* MPOAuthURLRequest.h in Headers */,
 				CB920E420EF3D0B000A89BBD /* MPOAuthURLResponse.h in Headers */,
-				CB920E430EF3D0B000A89BBD /* MPOAuthSignatureParameter.h in Headers */,
-				CB920E440EF3D0B000A89BBD /* MPURLRequestParameter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,14 +433,14 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = MPOAuthConnection_Prefix.pch;
 				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				INFOPLIST_FILE = Info.plist;
@@ -508,11 +502,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
+					"$(BUILT_PRODUCTS_DIR)",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

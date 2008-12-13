@@ -7,8 +7,6 @@
 //
 
 #import "OAuthClientController.h"
-#import "MPOAuthAPI.h"
-//#import <MPOAuth/MPOAuth.h>
 
 @implementation OAuthClientController
 
