@@ -11,15 +11,7 @@
 @implementation OAuthClientController
 
 - (id)init {
-	if (self = [super init]) {
-		NSDictionary *credentials = [NSDictionary dictionaryWithObjectsAndKeys:	@"dj0yJmk9RUxGcXk5aEdsR2czJmQ9WVdrOVNXRnNhV0kzTm1zbWNHbzlNVEV5TmpVNU5qUTFNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1iYw--", kMPOAuthCredentialConsumerKey,
-																			 @"5623972ab2330c9342887285e1356885d4e49cbf", kMPOAuthCredentialConsumerSecret,
-									 nil];
-		_oauthAPI = [[MPOAuthAPI alloc] initWithCredentials:credentials
-											   authenticationURL:[NSURL URLWithString:@"https://api.login.yahoo.com/oauth/v2/"]
-													  andBaseURL:[NSURL URLWithString:@"http://social.yahooapis.com/v1/"]];
-		
-		
+	if (self = [super init]) {		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestTokenReceived:) name:MPOAuthNotificationRequestTokenReceived object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenReceived:) name:MPOAuthNotificationAccessTokenReceived object:nil];
 	}
