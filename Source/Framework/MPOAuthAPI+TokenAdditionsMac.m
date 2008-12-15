@@ -18,12 +18,20 @@
 
 - (void)addToKeychainUsingName:(NSString *)inName andValue:(NSString *)inValue {
 	NSString *serverName = [_baseURL host];
+	NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
 	NSString *securityDomain = [_authenticationURL host];
+	NSString *uniqueName = [NSString stringWithFormat:@"%@.%@", bundleID, inName];
+	SecKeychainItemRef existingKeychainItem = NULL;
+	
+	if ([self findValueFromKeychainUsingName:inName returningItem:&existingKeychainItem]) {
+		// This is MUCH easier than updating the item attributes/data
+		SecKeychainItemDelete(existingKeychainItem);
+	}
 	
 	SecKeychainAddInternetPassword(NULL /* default keychain */,
 								   [serverName length], [serverName UTF8String],
 								   [securityDomain length], [securityDomain UTF8String],
-								   [inName length], [inName UTF8String],	/* account name */
+								   [uniqueName length], [uniqueName UTF8String],	/* account name */
 								   0, NULL,	/* path */
 								   0,
 								   'oaut'	/* OAuth, not an official OSType code */,
