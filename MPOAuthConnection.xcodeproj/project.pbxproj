@@ -36,6 +36,8 @@
 		CB920E720EF3D1E700A89BBD /* MPOAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = CB920E700EF3D1E700A89BBD /* MPOAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB920ED60EF3DFFE00A89BBD /* MPOAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB920E280EF3D02600A89BBD /* MPOAuth.framework */; };
 		CB920EDA0EF3E01900A89BBD /* MPOAuth.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CB920E280EF3D02600A89BBD /* MPOAuth.framework */; };
+		CB920F060EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = CB920F040EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditions.h */; };
+		CB920F070EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditionsMac.m in Sources */ = {isa = PBXBuildFile; fileRef = CB920F050EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditionsMac.m */; };
 		CBDC70910EEA338C008C4B9B /* OAuthClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70900EEA338C008C4B9B /* OAuthClientController.m */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +46,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CB920E270EF3D02600A89BBD /* MPOAuth */;
+			remoteGlobalIDString = CB920E270EF3D02600A89BBD;
 			remoteInfo = MPOAuth;
 		};
 /* End PBXContainerItemProxy section */
@@ -67,7 +69,7 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Source/Test App/main.m"; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* MPOAuthConnection_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthConnection_Prefix.pch; sourceTree = "<group>"; };
@@ -89,6 +91,9 @@
 		CB920E280EF3D02600A89BBD /* MPOAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPOAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB920E290EF3D02600A89BBD /* MPOAuth-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MPOAuth-Info.plist"; sourceTree = "<group>"; };
 		CB920E700EF3D1E700A89BBD /* MPOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuth.h; sourceTree = "<group>"; };
+		CB920F010EF4B67900A89BBD /* MPOAuthAPI+TokenAdditionsiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPOAuthAPI+TokenAdditionsiPhone.m"; sourceTree = "<group>"; };
+		CB920F040EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MPOAuthAPI+TokenAdditions.h"; sourceTree = "<group>"; };
+		CB920F050EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditionsMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPOAuthAPI+TokenAdditionsMac.m"; sourceTree = "<group>"; };
 		CB946B970EEE179A00493DCC /* NSURL+MPURLParameterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MPURLParameterAdditions.h"; sourceTree = "<group>"; };
 		CB946B980EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MPURLParameterAdditions.m"; sourceTree = "<group>"; };
 		CBDC70550EE9FCBB008C4B9B /* MPOAuthConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthConnection.h; sourceTree = "<group>"; };
@@ -235,6 +240,9 @@
 				CB920CF00EF2412B00A89BBD /* MPOAuthCredentialConcreteStore.m */,
 				CBDC70580EEA04B9008C4B9B /* MPOAuthAPI.h */,
 				CBDC70590EEA04B9008C4B9B /* MPOAuthAPI.m */,
+				CB920F040EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditions.h */,
+				CB920F050EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditionsMac.m */,
+				CB920F010EF4B67900A89BBD /* MPOAuthAPI+TokenAdditionsiPhone.m */,
 				CBDC708A0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.h */,
 				CBDC708B0EEA28AA008C4B9B /* MPOAuthAPIRequestLoader.m */,
 				CBDC70550EE9FCBB008C4B9B /* MPOAuthConnection.h */,
@@ -288,6 +296,7 @@
 				CB920E400EF3D0B000A89BBD /* MPOAuthConnection.h in Headers */,
 				CB920E410EF3D0B000A89BBD /* MPOAuthURLRequest.h in Headers */,
 				CB920E420EF3D0B000A89BBD /* MPOAuthURLResponse.h in Headers */,
+				CB920F060EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +406,7 @@
 				CB920E300EF3D04B00A89BBD /* Base64Transcoder.c in Sources */,
 				CB920E310EF3D04B00A89BBD /* hmac.c in Sources */,
 				CB920E320EF3D04B00A89BBD /* sha1.c in Sources */,
+				CB920F070EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditionsMac.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

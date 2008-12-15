@@ -12,6 +12,7 @@
 #import "MPOAuthURLResponse.h"
 
 #import "NSURL+MPURLParameterAdditions.h"
+#import "MPOAuthAPI+TokenAdditions.h"
 
 NSString *kMPOAuthCredentialConsumerKey			= @"kMPOAuthCredentialConsumerKey";
 NSString *kMPOAuthCredentialConsumerSecret		= @"kMPOAuthCredentialConsumerSecret";
@@ -32,11 +33,6 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 - (void)_authenticationRequestForUserPermissionsConfirmationAtURL:(NSURL *)inURL;
 - (void)_authenticationRequestForAccessToken;
 
-- (void)addToKeychainUsingName:(NSString *)inName andValue:(NSString *)inValue;
-- (NSString *)findValueFromKeychainUsingName:(NSString *)inName;
-- (NSString *)findValueFromKeychainUsingName:(NSString *)inName returningItem:(SecKeychainItemRef *)outKeychainItemRef;
-- (void)removeValueFromKeychainUsingName:(NSString *)inName;
-
 @end
 
 @implementation MPOAuthAPI
@@ -47,15 +43,20 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 
 - (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL {
 	if (self = [super init]) {
+		self.authenticationURL = inAuthURL;
+		self.baseURL = inBaseURL;
+
+		NSString *requestToken = [self findValueFromKeychainUsingName:@"oauth_token_request"];
+		NSString *requestTokenSecret = [self findValueFromKeychainUsingName:@"oauth_token_request_secret"];
 		NSString *accessToken = [self findValueFromKeychainUsingName:@"oauth_token_access"];
 		NSString *accessTokenSecret = [self findValueFromKeychainUsingName:@"oauth_token_access_secret"];
 		
 		_credentials = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:inCredentials];
+		[_credentials setRequestToken:requestToken];
+		[_credentials setRequestTokenSecret:requestTokenSecret];
 		[(MPOAuthCredentialConcreteStore *)_credentials setAccessToken:accessToken];
 		[_credentials setAccessTokenSecret:accessTokenSecret];
 		
-		self.authenticationURL = inAuthURL;
-		self.baseURL = inBaseURL;
 		_activeLoaders = [[NSMutableArray alloc] initWithCapacity:10];
 		
 		self.signatureScheme = MPOAuthSignatureSchemeHMACSHA1;
@@ -140,9 +141,9 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 }
 
 - (void)_authenticationRequestForUserPermissionsConfirmationAtURL:(NSURL *)userAuthURL {
-#ifdef TARGET_OS_MAC
+#ifndef TARGET_OS_IPHONE
 	[[NSWorkspace sharedWorkspace] openURL:userAuthURL];
-#elif TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#else
 	[[UIApplication sharedApplication] openURL:userAuthURL];
 #endif
 }
@@ -199,7 +200,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 #pragma mark -
 
 - (void)_performedLoad:(MPOAuthAPIRequestLoader *)inLoader receivingData:(NSData *)inData {
-	NSLog(@"loaded %@, and got %@", inLoader, inData);
+//	NSLog(@"loaded %@, and got %@", inLoader, inData);
 }
 
 #pragma mark -
@@ -219,62 +220,6 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 
 #pragma mark -
 
-- (void)addToKeychainUsingName:(NSString *)inName andValue:(NSString *)inValue {
-	NSString *serverName = [_baseURL host];
-	NSString *securityDomain = [_authenticationURL host];
-	
-	SecKeychainAddInternetPassword(NULL /* default keychain */,
-								   [serverName length], [serverName UTF8String],
-								   [securityDomain length], [securityDomain UTF8String],
-								   [inName length], [inName UTF8String],	/* account name */
-								   0, NULL,	/* path */
-								   0,
-								   'oaut'	/* OAuth, not an official OSType code */,
-								   kSecAuthenticationTypeDefault,
-								   [inValue length], [inValue UTF8String],
-								   NULL);
-}
 
-- (NSString *)findValueFromKeychainUsingName:(NSString *)inName {
-	return [self findValueFromKeychainUsingName:inName returningItem:NULL];
-}
-
-- (NSString *)findValueFromKeychainUsingName:(NSString *)inName returningItem:(SecKeychainItemRef *)outKeychainItemRef {
-	NSString *foundPassword = nil;
-	NSString *serverName = [_baseURL host];
-	NSString *securityDomain = [_authenticationURL host];
-
-	UInt32 passwordLength = 0;
-	const char *passwordString = NULL;
-	
-	OSStatus status = SecKeychainFindInternetPassword(NULL	/* default keychain */,
-													  [serverName length], [serverName UTF8String],
-													  [securityDomain length], [securityDomain UTF8String],
-													  [inName length], [inName UTF8String],
-													  0, NULL,	/* path */
-													  0,
-													  (SecProtocolType)NULL,
-													  (SecAuthenticationType)NULL,
-													  (UInt32 *)&passwordLength,
-													  (void **)&passwordString,
-													  outKeychainItemRef);
-	
-	if (status == noErr && passwordLength) {
-		NSData *passwordStringData = [NSData dataWithBytes:passwordString length:passwordLength];
-		foundPassword = [[NSString alloc] initWithData:passwordStringData encoding:NSUTF8StringEncoding];
-	}
-	
-	return [foundPassword autorelease];
-}
-
-- (void)removeValueFromKeychainUsingName:(NSString *)inName {
-	SecKeychainItemRef aKeychainItem = NULL;
-	
-	[self findValueFromKeychainUsingName:inName returningItem:&aKeychainItem];
-	
-	if (aKeychainItem) {
-		SecKeychainItemDelete(aKeychainItem);
-	}
-}
 
 @end
