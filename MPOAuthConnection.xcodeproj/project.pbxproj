@@ -38,6 +38,7 @@
 		CB920EDA0EF3E01900A89BBD /* MPOAuth.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CB920E280EF3D02600A89BBD /* MPOAuth.framework */; };
 		CB920F060EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = CB920F040EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditions.h */; };
 		CB920F070EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditionsMac.m in Sources */ = {isa = PBXBuildFile; fileRef = CB920F050EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditionsMac.m */; };
+		CB9215970EF75E5900A89BBD /* MPURLRequestParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = CBDC70820EEA2680008C4B9B /* MPURLRequestParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBDC70910EEA338C008C4B9B /* OAuthClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC70900EEA338C008C4B9B /* OAuthClientController.m */; };
 /* End PBXBuildFile section */
 
@@ -295,6 +296,7 @@
 				CB920E3F0EF3D0B000A89BBD /* MPOAuthAPIRequestLoader.h in Headers */,
 				CB920E400EF3D0B000A89BBD /* MPOAuthConnection.h in Headers */,
 				CB920E410EF3D0B000A89BBD /* MPOAuthURLRequest.h in Headers */,
+				CB9215970EF75E5900A89BBD /* MPURLRequestParameter.h in Headers */,
 				CB920E420EF3D0B000A89BBD /* MPOAuthURLResponse.h in Headers */,
 				CB920F060EF4B69F00A89BBD /* MPOAuthAPI+TokenAdditions.h in Headers */,
 			);

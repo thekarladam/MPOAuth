@@ -43,37 +43,47 @@
 #pragma mark -
 
 - (NSURLRequest  *)urlRequestSignedWithSecret:(NSString *)inSecret usingMethod:(NSString *)inScheme {
+	[self.parameters sortUsingSelector:@selector(compare:)];
+
 	NSMutableURLRequest *aRequest = [[NSMutableURLRequest alloc] init];
+	NSMutableString *parameterString = [[NSMutableString alloc] initWithString:[MPURLRequestParameter parameterStringForParameters:self.parameters]];
+	MPOAuthSignatureParameter *signatureParameter = [[MPOAuthSignatureParameter alloc] initWithText:parameterString andSecret:inSecret forRequest:self usingMethod:inScheme];
+	[parameterString appendFormat:@"&%@", [signatureParameter HTTPGETParameterString]];
 	
-	if (@"GET" && [self.parameters count]) {
-		[aRequest setHTTPMethod:self.HTTPMethod];
-		NSMutableString *queryString = [[NSMutableString alloc] init];
-		int i = 0;
-		int parameterCount = [self.parameters count];
+	[aRequest setHTTPMethod:self.HTTPMethod];
+	
+	if ([[self HTTPMethod] isEqualToString:@"GET"] && [self.parameters count]) {
+//		int i = 0;
+//		int parameterCount = [self.parameters count];
 		
-		[self.parameters sortUsingSelector:@selector(compare:)];
-		MPURLRequestParameter *aParameter = nil;
-
-		for (; i < parameterCount; i++) {
-			aParameter = [self.parameters objectAtIndex:i];
-			[queryString appendString:[aParameter HTTPGETParameterString]];
-
-			if (i < parameterCount - 1) {
-				[queryString appendString:@"&"];
-			}
-		}
-				
-		MPOAuthSignatureParameter *signatureParameter = [[MPOAuthSignatureParameter alloc] initWithText:queryString andSecret:inSecret forRequest:self usingMethod:inScheme];
-		NSString *urlString = [NSString stringWithFormat:@"%@?%@&%@", [self.url absoluteString], queryString, [signatureParameter HTTPGETParameterString]];
+//		MPURLRequestParameter *aParameter = nil;
+//
+//		for (; i < parameterCount; i++) {
+//			aParameter = [self.parameters objectAtIndex:i];
+//			[queryString appendString:[aParameter HTTPGETParameterString]];
+//
+//			if (i < parameterCount - 1) {
+//				[queryString appendString:@"&"];
+//			}
+//		}
+		
+		NSString *urlString = [NSString stringWithFormat:@"%@?%@", [self.url absoluteString], parameterString];
 		NSLog( @"urlString - %@", urlString);
 		
 		[aRequest setURL:[NSURL URLWithString:urlString]];
-		[signatureParameter release];
-		[queryString release];
+	} else if ([[self HTTPMethod] isEqualToString:@"POST"]) {
+		NSData *postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
+		NSLog(@"urlString - %@", self.url);
+		NSLog( @"postDataString - %@", parameterString);
 		
-	} else if ([[aRequest HTTPMethod] isEqualToString:@"POST"]) {
-		
+		[aRequest setURL:self.url];
+		[aRequest setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+		[aRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+		[aRequest setHTTPBody:postData];
 	}
+	
+	[parameterString release];
+	[signatureParameter release];		
 	
 	self.urlRequest = aRequest;
 		
