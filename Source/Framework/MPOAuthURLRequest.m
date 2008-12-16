@@ -53,20 +53,6 @@
 	[aRequest setHTTPMethod:self.HTTPMethod];
 	
 	if ([[self HTTPMethod] isEqualToString:@"GET"] && [self.parameters count]) {
-//		int i = 0;
-//		int parameterCount = [self.parameters count];
-		
-//		MPURLRequestParameter *aParameter = nil;
-//
-//		for (; i < parameterCount; i++) {
-//			aParameter = [self.parameters objectAtIndex:i];
-//			[queryString appendString:[aParameter HTTPGETParameterString]];
-//
-//			if (i < parameterCount - 1) {
-//				[queryString appendString:@"&"];
-//			}
-//		}
-		
 		NSString *urlString = [NSString stringWithFormat:@"%@?%@", [self.url absoluteString], parameterString];
 		NSLog( @"urlString - %@", urlString);
 		
@@ -86,6 +72,7 @@
 	[signatureParameter release];		
 	
 	self.urlRequest = aRequest;
+	[aRequest release];
 		
 	return aRequest;
 }
