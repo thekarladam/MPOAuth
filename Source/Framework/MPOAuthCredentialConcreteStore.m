@@ -80,6 +80,20 @@
 	}	
 }
 
+- (NSString *)sessionHandle {
+	return [_store objectForKey:kMPOAuthCredentialSessionHandle];
+}
+
+- (void)setSessionHandle:(NSString *)inSessionHandle {
+	if (inSessionHandle) {
+		[_store setObject:inSessionHandle forKey:kMPOAuthCredentialSessionHandle];
+	} else {
+		[_store removeObjectForKey:kMPOAuthCredentialSessionHandle];
+	}
+}
+
+#pragma mark -
+
 - (NSString *)tokenSecret {
 	NSString *tokenSecret = @"";
 	

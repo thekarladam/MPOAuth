@@ -22,6 +22,8 @@
 @property (nonatomic, readwrite, retain) NSString *accessToken;
 @property (nonatomic, readwrite, retain) NSString *accessTokenSecret;
 
+@property (nonatomic, readwrite, retain) NSString *sessionHandle;
+
 - (id)initWithCredentials:(NSDictionary *)inCredentials;
 
 @end

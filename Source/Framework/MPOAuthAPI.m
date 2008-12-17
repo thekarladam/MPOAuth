@@ -11,6 +11,7 @@
 #import "MPOAuthCredentialConcreteStore.h"
 #import "MPOAuthURLRequest.h"
 #import "MPOAuthURLResponse.h"
+#import "MPURLRequestParameter.h"
 
 #import "NSURL+MPURLParameterAdditions.h"
 #import "MPOAuthAPI+TokenAdditions.h"
@@ -23,6 +24,7 @@ NSString *kMPOAuthCredentialRequestToken		= @"kMPOAuthCredentialRequestToken";
 NSString *kMPOAuthCredentialRequestTokenSecret	= @"kMPOAuthCredentialRequestTokenSecret";
 NSString *kMPOAuthCredentialAccessToken			= @"kMPOAuthCredentialAccessToken";
 NSString *kMPOAuthCredentialAccessTokenSecret	= @"kMPOAuthCredentialAccessTokenSecret";
+NSString *kMPOAuthCredentialSessionHandle		= @"kMPOAuthCredentialSessionHandle";
 
 NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 
@@ -54,12 +56,14 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 		NSString *requestTokenSecret = [self findValueFromKeychainUsingName:@"oauth_token_request_secret"];
 		NSString *accessToken = [self findValueFromKeychainUsingName:@"oauth_token_access"];
 		NSString *accessTokenSecret = [self findValueFromKeychainUsingName:@"oauth_token_access_secret"];
+		NSString *sessionHandle = [self findValueFromKeychainUsingName:@"oauth_session_handle"];
 		
 		_credentials = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:inCredentials];
 		[_credentials setRequestToken:requestToken];
 		[_credentials setRequestTokenSecret:requestTokenSecret];
 		[(MPOAuthCredentialConcreteStore *)_credentials setAccessToken:accessToken];
 		[_credentials setAccessTokenSecret:accessTokenSecret];
+		[_credentials setSessionHandle:sessionHandle];
 		
 		_activeLoaders = [[NSMutableArray alloc] initWithCapacity:10];
 		
@@ -232,6 +236,8 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	[self addToKeychainUsingName:@"oauth_token_access" andValue:[[inNotification userInfo] objectForKey:@"oauth_token"]];
 	[self addToKeychainUsingName:@"oauth_token_access_secret" andValue:[[inNotification userInfo] objectForKey:@"oauth_token_secret"]];
 	
+	[self addToKeychainUsingName:@"oauth_session_handle" andValue:[[inNotification userInfo] objectForKey:@"oauth_session_handle"]];
+	
 	NSTimeInterval tokenRefreshInterval = (NSTimeInterval)[[[inNotification userInfo] objectForKey:@"oauth_expires_in"] intValue];
 	NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceNow:tokenRefreshInterval];
 	[[NSUserDefaults standardUserDefaults] setDouble:[tokenExpiryDate timeIntervalSinceReferenceDate] forKey:kMPOAuthTokenRefreshDateDefaultsKey];
@@ -244,7 +250,17 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 #pragma mark -
 
 - (void)_automaticallyRefreshAccessToken:(NSTimer *)inTimer {
-	[self _authenticationRequestForAccessToken];
+	MPURLRequestParameter *sessionHandleParameter = [[MPURLRequestParameter alloc] init];
+	sessionHandleParameter.name = @"oauth_session_handle";
+	sessionHandleParameter.value = _credentials.sessionHandle;
+	
+	[self performMethod:@"get_request_token"
+				  atURL:self.authenticationURL
+		 withParameters:[NSArray arrayWithObject:sessionHandleParameter]
+			 withTarget:self
+			  andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
+	
+	[sessionHandleParameter release];
 }
 
 @end
