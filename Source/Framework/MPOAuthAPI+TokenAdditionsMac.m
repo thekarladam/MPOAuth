@@ -48,6 +48,8 @@
 	NSString *foundPassword = nil;
 	NSString *serverName = [_baseURL host];
 	NSString *securityDomain = [_authenticationURL host];
+	NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
+	NSString *uniqueName = [NSString stringWithFormat:@"%@.%@", bundleID, inName];
 	
 	UInt32 passwordLength = 0;
 	const char *passwordString = NULL;
@@ -55,7 +57,7 @@
 	OSStatus status = SecKeychainFindInternetPassword(NULL	/* default keychain */,
 													  [serverName length], [serverName UTF8String],
 													  [securityDomain length], [securityDomain UTF8String],
-													  [inName length], [inName UTF8String],
+													  [uniqueName length], [uniqueName UTF8String],
 													  0, NULL,	/* path */
 													  0,
 													  (SecProtocolType)NULL,

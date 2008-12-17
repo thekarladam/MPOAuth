@@ -37,6 +37,7 @@ typedef enum {
 	MPOAuthSignatureScheme			_signatureScheme;
 	NSMutableArray					*_activeLoaders;
 	id <MPOAuthAPIDelegate>			_delegate;
+	NSTimer							*_refreshTimer;
 }
 
 @property (nonatomic, readonly, retain) NSURL *baseURL;

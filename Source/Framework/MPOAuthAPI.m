@@ -5,6 +5,7 @@
 //  Created by Karl Adam on 08.12.05.
 //  Copyright 2008 matrixPointer. All rights reserved.
 //
+
 #import "MPOAuthAPIRequestLoader.h"
 #import "MPOAuthAPI.h"
 #import "MPOAuthCredentialConcreteStore.h"
@@ -13,6 +14,8 @@
 
 #import "NSURL+MPURLParameterAdditions.h"
 #import "MPOAuthAPI+TokenAdditions.h"
+
+#define kMPOAuthTokenRefreshDateDefaultsKey		@"MPOAuthAutomaticTokenRefreshLastExpiryDate"
 
 NSString *kMPOAuthCredentialConsumerKey			= @"kMPOAuthCredentialConsumerKey";
 NSString *kMPOAuthCredentialConsumerSecret		= @"kMPOAuthCredentialConsumerSecret";
@@ -28,6 +31,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 @property (nonatomic, readwrite, retain) NSURL *authenticationURL;
 @property (nonatomic, readwrite, retain) NSURL *baseURL;
 @property (nonatomic, readwrite, retain) NSMutableArray *activeLoaders;
+@property (nonatomic, readwrite, retain) NSTimer *refreshTimer;
 
 - (void)_authenticationRequestForRequestToken;
 - (void)_authenticationRequestForUserPermissionsConfirmationAtURL:(NSURL *)inURL;
@@ -75,6 +79,9 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	self.authenticationURL = nil;
 	self.activeLoaders = nil;
 	
+	[self.refreshTimer invalidate];
+	self.refreshTimer = nil;
+	
 	[super dealloc];
 }
 
@@ -84,6 +91,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 @synthesize signatureScheme = _signatureScheme;
 @synthesize activeLoaders = _activeLoaders;
 @synthesize delegate = _delegate;
+@synthesize refreshTimer = _refreshTimer;
 
 #pragma mark -
 
@@ -116,6 +124,13 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 		[self _authenticationRequestForRequestToken];
 	} else if (!_credentials.accessToken) {
 		[self _authenticationRequestForAccessToken];
+	} else if (_credentials.accessToken) {
+		NSTimeInterval expiryDateInterval = [[NSUserDefaults standardUserDefaults] doubleForKey:kMPOAuthTokenRefreshDateDefaultsKey];
+		NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceReferenceDate:expiryDateInterval];
+		
+		if ([tokenExpiryDate compare:[NSDate date]] == NSOrderedAscending) {
+			[self _authenticationRequestForAccessToken];
+		}
 	}
 }
 
@@ -216,10 +231,20 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	
 	[self addToKeychainUsingName:@"oauth_token_access" andValue:[[inNotification userInfo] objectForKey:@"oauth_token"]];
 	[self addToKeychainUsingName:@"oauth_token_access_secret" andValue:[[inNotification userInfo] objectForKey:@"oauth_token_secret"]];
+	
+	NSTimeInterval tokenRefreshInterval = (NSTimeInterval)[[[inNotification userInfo] objectForKey:@"oauth_expires_in"] intValue];
+	NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceNow:tokenRefreshInterval];
+	[[NSUserDefaults standardUserDefaults] setDouble:[tokenExpiryDate timeIntervalSinceReferenceDate] forKey:kMPOAuthTokenRefreshDateDefaultsKey];
+	
+	if (!_refreshTimer && tokenRefreshInterval > 0.0) {
+		self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:tokenRefreshInterval target:self selector:@selector(_refreshAccessToken:) userInfo:nil repeats:YES];
+	}
 }
 
 #pragma mark -
 
-
+- (void)_automaticallyRefreshAccessToken:(NSTimer *)inTimer {
+	[self _authenticationRequestForAccessToken];
+}
 
 @end
