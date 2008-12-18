@@ -14,7 +14,7 @@
 #import "MPURLRequestParameter.h"
 
 #import "NSURL+MPURLParameterAdditions.h"
-#import "MPOAuthAPI+TokenAdditions.h"
+#import "MPOAuthAPI+KeychainAdditions.h"
 
 #define kMPOAuthTokenRefreshDateDefaultsKey		@"MPOAuthAutomaticTokenRefreshLastExpiryDate"
 
