@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MPOAuthAPI.h"
 
-@interface MPOAuthAPI (TokenAdditions)
+@interface MPOAuthAPI (KeychainAdditions)
 
 - (void)addToKeychainUsingName:(NSString *)inName andValue:(NSString *)inValue;
 - (NSString *)findValueFromKeychainUsingName:(NSString *)inName;

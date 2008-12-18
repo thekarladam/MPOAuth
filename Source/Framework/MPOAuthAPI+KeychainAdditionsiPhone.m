@@ -6,7 +6,7 @@
 //  Copyright 2008 matrixPointer. All rights reserved.
 //
 
-#import "MPOAuthAPI+TokenAdditions.h"
+#import "MPOAuthAPI+KeychainAdditions.h"
 #import <Security/Security.h>
 
 #if TARGET_OS_IPHONE && (! TARGET_IPHONE_SIMULATOR)
@@ -15,7 +15,7 @@
 - (NSString *)findValueFromKeychainUsingName:(NSString *)inName returningItem:(NSDictionary **)outKeychainItemRef;
 @end
 
-@implementation MPOAuthAPI (TokenAdditions)
+@implementation MPOAuthAPI (KeychainAdditions)
 
 - (void)addToKeychainUsingName:(NSString *)inName andValue:(NSString *)inValue {
 	NSString *serverName = [_baseURL host];
