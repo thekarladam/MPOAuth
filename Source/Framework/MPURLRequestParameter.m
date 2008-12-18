@@ -119,6 +119,14 @@
 	return self;
 }
 
+- (id)initWithName:(NSString *)inName andValue:(NSString *)inValue {
+	if (self = [super init]) {
+		self.name = inName;
+		self.value = inValue;
+	}
+	return self;
+}
+
 - (oneway void)dealloc {
 	self.name = nil;
 	self.value = nil;

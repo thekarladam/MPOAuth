@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "MPURLRequestParameter.h"
 
+#define kMPOAuthSignatureMethodPlaintext	@"PLAINTEXT"
+#define kMPOAuthSignatureMethodHMACSHA1		@"HMAC-SHA1"
+#define kMPOAuthSignatureMethodRSASHA1		@"RSA-SHA1"
+
 @class MPOAuthURLRequest;
 
 @interface MPOAuthSignatureParameter : MPURLRequestParameter {

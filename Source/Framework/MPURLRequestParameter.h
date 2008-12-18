@@ -23,6 +23,8 @@
 + (NSString *)parameterStringForParameters:(NSArray *)inParameters;
 + (NSString *)parameterStringForDictionary:(NSDictionary *)inParameterDictionary;
 
+- (id)initWithName:(NSString *)inName andValue:(NSString *)inValue;
+
 - (NSString *)HTTPGETParameterString;
 
 @end

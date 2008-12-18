@@ -41,6 +41,11 @@
 		CBE7155E0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = CBE7155B0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditions.h */; };
 		CBE7155F0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7155C0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsiPhone.m */; };
 		CBE715600EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsMac.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7155D0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsMac.m */; };
+		CBE7158B0EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7158A0EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.m */; };
+		CBE715A30EFAC71600EF25AA /* MPOAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB920E280EF3D02600A89BBD /* MPOAuth.framework */; };
+		CBE715CB0EFAC8DC00EF25AA /* MPURLRequestParameterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE715CA0EFAC8DC00EF25AA /* MPURLRequestParameterTests.m */; };
+		CBE715DC0EFACB1100EF25AA /* MPOAuthURLRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE715DB0EFACB1100EF25AA /* MPOAuthURLRequestTests.m */; };
+		CBE715E00EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE715DF0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +55,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = CB920E270EF3D02600A89BBD;
 			remoteInfo = MPOAuth;
+		};
+		CBE715840EFAC05900EF25AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CB920E270EF3D02600A89BBD /* MPOAuth */;
+			remoteInfo = MPOAuth;
+		};
+		CBE715920EFAC36200EF25AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBE7157E0EFAC03300EF25AA /* Unit Tests */;
+			remoteInfo = "Unit Tests";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -116,6 +135,16 @@
 		CBE7155B0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MPOAuthAPI+KeychainAdditions.h"; sourceTree = "<group>"; };
 		CBE7155C0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPOAuthAPI+KeychainAdditionsiPhone.m"; sourceTree = "<group>"; };
 		CBE7155D0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPOAuthAPI+KeychainAdditionsMac.m"; sourceTree = "<group>"; };
+		CBE7157F0EFAC03300EF25AA /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Unit Tests.octest"; path = "build/Debug/Unit Tests.octest"; sourceTree = "<group>"; };
+		CBE715800EFAC03300EF25AA /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unit Tests-Info.plist"; sourceTree = "<group>"; };
+		CBE715890EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAPIKeychainTests.h; sourceTree = "<group>"; };
+		CBE7158A0EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAPIKeychainTests.m; sourceTree = "<group>"; };
+		CBE715C90EFAC8DC00EF25AA /* MPURLRequestParameterTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPURLRequestParameterTests.h; sourceTree = "<group>"; };
+		CBE715CA0EFAC8DC00EF25AA /* MPURLRequestParameterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPURLRequestParameterTests.m; sourceTree = "<group>"; };
+		CBE715DA0EFACB1100EF25AA /* MPOAuthURLRequestTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthURLRequestTests.h; sourceTree = "<group>"; };
+		CBE715DB0EFACB1100EF25AA /* MPOAuthURLRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthURLRequestTests.m; sourceTree = "<group>"; };
+		CBE715DE0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthSignatureParameterTests.h; sourceTree = "<group>"; };
+		CBE715DF0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthSignatureParameterTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +165,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CBE7157C0EFAC03300EF25AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBE715A30EFAC71600EF25AA /* MPOAuth.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -144,6 +181,7 @@
 			children = (
 				CBDC70920EEA3393008C4B9B /* Test App */,
 				CBDC70740EEA0F4D008C4B9B /* Framework */,
+				CBE715860EFAC15D00EF25AA /* Unit Tests */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -172,6 +210,7 @@
 			children = (
 				8D1107320486CEB800E47090 /* MPOAuthConnection.app */,
 				CB920E280EF3D02600A89BBD /* MPOAuth.framework */,
+				CBE7157F0EFAC03300EF25AA /* Unit Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,6 +224,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				CB920E290EF3D02600A89BBD /* MPOAuth-Info.plist */,
+				CBE715800EFAC03300EF25AA /* Unit Tests-Info.plist */,
 			);
 			name = MPOAuthConnection;
 			sourceTree = "<group>";
@@ -283,6 +323,21 @@
 			path = "Test App";
 			sourceTree = "<group>";
 		};
+		CBE715860EFAC15D00EF25AA /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CBE715890EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.h */,
+				CBE7158A0EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.m */,
+				CBE715C90EFAC8DC00EF25AA /* MPURLRequestParameterTests.h */,
+				CBE715CA0EFAC8DC00EF25AA /* MPURLRequestParameterTests.m */,
+				CBE715DA0EFACB1100EF25AA /* MPOAuthURLRequestTests.h */,
+				CBE715DB0EFACB1100EF25AA /* MPOAuthURLRequestTests.m */,
+				CBE715DE0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.h */,
+				CBE715DF0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m */,
+			);
+			path = "Unit Tests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -319,6 +374,7 @@
 			);
 			dependencies = (
 				CB920E760EF3D46000A89BBD /* PBXTargetDependency */,
+				CBE715930EFAC36200EF25AA /* PBXTargetDependency */,
 			);
 			name = MPOAuthConnection;
 			productInstallPath = "$(HOME)/Applications";
@@ -344,6 +400,25 @@
 			productReference = CB920E280EF3D02600A89BBD /* MPOAuth.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		CBE7157E0EFAC03300EF25AA /* Unit Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBE715830EFAC03500EF25AA /* Build configuration list for PBXNativeTarget "Unit Tests" */;
+			buildPhases = (
+				CBE7157A0EFAC03300EF25AA /* Resources */,
+				CBE7157B0EFAC03300EF25AA /* Sources */,
+				CBE7157C0EFAC03300EF25AA /* Frameworks */,
+				CBE7157D0EFAC03300EF25AA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CBE715850EFAC05900EF25AA /* PBXTargetDependency */,
+			);
+			name = "Unit Tests";
+			productName = "Unit Tests";
+			productReference = CBE7157F0EFAC03300EF25AA /* Unit Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -358,6 +433,7 @@
 			targets = (
 				8D1107260486CEB800E47090 /* MPOAuthConnection */,
 				CB920E270EF3D02600A89BBD /* MPOAuth */,
+				CBE7157E0EFAC03300EF25AA /* Unit Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -379,7 +455,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CBE7157A0EFAC03300EF25AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CBE7157D0EFAC03300EF25AA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
@@ -414,6 +513,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CBE7157B0EFAC03300EF25AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBE7158B0EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.m in Sources */,
+				CBE715CB0EFAC8DC00EF25AA /* MPURLRequestParameterTests.m in Sources */,
+				CBE715DC0EFACB1100EF25AA /* MPOAuthURLRequestTests.m in Sources */,
+				CBE715E00EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -421,6 +531,16 @@
 			isa = PBXTargetDependency;
 			target = CB920E270EF3D02600A89BBD /* MPOAuth */;
 			targetProxy = CB920E750EF3D46000A89BBD /* PBXContainerItemProxy */;
+		};
+		CBE715850EFAC05900EF25AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CB920E270EF3D02600A89BBD /* MPOAuth */;
+			targetProxy = CBE715840EFAC05900EF25AA /* PBXContainerItemProxy */;
+		};
+		CBE715930EFAC36200EF25AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CBE7157E0EFAC03300EF25AA /* Unit Tests */;
+			targetProxy = CBE715920EFAC36200EF25AA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -569,6 +689,60 @@
 			};
 			name = Release;
 		};
+		CBE715810EFAC03400EF25AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Unit Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Unit Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		CBE715820EFAC03400EF25AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Unit Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Unit Tests";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -595,6 +769,15 @@
 			buildConfigurations = (
 				CB920E2A0EF3D02800A89BBD /* Debug */,
 				CB920E2B0EF3D02800A89BBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CBE715830EFAC03500EF25AA /* Build configuration list for PBXNativeTarget "Unit Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBE715810EFAC03400EF25AA /* Debug */,
+				CBE715820EFAC03400EF25AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

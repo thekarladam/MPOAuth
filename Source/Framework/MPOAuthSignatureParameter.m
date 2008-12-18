@@ -13,10 +13,6 @@
 #include "hmac.h"
 #include "Base64Transcoder.h"
 
-#define kMPOAuthSignatureMethodPlaintext	@"PLAINTEXT"
-#define kMPOAuthSignatureMethodHMACSHA1		@"HMAC-SHA1"
-#define kMPOAuthSignatureMethodRSASHA1		@""
-
 @interface MPOAuthSignatureParameter ()
 - (id)initUsingHMAC_SHA1WithText:(NSString *)inText andSecret:(NSString *)inSecret forRequest:(MPOAuthURLRequest *)inRequest;
 @end
