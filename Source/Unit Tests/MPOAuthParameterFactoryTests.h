@@ -1,17 +1,16 @@
 //
-//  MPOAuthURLRequestTests.h
+//  MPOAuthParameterFactoryTests.h
 //  MPOAuthConnection
 //
 //  Created by Karl Adam on 08.12.18.
 //  Copyright 2008 matrixPointer. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import <SenTestingKit/SenTestingKit.h>
-#import "MPOAuthURLRequest.h"
+#import "MPOAuthParameterFactory.h"
 
-@interface MPOAuthURLRequestTests : SenTestCase {
-	MPOAuthURLRequest *_request;
+@interface MPOAuthParameterFactoryTests : SenTestCase {
+	id <MPOAuthParameterFactory> _factory;
 }
 
 @end
