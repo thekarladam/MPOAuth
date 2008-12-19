@@ -48,7 +48,7 @@
 	NSMutableURLRequest *aRequest = [[NSMutableURLRequest alloc] init];
 	NSMutableString *parameterString = [[NSMutableString alloc] initWithString:[MPURLRequestParameter parameterStringForParameters:self.parameters]];
 	MPOAuthSignatureParameter *signatureParameter = [[MPOAuthSignatureParameter alloc] initWithText:parameterString andSecret:inSecret forRequest:self usingMethod:inScheme];
-	[parameterString appendFormat:@"&%@", [signatureParameter HTTPGETParameterString]];
+	[parameterString appendFormat:@"&%@", [signatureParameter URLEncodedParameterString]];
 	
 	[aRequest setHTTPMethod:self.HTTPMethod];
 	

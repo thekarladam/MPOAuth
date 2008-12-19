@@ -23,7 +23,7 @@
 }
 
 - (void)testURLEncodedNameValuePair {
-    STAssertEqualObjects([_parameter HTTPGETParameterString], @"simon=did\%20not\%20say", @"The parameter pair was incorrectly encoded as: %@", [_parameter HTTPGETParameterString]);
+    STAssertEqualObjects([_parameter URLEncodedParameterString], @"simon=did\%20not\%20say", @"The parameter pair was incorrectly encoded as: %@", [_parameter URLEncodedParameterString]);
 }
 
 

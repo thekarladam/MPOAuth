@@ -88,7 +88,7 @@
 	
 	for (; i < parameterCount; i++) {
 		aParameter = [inParameters objectAtIndex:i];
-		[queryString appendString:[aParameter HTTPGETParameterString]];
+		[queryString appendString:[aParameter URLEncodedParameterString]];
 		
 		if (i < parameterCount - 1) {
 			[queryString appendString:@"&"];
@@ -139,7 +139,7 @@
 
 #pragma mark -
 
-- (NSString *)HTTPGETParameterString {
+- (NSString *)URLEncodedParameterString {
 	return [NSString stringWithFormat:@"%@=%@", self.name, [self.value stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 }
 
@@ -150,7 +150,7 @@
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p %@>", [self className], self, [self HTTPGETParameterString]];
+	return [NSString stringWithFormat:@"<%@: %p %@>", [self className], self, [self URLEncodedParameterString]];
 }
 
 @end

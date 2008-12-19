@@ -25,6 +25,6 @@
 
 - (id)initWithName:(NSString *)inName andValue:(NSString *)inValue;
 
-- (NSString *)HTTPGETParameterString;
+- (NSString *)URLEncodedParameterString;
 
 @end
