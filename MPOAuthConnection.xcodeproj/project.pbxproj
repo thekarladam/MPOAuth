@@ -11,6 +11,9 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		CB1C1DB20EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C1DB10EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m */; };
+		CB1C1E2B0EFB739900B306A3 /* OATestServer.rb in Resources */ = {isa = PBXBuildFile; fileRef = CB1C1E2A0EFB739900B306A3 /* OATestServer.rb */; };
+		CB1C1E2E0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C1E2D0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m */; };
 		CB920E2D0EF3D04B00A89BBD /* NSURL+MPURLParameterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CB946B980EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m */; };
 		CB920E2E0EF3D04B00A89BBD /* NSURLResponse+Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC71890EEA4AC8008C4B9B /* NSURLResponse+Encoding.m */; };
 		CB920E2F0EF3D04B00A89BBD /* NSString+URLEscapingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EC2650EEC70790012512C /* NSString+URLEscapingAdditions.m */; };
@@ -60,14 +63,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CB920E270EF3D02600A89BBD /* MPOAuth */;
+			remoteGlobalIDString = CB920E270EF3D02600A89BBD;
 			remoteInfo = MPOAuth;
 		};
 		CBE715920EFAC36200EF25AA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CBE7157E0EFAC03300EF25AA /* Unit Tests */;
+			remoteGlobalIDString = CBE7157E0EFAC03300EF25AA;
 			remoteInfo = "Unit Tests";
 		};
 /* End PBXContainerItemProxy section */
@@ -96,6 +99,11 @@
 		32CA4F630368D1EE00C91783 /* MPOAuthConnection_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthConnection_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MPOAuthConnection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MPOAuthConnection.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB1C1DB00EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthParameterFactoryTests.h; sourceTree = "<group>"; };
+		CB1C1DB10EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthParameterFactoryTests.m; sourceTree = "<group>"; };
+		CB1C1E2A0EFB739900B306A3 /* OATestServer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = OATestServer.rb; sourceTree = "<group>"; };
+		CB1C1E2C0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAPIRequestLoaderTests.h; sourceTree = "<group>"; };
+		CB1C1E2D0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAPIRequestLoaderTests.m; sourceTree = "<group>"; };
 		CB6EC2640EEC70790012512C /* NSString+URLEscapingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEscapingAdditions.h"; sourceTree = "<group>"; };
 		CB6EC2650EEC70790012512C /* NSString+URLEscapingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEscapingAdditions.m"; sourceTree = "<group>"; };
 		CB6EC36F0EECE9030012512C /* MPOAuthSignatureParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthSignatureParameter.h; sourceTree = "<group>"; };
@@ -135,7 +143,7 @@
 		CBE7155B0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MPOAuthAPI+KeychainAdditions.h"; sourceTree = "<group>"; };
 		CBE7155C0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPOAuthAPI+KeychainAdditionsiPhone.m"; sourceTree = "<group>"; };
 		CBE7155D0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPOAuthAPI+KeychainAdditionsMac.m"; sourceTree = "<group>"; };
-		CBE7157F0EFAC03300EF25AA /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Unit Tests.octest"; path = "build/Debug/Unit Tests.octest"; sourceTree = "<group>"; };
+		CBE7157F0EFAC03300EF25AA /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBE715800EFAC03300EF25AA /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		CBE715890EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAPIKeychainTests.h; sourceTree = "<group>"; };
 		CBE7158A0EFAC30D00EF25AA /* MPOAuthAPIKeychainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAPIKeychainTests.m; sourceTree = "<group>"; };
@@ -334,6 +342,11 @@
 				CBE715DB0EFACB1100EF25AA /* MPOAuthURLRequestTests.m */,
 				CBE715DE0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.h */,
 				CBE715DF0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m */,
+				CB1C1DB00EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.h */,
+				CB1C1DB10EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m */,
+				CB1C1E2A0EFB739900B306A3 /* OATestServer.rb */,
+				CB1C1E2C0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.h */,
+				CB1C1E2D0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -459,6 +472,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB1C1E2B0EFB739900B306A3 /* OATestServer.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +535,8 @@
 				CBE715CB0EFAC8DC00EF25AA /* MPURLRequestParameterTests.m in Sources */,
 				CBE715DC0EFACB1100EF25AA /* MPOAuthURLRequestTests.m in Sources */,
 				CBE715E00EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m in Sources */,
+				CB1C1DB20EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m in Sources */,
+				CB1C1E2E0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
