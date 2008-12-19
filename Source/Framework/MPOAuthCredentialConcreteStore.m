@@ -8,6 +8,7 @@
 
 #import "MPOAuthCredentialConcreteStore.h"
 #import "MPURLRequestParameter.h"
+#import "NSString+URLEscapingAdditions.h"
 
 @implementation MPOAuthCredentialConcreteStore
 
@@ -107,10 +108,10 @@
 }
 
 - (NSString *)signingKey {
-	NSString *consumerSecret = [self consumerSecret];
-	NSString *tokenSecret = [self tokenSecret];
+	NSString *consumerSecret = [[self consumerSecret] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSString *tokenSecret = [[self tokenSecret] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	
-	return [NSString stringWithFormat:@"%@&%@", consumerSecret, tokenSecret];
+	return [NSString stringWithFormat:@"%@%&%@", consumerSecret, tokenSecret];
 }
 
 #pragma mark -

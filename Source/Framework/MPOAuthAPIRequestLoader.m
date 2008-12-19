@@ -148,7 +148,7 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 		self.oauthResponse.oauthParameters = foundParameters;
 		
 		if ([response length] > 13 && [[response substringToIndex:13] isEqualToString:@"oauth_problem"]) {
-			
+			NSLog(@"oauthProblem = %@", foundParameters);
 		} else if ([response length] > 11 && [[response substringToIndex:11] isEqualToString:@"oauth_token"]) {
 			NSString *aParameterValue = nil;
 			//NSLog(@"foundParameters = %@", foundParameters);

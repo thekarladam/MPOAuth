@@ -9,6 +9,7 @@
 #import "MPOAuthSignatureParameterTests.h"
 #import "MPOAuthURLRequest.h"
 #import "MPOAuthCredentialConcreteStore.h"
+#import "NSString+URLEscapingAdditions.h"
 
 @implementation MPOAuthSignatureParameterTests
 
@@ -50,6 +51,34 @@
 	[mockCredentials release];
 	[_signatureParameter release];
 	_signatureParameter = nil;
+}
+
+- (void)testURIEscapedGeneratedSignatures_Core941 {
+	NSDictionary *credentialsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"abcdefghijklmnopqestuvwxyz", kMPOAuthCredentialConsumerKey,
+																					@"djr9rjt0jd78jf88", kMPOAuthCredentialConsumerSecret, nil];
+	MPOAuthCredentialConcreteStore *mockCredentials = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentialsDictionary];
+	mockCredentials.signatureMethod = @"PLAINTEXT";
+	
+	mockCredentials.requestToken = @"empty";
+	mockCredentials.requestTokenSecret = @"";
+	STAssertEqualObjects([mockCredentials.signingKey stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"djr9rjt0jd78jf88%26", @"Generated Signature does not conform to OAuth Core 9.4.1");
+
+	
+	mockCredentials.requestTokenSecret = @"jjd999tj88uiths3";
+	STAssertEqualObjects([mockCredentials.signingKey stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"djr9rjt0jd78jf88%26jjd999tj88uiths3", @"Generated Signature does not conform to OAuth Core 9.4.1");
+	
+	mockCredentials.requestTokenSecret = @"jjd99$tj88uiths3";
+	STAssertEqualObjects([mockCredentials.signingKey stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"djr9rjt0jd78jf88%26jjd99%2524tj88uiths3", @"Generated Signature does not conform to OAuth Core 9.4.1");
+	
+	mockCredentials.signatureMethod = @"HMAC-SHA1";
+	STAssertEqualObjects(mockCredentials.signingKey, @"djr9rjt0jd78jf88&", @"Generated Signature does not conform to OAuth Core 9.4.1");
+	
+	mockCredentials.requestTokenSecret = @"jjd999tj88uiths3";
+	STAssertEqualObjects(mockCredentials.signingKey, @"djr9rjt0jd78jf88&jjd999tj88uiths3", @"Generated Signature does not conform to OAuth Core 9.4.1");
+	
+	mockCredentials.requestTokenSecret = @"jjd99$tj88uiths3";
+	STAssertEqualObjects(mockCredentials.signingKey, @"djr9rjt0jd78jf88&jjd99%24tj88uiths3", @"Generated Signature does not conform to OAuth Core 9.4.1");	
+	
 }
 
 @end
