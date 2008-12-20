@@ -9,6 +9,7 @@
 #import "MPOAuthSignatureParameter.h"
 #import "MPOAuthURLRequest.h"
 #import "NSString+URLEscapingAdditions.h"
+#import "NSURL+MPURLParameterAdditions.h"
 
 #include "hmac.h"
 #include "Base64Transcoder.h"
@@ -18,6 +19,12 @@
 @end
 
 @implementation MPOAuthSignatureParameter
+
++ (NSString *)signatureBaseStringUsingParameterString:(NSString *)inParameterString forRequest:(MPOAuthURLRequest *)inRequest {
+	return [NSString stringWithFormat:@"%@&%@&%@",	[inRequest HTTPMethod],
+			[[inRequest.url absoluteNormalizedString] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+			[inParameterString stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+}
 
 - (id)initWithText:(NSString *)inText andSecret:(NSString *)inSecret forRequest:(MPOAuthURLRequest *)inRequest usingMethod:(NSString *)inMethod {
 	if ([inMethod isEqual:kMPOAuthSignatureMethodHMACSHA1]) {
@@ -38,9 +45,7 @@
 
 - (id)initUsingHMAC_SHA1WithText:(NSString *)inText andSecret:(NSString *)inSecret forRequest:(MPOAuthURLRequest *)inRequest {
 	if (self = [super init]) {
-		NSString *signatureBaseString = [NSString stringWithFormat:@"%@&%@&%@", [inRequest HTTPMethod],
-										 [[inRequest.url absoluteString] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-										 [inText stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		NSString *signatureBaseString = [MPOAuthSignatureParameter signatureBaseStringUsingParameterString:inText forRequest:inRequest];
 
 		NSData *secretData = [inSecret dataUsingEncoding:NSUTF8StringEncoding];
 		NSData *textData = [signatureBaseString dataUsingEncoding:NSUTF8StringEncoding];
@@ -63,5 +68,6 @@
 - (oneway void)dealloc {
 	[super dealloc];
 }
+
 
 @end

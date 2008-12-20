@@ -82,4 +82,59 @@
 	
 }
 
+- (void)testConcatenationOfRequestElementsForBASEString_Core912 {
+	NSURL *testURL = [NSURL URLWithString:@"http://example.com/"];
+	MPURLRequestParameter *aParameter = [[[MPURLRequestParameter alloc] initWithName:@"n" andValue:@"v"] autorelease];
+	NSMutableArray *parameterArray = [NSMutableArray arrayWithObject:aParameter];
+	MPOAuthURLRequest *urlRequest = [[[MPOAuthURLRequest alloc] initWithURL:testURL andParameters:[NSArray arrayWithObject:aParameter]] autorelease];
+
+	NSString *baseString = [MPOAuthSignatureParameter signatureBaseStringUsingParameterString:[MPURLRequestParameter parameterStringForParameters:parameterArray]
+																				   forRequest:urlRequest];	
+	STAssertEqualObjects(baseString, @"GET&http%3A%2F%2Fexample.com%2F&n%3Dv", @"Base String does not conform to Core 9.1.2");
+	
+	urlRequest.url = [NSURL URLWithString:@"http://example.com"];
+	baseString = [MPOAuthSignatureParameter signatureBaseStringUsingParameterString:[MPURLRequestParameter parameterStringForParameters:parameterArray]
+																		 forRequest:urlRequest];
+	STAssertEqualObjects(baseString, @"GET&http%3A%2F%2Fexample.com%2F&n%3Dv", @"Base String does not conform to Core 9.1.2");
+
+	urlRequest.HTTPMethod = @"POST";
+	urlRequest.url = [NSURL URLWithString:@"https://photos.example.net/request_token"];
+	[parameterArray removeAllObjects];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_version" andValue:@"1.0"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_consumer_key" andValue:@"dpf43f3p2l4k3l03"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_timestamp" andValue:@"1191242090"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_nonce" andValue:@"hsu94j3884jdopsl"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_signature_method" andValue:@"PLAINTEXT"] autorelease]];
+	// This is not part of the test, it's added later by the API, only here to document the discrepancy between the site's test and here
+//	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_signature" andValue:@"ignored"] autorelease]]; 
+	[parameterArray sortUsingSelector:@selector(compare:)];
+	baseString = [MPOAuthSignatureParameter signatureBaseStringUsingParameterString:[MPURLRequestParameter parameterStringForParameters:parameterArray]
+																		 forRequest:urlRequest];
+	STAssertEqualObjects(baseString, 
+						 @"POST&https%3A%2F%2Fphotos.example.net%2Frequest_token&oauth_consumer_key%3Ddpf43f3p2l4k3l03%26oauth_nonce%3Dhsu94j3884jdopsl%26oauth_signature_method%3DPLAINTEXT%26oauth_timestamp%3D1191242090%26oauth_version%3D1.0",
+						 @"Base String does not conform to Core 9.1.2");
+	
+	urlRequest.HTTPMethod = @"GET";
+	urlRequest.url = [NSURL URLWithString:@"http://photos.example.net/photos"];
+	[parameterArray removeAllObjects];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_version" andValue:@"1.0"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_consumer_key" andValue:@"dpf43f3p2l4k3l03"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_token" andValue:@"nnch734d00sl2jdk"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_timestamp" andValue:@"1191242096"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_nonce" andValue:@"kllo9940pd9333jh"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_signature_method" andValue:@"HMAC-SHA1"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"file" andValue:@"vacation.jpg"] autorelease]];
+	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"size" andValue:@"original"] autorelease]];
+	// This is not part of the test, it's added later by the API, only here to document the discrepancy between the site's test and here
+	//	[parameterArray addObject:[[[MPURLRequestParameter alloc] initWithName:@"oauth_signature" andValue:@"ignored"] autorelease]];
+	[parameterArray sortUsingSelector:@selector(compare:)];
+	baseString = [MPOAuthSignatureParameter signatureBaseStringUsingParameterString:[MPURLRequestParameter parameterStringForParameters:parameterArray]
+																		 forRequest:urlRequest];
+	STAssertEqualObjects(baseString, 
+						 @"GET&http%3A%2F%2Fphotos.example.net%2Fphotos&file%3Dvacation.jpg%26oauth_consumer_key%3Ddpf43f3p2l4k3l03%26oauth_nonce%3Dkllo9940pd9333jh%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1191242096%26oauth_token%3Dnnch734d00sl2jdk%26oauth_version%3D1.0%26size%3Doriginal",
+						 @"Base String does not conform to Core 9.1.2");
+	
+}
+
+
 @end

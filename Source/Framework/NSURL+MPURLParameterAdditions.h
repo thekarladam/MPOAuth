@@ -13,5 +13,6 @@
 
 - (NSURL *)urlByAddingParameters:(NSArray *)inParameters;
 - (NSURL *)urlByAddingParameterDictionary:(NSDictionary *)inParameters;
+- (NSString *)absoluteNormalizedString;
 
 @end

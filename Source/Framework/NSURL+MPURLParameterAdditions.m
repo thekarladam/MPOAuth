@@ -37,4 +37,14 @@
 	return [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [absoluteString substringToIndex:parameterRange.location], [MPURLRequestParameter parameterStringForDictionary:[parameterDictionary autorelease]]]];
 }
 
+- (NSString *)absoluteNormalizedString {
+	NSString *normalizedString = [self absoluteString];
+
+	if ([[self path] length] == 0 && [[self query] length] == 0) {
+		normalizedString = [NSString stringWithFormat:@"%@/", [self absoluteString]];
+	}
+	
+	return normalizedString;
+}
+
 @end
