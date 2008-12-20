@@ -71,6 +71,7 @@
 	STAssertEqualObjects([mockCredentials.signingKey stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"djr9rjt0jd78jf88%26jjd99%2524tj88uiths3", @"Generated Signature does not conform to OAuth Core 9.4.1");
 	
 	mockCredentials.signatureMethod = @"HMAC-SHA1";
+	mockCredentials.requestTokenSecret = @"";
 	STAssertEqualObjects(mockCredentials.signingKey, @"djr9rjt0jd78jf88&", @"Generated Signature does not conform to OAuth Core 9.4.1");
 	
 	mockCredentials.requestTokenSecret = @"jjd999tj88uiths3";

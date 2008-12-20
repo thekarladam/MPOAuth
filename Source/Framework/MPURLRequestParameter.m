@@ -140,13 +140,19 @@
 #pragma mark -
 
 - (NSString *)URLEncodedParameterString {
-	return [NSString stringWithFormat:@"%@=%@", self.name, [self.value stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	return [NSString stringWithFormat:@"%@=%@", [self.name stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.value ? [self.value stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""];
 }
 
 #pragma mark -
 
 - (NSComparisonResult)compare:(id)inObject {
-	return [self.name compare:[(MPURLRequestParameter *)inObject name]];
+	NSComparisonResult result = [self.name compare:[(MPURLRequestParameter *)inObject name]];
+	
+	if (result == NSOrderedSame) {
+		result = [self.value compare:[(MPURLRequestParameter *)inObject value]];
+	}
+								 
+	return result;
 }
 
 - (NSString *)description {

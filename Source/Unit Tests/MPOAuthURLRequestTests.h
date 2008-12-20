@@ -9,9 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <SenTestingKit/SenTestingKit.h>
 #import "MPOAuthURLRequest.h"
+#import "MPOAuthCredentialStore.h"
 
 @interface MPOAuthURLRequestTests : SenTestCase {
 	MPOAuthURLRequest *_request;
+	id <MPOAuthCredentialStore> _credentials;
 }
 
 @end
