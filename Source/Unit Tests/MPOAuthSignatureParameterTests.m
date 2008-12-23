@@ -53,6 +53,21 @@
 	_signatureParameter = nil;
 }
 
+- (void)testHMACSHA1Signature_Core92 {
+	STAssertEqualObjects([MPOAuthSignatureParameter HMAC_SHA1SignatureForText:@"bs" usingSecret:@"cs&"],
+						 @"egQqG5AJep5sJ7anhXju1unge2I=",
+						 @"Generated HMAC_SHA1 Signature is incorrect, Core 9.2");
+	
+	STAssertEqualObjects([MPOAuthSignatureParameter HMAC_SHA1SignatureForText:@"bs" usingSecret:@"cs&ts"],
+						 @"VZVjXceV7JgPq/dOTnNmEfO0Fv8=",
+						 @"Generated HMAC_SHA1 Signature is incorrect, Core 9.2");
+	
+	STAssertEqualObjects([MPOAuthSignatureParameter HMAC_SHA1SignatureForText:@"GET&http%3A%2F%2Fphotos.example.net%2Fphotos&file%3Dvacation.jpg%26oauth_consumer_key%3Ddpf43f3p2l4k3l03%26oauth_nonce%3Dkllo9940pd9333jh%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1191242096%26oauth_token%3Dnnch734d00sl2jdk%26oauth_version%3D1.0%26size%3Doriginal" usingSecret:@"kd94hf93k423kf44&pfkkdhi9sl3r4s00"],
+						 @"tR3+Ty81lMeYAr/Fid0kMTYa/WM=",
+						 @"Generated HMAC_SHA1 Signature is incorrect, Core 9.2");
+	
+}
+
 - (void)testURIEscapedGeneratedSignatures_Core941 {
 	NSDictionary *credentialsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"abcdefghijklmnopqestuvwxyz", kMPOAuthCredentialConsumerKey,
 																					@"djr9rjt0jd78jf88", kMPOAuthCredentialConsumerSecret, nil];

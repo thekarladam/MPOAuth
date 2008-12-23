@@ -21,7 +21,7 @@
 	MPOAuthCredentialConcreteStore *credentialStore = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentials];
 	credentialStore.signatureMethod = @"PLAINTEXT";
 	
-	NSURL *url = [NSURL URLWithString:@"http://public.site.tld/request_token"];
+	NSURL *url = [NSURL URLWithString:@"http://example.com/request_token"];
 	_request = [[MPOAuthURLRequest alloc] initWithURL:url andParameters:nil];
 }
 
@@ -85,12 +85,6 @@
 	anotherParameter.value = @"a";
 	[parameterArray sortUsingSelector:@selector(compare:)];
 	STAssertEqualObjects([MPURLRequestParameter parameterStringForParameters:parameterArray], @"x=a&x%21y=a", @"Incorrectly Normalized Request Parameters, Core 9.1.1");	
-}
-
-- (void)testNSURLRequestWithSecret {
-//	NSURLRequest *urlRequest = [_request urlRequestSignedWithSecret:@"kd94hf93k423kf44%26" usingMethod:@"HMAC-SHA1"];
-//	NSLog( @"urlRequest - %@", urlRequest);
-//	STAssertEqualObjects([urlRequest URL], @"site.com", @"URLRequest failed to be correctly created for GET");
 }
 
 @end
