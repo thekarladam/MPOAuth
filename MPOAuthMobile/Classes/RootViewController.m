@@ -3,7 +3,7 @@
 //  MPOAuthMobile
 //
 //  Created by Karl Adam on 08.12.14.
-//  Copyright Yahoo 2008. All rights reserved.
+//  Copyright matrixPointer 2008. All rights reserved.
 //
 
 #import "RootViewController.h"
