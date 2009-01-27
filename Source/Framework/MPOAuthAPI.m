@@ -145,7 +145,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 - (void)_authenticationRequestForRequestTokenSuccessfulLoad:(MPOAuthAPIRequestLoader *)inLoader withData:(NSData *)inData {
 	NSDictionary *oauthResponseParameters = inLoader.oauthResponse.oauthParameters;
 	NSString *xoauthRequestAuthURL = [oauthResponseParameters objectForKey:@"xoauth_request_auth_url"]; // a common custom extension, used by Yahoo!
-	NSURL *userAuthURL = xoauthRequestAuthURL ? [NSURL URLWithString:xoauthRequestAuthURL] : nil;
+	NSURL *userAuthURL = xoauthRequestAuthURL ? [NSURL URLWithString:xoauthRequestAuthURL] : [NSURL URLWithString:@"request_auth" relativeToURL:self.authenticationURL];
 	NSURL *callbackURL = [self.delegate respondsToSelector:@selector(callbackURLForCompletedUserAuthorization)] ? [self.delegate callbackURLForCompletedUserAuthorization] : nil;
 	NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:	[oauthResponseParameters objectForKey:@"oauth_token"], @"oauth_token",
 																			callbackURL, @"oauth_callback",
@@ -254,7 +254,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	sessionHandleParameter.name = @"oauth_session_handle";
 	sessionHandleParameter.value = _credentials.sessionHandle;
 	
-	[self performMethod:@"get_request_token"
+	[self performMethod:@"get_token"
 				  atURL:self.authenticationURL
 		 withParameters:[NSArray arrayWithObject:sessionHandleParameter]
 			 withTarget:self
