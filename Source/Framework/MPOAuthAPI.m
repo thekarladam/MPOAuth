@@ -38,6 +38,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 - (void)_authenticationRequestForRequestToken;
 - (void)_authenticationRequestForUserPermissionsConfirmationAtURL:(NSURL *)inURL;
 - (void)_authenticationRequestForAccessToken;
+- (void)_automaticallyRefreshAccessToken:(NSTimer *)inTimer;
 
 @end
 
@@ -133,7 +134,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 		NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceReferenceDate:expiryDateInterval];
 		
 		if ([tokenExpiryDate compare:[NSDate date]] == NSOrderedAscending) {
-			[self _authenticationRequestForAccessToken];
+			[self _automaticallyRefreshAccessToken:nil];
 		}
 	}
 }
@@ -185,10 +186,9 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	loader.credentials = self.credentials;
 	loader.target = inTarget;
 	loader.successSelector = inAction ? inAction : @selector(_performedLoad:receivingData:);
-//	loader.failSelector = @selector(_failedLoad:receivingData:);
 	
 	[loader loadSynchronously:NO];
-///	[self.activeLoaders addObject:loader];
+//	[self.activeLoaders addObject:loader];
 
 	[loader release];
 	[aRequest release];
