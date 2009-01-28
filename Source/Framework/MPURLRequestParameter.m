@@ -59,24 +59,25 @@
 
 + (NSDictionary *)parameterDictionaryFromString:(NSString *)inString {
 	NSMutableDictionary *foundParameters = [NSMutableDictionary dictionaryWithCapacity:10];
-	NSScanner *parameterScanner = [[NSScanner alloc] initWithString:inString];
-	NSString *name = nil;
-	NSString *value = nil;
-	
-	while (![parameterScanner isAtEnd]) {
-		name = nil;
-		value = nil;
+	if (inString) {
+		NSScanner *parameterScanner = [[NSScanner alloc] initWithString:inString];
+		NSString *name = nil;
+		NSString *value = nil;
 		
-		[parameterScanner scanUpToString:@"=" intoString:&name];
-		[parameterScanner scanString:@"=" intoString:NULL];
-		[parameterScanner scanUpToString:@"&" intoString:&value];
-		[parameterScanner scanString:@"&" intoString:NULL];		
+		while (![parameterScanner isAtEnd]) {
+			name = nil;
+			value = nil;
+			
+			[parameterScanner scanUpToString:@"=" intoString:&name];
+			[parameterScanner scanString:@"=" intoString:NULL];
+			[parameterScanner scanUpToString:@"&" intoString:&value];
+			[parameterScanner scanString:@"&" intoString:NULL];		
+			
+			[foundParameters setObject:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:name];
+		}
 		
-		[foundParameters setObject:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:name];
+		[parameterScanner release];
 	}
-	
-	[parameterScanner release];
-	
 	return foundParameters;
 }
 

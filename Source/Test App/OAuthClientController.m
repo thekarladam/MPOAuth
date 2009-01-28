@@ -25,8 +25,10 @@
 }
 
 - (void)awakeFromNib {
-	[progressIndicator setHidden:NO];
-	[progressIndicator startAnimation:self];
+	if (_oauthAPI) {
+		[progressIndicator setHidden:NO];
+		[progressIndicator startAnimation:self];
+	}
 }
 
 - (void)requestTokenReceived:(NSNotification *)inNotification {

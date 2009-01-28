@@ -29,12 +29,18 @@
 	NSString *queryString = [self query];
 	NSString *absoluteString = [self absoluteString];
 	NSRange parameterRange = [absoluteString rangeOfString:@"?"];
-	parameterRange.length = [absoluteString length] - parameterRange.location;
+	NSURL *composedURL = self;
 	
-	[parameterDictionary addEntriesFromDictionary:inParameterDictionary];
-	[parameterDictionary addEntriesFromDictionary:[MPURLRequestParameter parameterDictionaryFromString:queryString]];
-	
-	return [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [absoluteString substringToIndex:parameterRange.location], [MPURLRequestParameter parameterStringForDictionary:[parameterDictionary autorelease]]]];
+	if (parameterRange.location != NSNotFound) {
+		parameterRange.length = [absoluteString length] - parameterRange.location;
+		
+		[parameterDictionary addEntriesFromDictionary:inParameterDictionary];
+		[parameterDictionary addEntriesFromDictionary:[MPURLRequestParameter parameterDictionaryFromString:queryString]];
+		
+		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [absoluteString substringToIndex:parameterRange.location], [MPURLRequestParameter parameterStringForDictionary:[parameterDictionary autorelease]]]];
+	}
+
+	return composedURL;
 }
 
 - (NSString *)absoluteNormalizedString {
