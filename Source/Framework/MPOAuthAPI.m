@@ -243,7 +243,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	[[NSUserDefaults standardUserDefaults] setDouble:[tokenExpiryDate timeIntervalSinceReferenceDate] forKey:kMPOAuthTokenRefreshDateDefaultsKey];
 	
 	if (!_refreshTimer && tokenRefreshInterval > 0.0) {
-		self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:tokenRefreshInterval target:self selector:@selector(_refreshAccessToken:) userInfo:nil repeats:YES];
+		self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:tokenRefreshInterval target:self selector:@selector(_automaticallyRefreshAccessToken:) userInfo:nil repeats:YES];
 	}
 }
 
