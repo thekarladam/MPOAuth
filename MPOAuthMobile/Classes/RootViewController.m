@@ -16,19 +16,11 @@
 
 @implementation RootViewController
 
-/*
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-*/
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	[self.navigationItem setPrompt:@"Performing Request Token Request"];
 	[self.navigationItem setTitle:@"OAuth Test"];
+	[methodInput addTarget:self action:@selector(methodEntered:) forControlEvents:UIControlEventEditingDidEndOnExit];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestTokenReceived:) name:MPOAuthNotificationRequestTokenReceived object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenReceived:) name:MPOAuthNotificationAccessTokenReceived object:nil];
@@ -37,33 +29,10 @@
 																			kConsumerSecret, kMPOAuthCredentialConsumerSecret,
 								 nil];
 	_oauthAPI = [[MPOAuthAPI alloc] initWithCredentials:credentials
-											  andBaseURL:[NSURL URLWithString:@"http://term.ie/oauth/example/"]];
+									  authenticationURL:[NSURL URLWithString:@"https://example.com/oauth/"]
+											 andBaseURL:[NSURL URLWithString:@"http://example.com/webservice/"]];
 	
 }
-
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)dealloc {
     [super dealloc];
@@ -77,6 +46,13 @@
 	[self.navigationItem setPrompt:@"Access Token Received"];
 }
 
+- (void)_methodLoadedFromURL:(NSURL *)inURL withResponseString:(NSString *)inString {
+	textOutput.text = inString;
+}
+
+- (void)methodEntered:(UITextField *)inTextField {
+	[_oauthAPI performMethod:inTextField.text withTarget:self andAction:@selector(_methodLoadedFromURL:withResponseString:)];
+}
 
 @end
 

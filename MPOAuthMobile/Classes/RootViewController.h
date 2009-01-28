@@ -11,7 +11,9 @@
 @class MPOAuthAPI;
 
 @interface RootViewController : UIViewController {
-	MPOAuthAPI *_oauthAPI;
+	MPOAuthAPI	*_oauthAPI;
+	UITextField *methodInput;
+	UITextView	*textOutput;
 }
 
 @end
