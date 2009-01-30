@@ -8,6 +8,7 @@
 
 #import "NSURL+MPURLParameterAdditions.h"
 #import "MPURLRequestParameter.h"
+#import "NSString+URLEscapingAdditions.h"
 
 @implementation NSURL (MPURLParameterAdditions)
 
@@ -51,6 +52,26 @@
 	}
 	
 	return normalizedString;
+}
+
+- (BOOL)domainMatches:(NSString *)inString {
+	BOOL matches = NO;
+	
+	NSString *domain = [self host];
+	matches = [domain isIPAddress] && [domain isEqualToString:inString];
+	
+	int domainLength = [domain length];
+	int requestedDomainLength = [inString length];
+	
+	if (!matches) {
+		if (domainLength > requestedDomainLength) {
+			matches = [domain rangeOfString:inString].location == (domainLength - requestedDomainLength);
+		} else if (domainLength == (requestedDomainLength - 1)) {
+			matches = ([inString compare:domain options:NSCaseInsensitiveSearch range:NSMakeRange(1, domainLength)] == NSOrderedSame);
+		}
+	}
+	
+	return matches;
 }
 
 @end

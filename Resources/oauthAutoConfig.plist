@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>.yahoo.com</key>
+	<array>
+		<string>get_request_token</string>
+		<string>request_auth</string>
+		<string>get_token</string>
+	</array>
+	<key>.google.com</key>
+	<array>
+		<string>OAuthGetRequestToken</string>
+		<string>OAuthAuthorizeToken</string>
+		<string>OAuthGetAccessToken</string>
+	</array>
+</dict>
+</plist>

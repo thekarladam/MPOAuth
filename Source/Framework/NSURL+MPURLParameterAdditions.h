@@ -15,4 +15,6 @@
 - (NSURL *)urlByAddingParameterDictionary:(NSDictionary *)inParameters;
 - (NSString *)absoluteNormalizedString;
 
+- (BOOL)domainMatches:(NSString *)inString;
+
 @end

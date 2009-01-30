@@ -34,6 +34,9 @@ typedef enum {
 	MPOAuthCredentialConcreteStore	*_credentials;
 	NSURL							*_baseURL;
 	NSURL							*_authenticationURL;
+	NSString						*_oauthRequestTokenMethod;
+	NSString						*_oauthAuthorizeTokenMethod;
+	NSString						*_oauthGetAccessTokenMethod;
 	MPOAuthSignatureScheme			_signatureScheme;
 	NSMutableArray					*_activeLoaders;
 	id <MPOAuthAPIDelegate>			_delegate;

@@ -54,13 +54,13 @@
 	
 	if ([[self HTTPMethod] isEqualToString:@"GET"] && [self.parameters count]) {
 		NSString *urlString = [NSString stringWithFormat:@"%@?%@", [self.url absoluteString], parameterString];
-		NSLog( @"urlString - %@", urlString);
+		//NSLog( @"urlString - %@", urlString);
 		
 		[aRequest setURL:[NSURL URLWithString:urlString]];
 	} else if ([[self HTTPMethod] isEqualToString:@"POST"]) {
 		NSData *postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
-		NSLog(@"urlString - %@", self.url);
-		NSLog( @"postDataString - %@", parameterString);
+		//NSLog(@"urlString - %@", self.url);
+		//NSLog( @"postDataString - %@", parameterString);
 		
 		[aRequest setURL:self.url];
 		[aRequest setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];

@@ -11,6 +11,7 @@
 
 @interface NSString (MPURLEscapingAdditions)
 
+- (BOOL)isIPAddress;
 - (NSString *)stringByAddingURIPercentEscapesUsingEncoding:(NSStringEncoding)inEncoding;
 
 @end

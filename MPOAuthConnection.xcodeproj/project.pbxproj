@@ -11,9 +11,11 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		CB12B3150F32A07100054573 /* NSString+URLAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB12B3140F32A07100054573 /* NSString+URLAdditionsTests.m */; };
 		CB1C1DB20EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C1DB10EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m */; };
 		CB1C1E2B0EFB739900B306A3 /* OATestServer.rb in Resources */ = {isa = PBXBuildFile; fileRef = CB1C1E2A0EFB739900B306A3 /* OATestServer.rb */; };
 		CB1C1E2E0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1C1E2D0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m */; };
+		CB437A6D0F30535B00FF1798 /* oauthAutoConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB437A6C0F30535B00FF1798 /* oauthAutoConfig.plist */; };
 		CB920E2D0EF3D04B00A89BBD /* NSURL+MPURLParameterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CB946B980EEE179A00493DCC /* NSURL+MPURLParameterAdditions.m */; };
 		CB920E2E0EF3D04B00A89BBD /* NSURLResponse+Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDC71890EEA4AC8008C4B9B /* NSURLResponse+Encoding.m */; };
 		CB920E2F0EF3D04B00A89BBD /* NSString+URLEscapingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EC2650EEC70790012512C /* NSString+URLEscapingAdditions.m */; };
@@ -99,11 +101,14 @@
 		32CA4F630368D1EE00C91783 /* MPOAuthConnection_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthConnection_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MPOAuthConnection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MPOAuthConnection.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB12B3130F32A07100054573 /* NSString+URLAdditionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLAdditionsTests.h"; sourceTree = "<group>"; };
+		CB12B3140F32A07100054573 /* NSString+URLAdditionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLAdditionsTests.m"; sourceTree = "<group>"; };
 		CB1C1DB00EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthParameterFactoryTests.h; sourceTree = "<group>"; };
 		CB1C1DB10EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthParameterFactoryTests.m; sourceTree = "<group>"; };
 		CB1C1E2A0EFB739900B306A3 /* OATestServer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = OATestServer.rb; sourceTree = "<group>"; };
 		CB1C1E2C0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthAPIRequestLoaderTests.h; sourceTree = "<group>"; };
 		CB1C1E2D0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthAPIRequestLoaderTests.m; sourceTree = "<group>"; };
+		CB437A6C0F30535B00FF1798 /* oauthAutoConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = oauthAutoConfig.plist; path = Resources/oauthAutoConfig.plist; sourceTree = SOURCE_ROOT; };
 		CB6EC2640EEC70790012512C /* NSString+URLEscapingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEscapingAdditions.h"; sourceTree = "<group>"; };
 		CB6EC2650EEC70790012512C /* NSString+URLEscapingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEscapingAdditions.m"; sourceTree = "<group>"; };
 		CB6EC36F0EECE9030012512C /* MPOAuthSignatureParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthSignatureParameter.h; sourceTree = "<group>"; };
@@ -265,6 +270,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CB437A620F30531200FF1798 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CB437A6C0F30535B00FF1798 /* oauthAutoConfig.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		CB6EC3C50EED02C60012512C /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				CB920E700EF3D1E700A89BBD /* MPOAuth.h */,
+				CB437A620F30531200FF1798 /* Resources */,
 				CBDC70770EEA11D1008C4B9B /* Additions */,
 				CB6EC3C50EED02C60012512C /* Crypto */,
 				CBDC72300EEB451A008C4B9B /* MPOAuthCredentialStore.h */,
@@ -347,6 +361,8 @@
 				CB1C1E2A0EFB739900B306A3 /* OATestServer.rb */,
 				CB1C1E2C0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.h */,
 				CB1C1E2D0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m */,
+				CB12B3130F32A07100054573 /* NSString+URLAdditionsTests.h */,
+				CB12B3140F32A07100054573 /* NSString+URLAdditionsTests.m */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -465,6 +481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB437A6D0F30535B00FF1798 /* oauthAutoConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +554,7 @@
 				CBE715E00EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m in Sources */,
 				CB1C1DB20EFB3C0B00B306A3 /* MPOAuthParameterFactoryTests.m in Sources */,
 				CB1C1E2E0EFB73FC00B306A3 /* MPOAuthAPIRequestLoaderTests.m in Sources */,
+				CB12B3150F32A07100054573 /* NSString+URLAdditionsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
