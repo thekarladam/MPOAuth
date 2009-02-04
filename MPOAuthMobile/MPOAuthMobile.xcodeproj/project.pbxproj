@@ -16,6 +16,9 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		CB9213A90EF6127700A89BBD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9213A80EF6127700A89BBD /* Security.framework */; };
+		CBCC930D0F395DE900DBEF2D /* oauthAutoConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBCC930C0F395DE900DBEF2D /* oauthAutoConfig.plist */; };
+		CBCC93350F3961A200DBEF2D /* UserAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBCC93340F3961A200DBEF2D /* UserAuthViewController.xib */; };
+		CBCC93390F39652300DBEF2D /* UserAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCC93380F39652300DBEF2D /* UserAuthViewController.m */; };
 		CBDC0D9B0F2068A100F30E8F /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = CBDC0D790F2068A100F30E8F /* Base64Transcoder.c */; };
 		CBDC0D9C0F2068A100F30E8F /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = CBDC0D7B0F2068A100F30E8F /* hmac.c */; };
 		CBDC0D9D0F2068A100F30E8F /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = CBDC0D7D0F2068A100F30E8F /* sha1.c */; };
@@ -49,6 +52,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9213A80EF6127700A89BBD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CBCC930C0F395DE900DBEF2D /* oauthAutoConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = oauthAutoConfig.plist; path = ../Resources/oauthAutoConfig.plist; sourceTree = SOURCE_ROOT; };
+		CBCC93340F3961A200DBEF2D /* UserAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAuthViewController.xib; sourceTree = "<group>"; };
+		CBCC93370F39652300DBEF2D /* UserAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthViewController.h; sourceTree = "<group>"; };
+		CBCC93380F39652300DBEF2D /* UserAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAuthViewController.m; sourceTree = "<group>"; };
 		CBDC0D790F2068A100F30E8F /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		CBDC0D7A0F2068A100F30E8F /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		CBDC0D7B0F2068A100F30E8F /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
@@ -105,6 +112,8 @@
 			children = (
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
+				CBCC93370F39652300DBEF2D /* UserAuthViewController.h */,
+				CBCC93380F39652300DBEF2D /* UserAuthViewController.m */,
 				1D3623240D0F684500981E51 /* MPOAuthMobileAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MPOAuthMobileAppDelegate.m */,
 			);
@@ -145,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				2899E55F0DE3E45000AC0155 /* RootViewController.xib */,
+				CBCC93340F3961A200DBEF2D /* UserAuthViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
@@ -162,11 +172,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CBCC93090F395DC900DBEF2D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CBCC930C0F395DE900DBEF2D /* oauthAutoConfig.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		CBDC0D770F2068A100F30E8F /* MPOAuth */ = {
 			isa = PBXGroup;
 			children = (
-				CBDC0D780F2068A100F30E8F /* Crypto */,
 				CBDC0D7F0F2068A100F30E8F /* MPOAuth.h */,
+				CBCC93090F395DC900DBEF2D /* Resources */,
+				CBDC0D780F2068A100F30E8F /* Crypto */,
 				CBDC0D800F2068A100F30E8F /* MPOAuthAPI+KeychainAdditions.h */,
 				CBDC0D810F2068A100F30E8F /* MPOAuthAPI+KeychainAdditionsiPhone.m */,
 				CBDC0D820F2068A100F30E8F /* MPOAuthAPI+KeychainAdditionsMac.m */,
@@ -263,6 +282,8 @@
 			files = (
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */,
+				CBCC930D0F395DE900DBEF2D /* oauthAutoConfig.plist in Resources */,
+				CBCC93350F3961A200DBEF2D /* UserAuthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +313,7 @@
 				CBDC0DA80F2068A100F30E8F /* NSString+URLEscapingAdditions.m in Sources */,
 				CBDC0DA90F2068A100F30E8F /* NSURL+MPURLParameterAdditions.m in Sources */,
 				CBDC0DAA0F2068A100F30E8F /* NSURLResponse+Encoding.m in Sources */,
+				CBCC93390F39652300DBEF2D /* UserAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

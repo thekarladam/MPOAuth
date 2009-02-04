@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MPOAuthAPI.h"
 
-@interface MPOAuthMobileAppDelegate : NSObject <UIApplicationDelegate> {
-    
+@interface MPOAuthMobileAppDelegate : NSObject <UIApplicationDelegate, MPOAuthAPIDelegate> {
     UIWindow *window;
     UINavigationController *navigationController;
 }

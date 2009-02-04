@@ -16,8 +16,12 @@
 
 @implementation RootViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)dealloc {
+    [super dealloc];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 	[self.navigationItem setPrompt:@"Performing Request Token Request"];
 	[self.navigationItem setTitle:@"OAuth Test"];
 	[methodInput addTarget:self action:@selector(methodEntered:) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -25,17 +29,21 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestTokenReceived:) name:MPOAuthNotificationRequestTokenReceived object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenReceived:) name:MPOAuthNotificationAccessTokenReceived object:nil];
 	
-	NSDictionary *credentials = [NSDictionary dictionaryWithObjectsAndKeys:	kConsumerKey, kMPOAuthCredentialConsumerKey,
-																			kConsumerSecret, kMPOAuthCredentialConsumerSecret,
-								 nil];
-	_oauthAPI = [[MPOAuthAPI alloc] initWithCredentials:credentials
-									  authenticationURL:[NSURL URLWithString:@"https://example.com/oauth/"]
-											 andBaseURL:[NSURL URLWithString:@"http://example.com/webservice/"]];
-	
 }
 
-- (void)dealloc {
-    [super dealloc];
+- (void)viewDidAppear:(BOOL)animated {
+	if (!_oauthAPI) {
+		NSDictionary *credentials = [NSDictionary dictionaryWithObjectsAndKeys:	kConsumerKey, kMPOAuthCredentialConsumerKey,
+									 kConsumerSecret, kMPOAuthCredentialConsumerSecret,
+									 nil];
+		_oauthAPI = [[MPOAuthAPI alloc] initWithCredentials:credentials
+										  authenticationURL:[NSURL URLWithString:@"https://example.com/auth/"]
+												 andBaseURL:[NSURL URLWithString:@"http://example.com/api/"]];
+		
+		_oauthAPI.delegate = (id <MPOAuthAPIDelegate>)[UIApplication sharedApplication].delegate;
+	} else {
+		[_oauthAPI authenticate];
+	}
 }
 
 - (void)requestTokenReceived:(NSNotification *)inNotification {
