@@ -165,7 +165,9 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 }
 
 - (void)_authenticationRequestForRequestToken {
-	[self performMethod:self.oauthRequestTokenMethod atURL:self.authenticationURL withParameters:nil withTarget:self andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
+	if (self.oauthRequestTokenMethod) {
+		[self performMethod:self.oauthRequestTokenMethod atURL:self.authenticationURL withParameters:nil withTarget:self andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
+	}
 }
 
 - (void)_authenticationRequestForRequestTokenSuccessfulLoad:(MPOAuthAPIRequestLoader *)inLoader withData:(NSData *)inData {
@@ -194,7 +196,9 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 }
 
 - (void)_authenticationRequestForAccessToken {
-	[self performMethod:self.oauthGetAccessTokenMethod atURL:self.authenticationURL withParameters:nil withTarget:self andAction:nil];
+	if (self.oauthGetAccessTokenMethod) {
+		[self performMethod:self.oauthGetAccessTokenMethod atURL:self.authenticationURL withParameters:nil withTarget:self andAction:nil];
+	}
 }
 
 #pragma mark -
