@@ -48,6 +48,11 @@ typedef enum {
 @property (nonatomic, readwrite, assign) MPOAuthSignatureScheme signatureScheme;
 @property (nonatomic, readwrite, assign) id <MPOAuthAPIDelegate> delegate;
 
+@property (nonatomic, readwrite, retain) NSString *oauthRequestTokenMethod;
+@property (nonatomic, readwrite, retain) NSString *oauthAuthorizeTokenMethod;
+@property (nonatomic, readwrite, retain) NSString *oauthGetAccessTokenMethod;
+
+
 - (id)initWithCredentials:(NSDictionary *)inCredentials andBaseURL:(NSURL *)inURL;
 - (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL;
 

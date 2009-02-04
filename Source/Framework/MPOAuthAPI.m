@@ -32,10 +32,6 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 @property (nonatomic, readwrite, retain) NSObject <MPOAuthCredentialStore, MPOAuthParameterFactory> *credentials;
 @property (nonatomic, readwrite, retain) NSURL *authenticationURL;
 @property (nonatomic, readwrite, retain) NSURL *baseURL;
-@property (nonatomic, readwrite, retain) NSString *oauthRequestTokenMethod;
-@property (nonatomic, readwrite, retain) NSString *oauthAuthorizeTokenMethod;
-@property (nonatomic, readwrite, retain) NSString *oauthGetAccessTokenMethod;
-
 @property (nonatomic, readwrite, retain) NSMutableArray *activeLoaders;
 @property (nonatomic, readwrite, retain) NSTimer *refreshTimer;
 
