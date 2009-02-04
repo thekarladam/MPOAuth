@@ -14,5 +14,17 @@
 		<string>OAuthAuthorizeToken</string>
 		<string>OAuthGetAccessToken</string>
 	</array>
+	<key>.freebaseapps.com</key>
+	<array>
+		<string>request_token</string>
+		<string>authorize_token</string>
+		<string>access_token</string>
+	</array>
+	<key>.fireeagle.yahooapis.com</key>
+	<array>
+		<string>request_token</string>
+		<string></string>
+		<string>access_token</string>
+	</array>
 </dict>
 </plist>
