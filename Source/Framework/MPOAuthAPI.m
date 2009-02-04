@@ -208,6 +208,10 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 }
 
 - (void)performMethod:(NSString *)inMethod atURL:(NSURL *)inURL withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction {
+	if (!inMethod) {
+		[NSException raise:@"NilMethodRequestException" format:@"Nil was passed as the method to be performed on %@", inURL];
+	}
+	
 	NSURL *requestURL = [NSURL URLWithString:inMethod relativeToURL:inURL];
 	MPOAuthURLRequest *aRequest = [[MPOAuthURLRequest alloc] initWithURL:requestURL andParameters:inParameters];
 	MPOAuthAPIRequestLoader *loader = [[MPOAuthAPIRequestLoader alloc] initWithRequest:aRequest];
