@@ -50,3 +50,11 @@
 }
 
 @end
+
+@implementation NSURL (MPURLEscapingAdditions)
+
+- (NSString *)stringByAddingURIPercentEscapesUsingEncoding:(NSStringEncoding)inEncoding {
+	return [[self absoluteString] stringByAddingURIPercentEscapesUsingEncoding:inEncoding];
+}
+
+@end

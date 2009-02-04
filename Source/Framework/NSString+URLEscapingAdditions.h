@@ -15,3 +15,7 @@
 - (NSString *)stringByAddingURIPercentEscapesUsingEncoding:(NSStringEncoding)inEncoding;
 
 @end
+
+@interface NSURL (MPURLEscapingAdditions)
+- (NSString *)stringByAddingURIPercentEscapesUsingEncoding:(NSStringEncoding)inEncoding;
+@end

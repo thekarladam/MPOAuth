@@ -72,19 +72,27 @@
 	[parameterArray addObject:aParameter];
 	[parameterArray addObject:anotherParameter];
 	STAssertEqualObjects([MPURLRequestParameter parameterStringForParameters:parameterArray], @"a=b&c=d", @"Incorrectly Normalized Request Parameters, Core 9.1.1");
-
+	
 	aParameter.value = @"x!y";
 	anotherParameter.name = @"a";
 	anotherParameter.value = @"x y"; // the test cases online use + as space
 	[parameterArray sortUsingSelector:@selector(compare:)];
 	STAssertEqualObjects([MPURLRequestParameter parameterStringForParameters:parameterArray], @"a=x%20y&a=x%21y", @"Incorrectly Normalized Request Parameters, Core 9.1.1");
-	
+		
 	aParameter.name = @"x!y";
 	aParameter.value = @"a";
 	anotherParameter.name  = @"x";
 	anotherParameter.value = @"a";
 	[parameterArray sortUsingSelector:@selector(compare:)];
 	STAssertEqualObjects([MPURLRequestParameter parameterStringForParameters:parameterArray], @"x=a&x%21y=a", @"Incorrectly Normalized Request Parameters, Core 9.1.1");	
+}
+
+- (void)testParameterDictionaries {
+	NSDictionary *parameterDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"b", @"a", @"d", @"c", nil];
+	STAssertEqualObjects([MPURLRequestParameter parameterStringForDictionary:parameterDictionary], @"a=b&c=d", @"Incorrectly Normalized Request Parameters, Core 9.1.1");
+		
+	parameterDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"a", @"x!y", @"a", @"x", nil];
+	STAssertEqualObjects([MPURLRequestParameter parameterStringForDictionary:parameterDictionary], @"x=a&x%21y=a", @"Incorrectly Normalized Request Parameters, Core 9.1.1");
 }
 
 @end

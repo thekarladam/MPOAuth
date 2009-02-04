@@ -104,7 +104,10 @@
 	int i = 0;
 	
 	for (NSString *aKey in [inParameterDictionary allKeys]) {
-		[queryString appendFormat:@"%@=%@", aKey, [[inParameterDictionary objectForKey:aKey] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		if (i > 0) {
+			[queryString appendString:@"&"];
+		}
+		[queryString appendFormat:@"%@=%@", [aKey stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding], [[inParameterDictionary objectForKey:aKey] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 		i++;
 	}
 	
