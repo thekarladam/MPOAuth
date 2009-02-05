@@ -7,6 +7,7 @@
 //
 
 #import "NSString+URLAdditionsTests.h"
+#import "MPURLRequestParameter.h"
 #import "NSURL+MPURLParameterAdditions.h"
 #import "NSString+URLEscapingAdditions.h"
 
@@ -43,6 +44,46 @@
 		STAssertFalse([anIP isIPAddress], @"%@ should not look like an IP address", anIP);
 		
 	}	
+}
+
+- (void)testURLByAddingParameters {
+	NSURL *nakedURL = [NSURL URLWithString:@"http://apple.com"];
+	NSURL *parameterizedURL = [NSURL URLWithString:@"http://example.com/index.php?a=b&c=d"];
+	
+	MPURLRequestParameter *aParameter = [[[MPURLRequestParameter alloc] initWithName:@"x" andValue:@"y"] autorelease];
+	MPURLRequestParameter *anotherParameter = [[[MPURLRequestParameter alloc] initWithName:@"zeta" andValue:@"beta"] autorelease];
+	NSArray *testParameters = [NSArray arrayWithObjects:aParameter, anotherParameter, nil];
+	
+	STAssertEqualObjects(	[nakedURL urlByAddingParameters:testParameters],
+							[NSURL URLWithString:@"http://apple.com?x=y&zeta=beta"],
+							@"-urlByAddingParameters failed to correctly add the requested parameters"
+						 );
+	
+	STAssertEqualObjects(	[parameterizedURL urlByAddingParameters:testParameters],
+							[NSURL URLWithString:@"http://example.com/index.php?a=b&c=d&x=y&zeta=beta"],
+							@"-urlByAddingParameters failed to correctly add the requested parameters"
+						 );
+	
+}
+
+- (void)testURLByAddingParameterDictionary {
+	NSURL *nakedURL = [NSURL URLWithString:@"http://apple.com"];
+	NSURL *parameterizedURL = [NSURL URLWithString:@"http://example.com/index.php?a=b&c=d"];
+
+	NSDictionary *parameterDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"y", @"x", @"beta", @"zeta", nil];
+
+	// This tests are actually a little bit disingenious but they're a quick sanity check to make sure things are spit out
+	// as expected
+	STAssertEqualObjects(	[nakedURL urlByAddingParameterDictionary:parameterDictionary],
+							[NSURL URLWithString:@"http://apple.com?x=y&zeta=beta"],
+							@"-urlByAddingParameters failed to correctly add the requested parameters"
+						 );
+	
+	STAssertEqualObjects(	[parameterizedURL urlByAddingParameterDictionary:parameterDictionary],
+							[NSURL URLWithString:@"http://example.com/index.php?a=b&zeta=beta&x=y&c=d"],
+							@"-urlByAddingParameters failed to correctly add the requested parameters"
+						 );
+	
 }
 
 @end

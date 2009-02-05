@@ -20,7 +20,7 @@
 	
 	if (parameterRange.location != NSNotFound) {
 		parameterRange.length = [absoluteString length] - parameterRange.location;
-		[parameters addObjectsFromArray:[MPURLRequestParameter parametersFromString:[queryString substringWithRange:NSMakeRange(1, [queryString length]-1)]]];
+		[parameters addObjectsFromArray:[MPURLRequestParameter parametersFromString:queryString]];
 		absoluteString = [absoluteString substringToIndex:parameterRange.location];
 	}
 	
