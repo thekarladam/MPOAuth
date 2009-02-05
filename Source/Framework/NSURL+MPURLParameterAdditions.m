@@ -17,12 +17,16 @@
 	NSString *queryString = [self query];
 	NSString *absoluteString = [self absoluteString];
 	NSRange parameterRange = [absoluteString rangeOfString:@"?"];
-	parameterRange.length = [absoluteString length] - parameterRange.location;
-
-	[parameters addObjectsFromArray:[MPURLRequestParameter parametersFromString:[queryString substringWithRange:NSMakeRange(1, [queryString length]-1)]]];
+	
+	if (parameterRange.location != NSNotFound) {
+		parameterRange.length = [absoluteString length] - parameterRange.location;
+		[parameters addObjectsFromArray:[MPURLRequestParameter parametersFromString:[queryString substringWithRange:NSMakeRange(1, [queryString length]-1)]]];
+		absoluteString = [absoluteString substringToIndex:parameterRange.location];
+	}
+	
 	[parameters addObjectsFromArray:inParameters];
 	
-	return [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [absoluteString substringToIndex:parameterRange.location], [MPURLRequestParameter parameterStringForParameters:[parameters autorelease]]]];
+	return [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", absoluteString, [MPURLRequestParameter parameterStringForParameters:[parameters autorelease]]]];
 }
 
 - (NSURL *)urlByAddingParameterDictionary:(NSDictionary *)inParameterDictionary {
@@ -39,6 +43,8 @@
 		[parameterDictionary addEntriesFromDictionary:[MPURLRequestParameter parameterDictionaryFromString:queryString]];
 		
 		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [absoluteString substringToIndex:parameterRange.location], [MPURLRequestParameter parameterStringForDictionary:[parameterDictionary autorelease]]]];
+	} else {
+		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", absoluteString, [MPURLRequestParameter parameterStringForDictionary:inParameterDictionary]]];
 	}
 
 	return composedURL;
