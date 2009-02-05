@@ -26,5 +26,41 @@
 		<string></string>
 		<string>access_token</string>
 	</array>
+	<key>.getsatisfaction.com</key>
+	<array>
+		<string>request_token</string>
+		<string>authorize</string>
+		<string>access_token</string>
+	</array>
+	<key>.ironmoney.com</key>
+	<array>
+		<string>/oauth/request</string>
+		<string>/oauth/authorize</string>
+		<string>/oauth/access</string>
+	</array>
+	<key>.netflix.com</key>
+	<array>
+		<string>/oauth/request_token</string>
+		<string>/oauth/login</string>
+		<string>/oauth/access_token</string>
+	</array>
+	<key>.proofile.com</key>
+	<array>
+		<string>/oauth/request_token</string>
+		<string>/oauth/authorize</string>
+		<string>/oauth/access_token</string>
+	</array>
+	<key>.tripit.com</key>
+	<array>
+		<string>/oauth/request_token</string>
+		<string>/oauth/authorize</string>
+		<string>/oauth/access_token</string>
+	</array>
+	<key>.smugmug.com</key>
+	<array>
+		<string>/services/oauth/getRequestToken.mg</string>
+		<string>/services/oauth/authorize.mg</string>
+		<string>/services/oauth/getAccessToken.mg</string>
+	</array>
 </dict>
 </plist>
