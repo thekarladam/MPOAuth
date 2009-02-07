@@ -14,6 +14,7 @@
 #import "MPOAuthCredentialConcreteStore.h"
 #import "MPURLRequestParameter.h"
 #import "NSURLResponse+Encoding.h"
+#import "MPDebug.h"
 
 NSString *MPOAuthNotificationRequestTokenReceived	= @"MPOAuthNotificationRequestTokenReceived";
 NSString *MPOAuthNotificationAccessTokenReceived	= @"MPOAuthNotificationAccessTokenReceived";
@@ -103,34 +104,29 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 #pragma mark -
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-		[_target performSelector:_selector withObject:self withObject:self.data];	
+		[_target performSelector:_action withObject:self withObject:self.data];	
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-//	NSLog(@"%@", NSStringFromSelector(_cmd));
-	
 	self.oauthResponse.urlResponse = response;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-//	NSLog(@"%@", NSStringFromSelector(_cmd));
+	MPLog(@"%@", NSStringFromSelector(_cmd));
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-//	NSLog(@"%@: data %d bytes", NSStringFromSelector(_cmd), [data length]);
 	[_dataBuffer appendData:data];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-//	NSLog(@"%@", NSStringFromSelector(_cmd));
 	[self _interrogateResponseForOAuthData];
-//	NSLog(@"Response: %@", self.responseString);
 	
-	if (_selector) {
+	if (_action) {
 		if ([_target conformsToProtocol:@protocol(MPOAuthAPIInternalClient)]) {
-			[_target performSelector:_selector withObject:self withObject:self.data];
+			[_target performSelector:_action withObject:self withObject:self.data];
 		} else {
-			[_target performSelector:_selector withObject:self.oauthRequest.url withObject:self.responseString];
+			[_target performSelector:_action withObject:self.oauthRequest.url withObject:self.responseString];
 		}
 	}
 }
@@ -146,10 +142,10 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 		self.oauthResponse.oauthParameters = foundParameters;
 		
 		if ([response length] > 13 && [[response substringToIndex:13] isEqualToString:@"oauth_problem"]) {
-			NSLog(@"oauthProblem = %@", foundParameters);
+			MPLog(@"oauthProblem = %@", foundParameters);
 		} else if ([response length] > 11 && [[response substringToIndex:11] isEqualToString:@"oauth_token"]) {
 			NSString *aParameterValue = nil;
-			NSLog(@"foundParameters = %@", foundParameters);
+			MPLog(@"foundParameters = %@", foundParameters);
 
 			if ([foundParameters count] && (aParameterValue = [foundParameters objectForKey:@"oauth_token"])) {
 				if (!self.credentials.requestToken && !self.credentials.accessToken) {
