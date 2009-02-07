@@ -218,7 +218,7 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 
 	loader.credentials = self.credentials;
 	loader.target = inTarget;
-	loader.successSelector = inAction ? inAction : @selector(_performedLoad:receivingData:);
+	loader.action = inAction ? inAction : @selector(_performedLoad:receivingData:);
 	
 	[loader loadSynchronously:NO];
 //	[self.activeLoaders addObject:loader];
@@ -290,8 +290,8 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	[self performMethod:self.oauthGetAccessTokenMethod
 				  atURL:self.authenticationURL
 		 withParameters:[NSArray arrayWithObject:sessionHandleParameter]
-			 withTarget:self
-			  andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
+			 withTarget:nil
+			  andAction:nil];
 	
 	[sessionHandleParameter release];
 }

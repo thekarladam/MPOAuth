@@ -28,8 +28,7 @@ extern NSString *MPOAuthNotificationErrorHasOccurred;
 	NSString						*_dataAsString;
 	NSError							*_error;
 	id								_target;
-	SEL								_successSelector;
-	SEL								_failSelector;
+	SEL								_action;
 }
 
 @property (nonatomic, readwrite, retain) id <MPOAuthCredentialStore, MPOAuthParameterFactory> credentials;
@@ -38,8 +37,7 @@ extern NSString *MPOAuthNotificationErrorHasOccurred;
 @property (nonatomic, readonly, retain) NSData *data;
 @property (nonatomic, readonly, retain) NSString *responseString;
 @property (nonatomic, readwrite, assign) id target;
-@property (nonatomic, readwrite, assign) SEL successSelector;
-@property (nonatomic, readwrite, assign) SEL failSelector;
+@property (nonatomic, readwrite, assign) SEL action;
 
 - (id)initWithURL:(NSURL *)inURL;
 - (id)initWithRequest:(MPOAuthURLRequest *)inRequest;

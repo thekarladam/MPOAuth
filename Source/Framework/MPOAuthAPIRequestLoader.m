@@ -66,8 +66,7 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 @synthesize data = _dataBuffer;
 @synthesize responseString = _dataAsString;
 @synthesize target = _target;
-@synthesize successSelector = _successSelector;
-@synthesize failSelector = _failSelector;
+@synthesize action = _action;
 
 #pragma mark -
 
@@ -94,7 +93,9 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 	if (!inSynchronous) {
 		[MPOAuthConnection connectionWithRequest:self.oauthRequest delegate:self credentials:self.credentials];
 	} else {
-		self.data = [MPOAuthConnection sendSynchronousRequest:self.oauthRequest usingCredentials:self.credentials returningResponse:&_oauthResponse error:nil];
+		MPOAuthURLResponse *theOAuthResponse = nil;
+		self.data = [MPOAuthConnection sendSynchronousRequest:self.oauthRequest usingCredentials:self.credentials returningResponse:&theOAuthResponse error:nil];
+		self.oauthResponse = theOAuthResponse;
 		[self _interrogateResponseForOAuthData];
 	}
 }
@@ -102,10 +103,7 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 #pragma mark -
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	if (_failSelector) {
-		[_target performSelector:_failSelector withObject:self withObject:self.data];
-	}
-	
+		[_target performSelector:_selector withObject:self withObject:self.data];	
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -128,11 +126,11 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 	[self _interrogateResponseForOAuthData];
 //	NSLog(@"Response: %@", self.responseString);
 	
-	if (_successSelector) {
+	if (_selector) {
 		if ([_target conformsToProtocol:@protocol(MPOAuthAPIInternalClient)]) {
-			[_target performSelector:_successSelector withObject:self withObject:self.data];
+			[_target performSelector:_selector withObject:self withObject:self.data];
 		} else {
-			[_target performSelector:_successSelector withObject:self.oauthRequest.url withObject:self.responseString];
+			[_target performSelector:_selector withObject:self.oauthRequest.url withObject:self.responseString];
 		}
 	}
 }
@@ -151,7 +149,7 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 			NSLog(@"oauthProblem = %@", foundParameters);
 		} else if ([response length] > 11 && [[response substringToIndex:11] isEqualToString:@"oauth_token"]) {
 			NSString *aParameterValue = nil;
-			//NSLog(@"foundParameters = %@", foundParameters);
+			NSLog(@"foundParameters = %@", foundParameters);
 
 			if ([foundParameters count] && (aParameterValue = [foundParameters objectForKey:@"oauth_token"])) {
 				if (!self.credentials.requestToken && !self.credentials.accessToken) {
