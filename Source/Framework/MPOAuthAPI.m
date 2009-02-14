@@ -28,6 +28,10 @@ NSString *kMPOAuthCredentialSessionHandle		= @"kMPOAuthCredentialSessionHandle";
 
 NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 
+NSString *MPOAuthRequestTokenURLKey				= @"MPOAuthRequestTokenURL";
+NSString *MPOAuthUserAuthorizationURLKey		= @"MPOAuthUserAuthorizationURL";
+NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
+
 @interface MPOAuthAPI ()
 @property (nonatomic, readwrite, retain) NSObject <MPOAuthCredentialStore, MPOAuthParameterFactory> *credentials;
 @property (nonatomic, readwrite, retain) NSURL *authenticationURL;
@@ -88,12 +92,12 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	
 	for ( NSString *domainString in [oauthEndpointsDictionary keyEnumerator]) {
 		if ([inBaseURL domainMatches:domainString]) {
-			NSArray *oauthEndpoints = [oauthEndpointsDictionary objectForKey:domainString];
+			NSDictionary *oauthEndpoints = [oauthEndpointsDictionary objectForKey:domainString];
 			NSAssert( [oauthEndpoints count] == 3, @"Incorrect number of oauth authorization methods");
 			
-			self.oauthRequestTokenMethod = [oauthEndpoints objectAtIndex:0];
-			self.oauthAuthorizeTokenMethod = [oauthEndpoints objectAtIndex:1];
-			self.oauthGetAccessTokenMethod = [oauthEndpoints objectAtIndex:2];
+			self.oauthRequestTokenURL = [NSURL URLWithString:[oauthEndpoints objectForKey:MPOAuthRequestTokenURLKey]];
+			self.oauthAuthorizeTokenURL = [NSURL URLWithString:[oauthEndpoints objectForKey:MPOAuthUserAuthorizationURLKey]];
+			self.oauthGetAccessTokenURL = [NSURL URLWithString:[oauthEndpoints objectForKey:MPOAuthAccessTokenURLKey]];
 
 			break;
 		}
@@ -115,9 +119,9 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 @synthesize credentials = _credentials;
 @synthesize baseURL = _baseURL;
 @synthesize authenticationURL = _authenticationURL;
-@synthesize oauthRequestTokenMethod = _oauthRequestTokenMethod;
-@synthesize oauthAuthorizeTokenMethod = _oauthAuthorizeTokenMethod;
-@synthesize oauthGetAccessTokenMethod = _oauthGetAccessTokenMethod;
+@synthesize oauthRequestTokenURL = _oauthRequestTokenURL;
+@synthesize oauthAuthorizeTokenURL = _oauthAuthorizeTokenURL;
+@synthesize oauthGetAccessTokenURL = _oauthGetAccessTokenURL;
 @synthesize signatureScheme = _signatureScheme;
 @synthesize activeLoaders = _activeLoaders;
 @synthesize delegate = _delegate;
@@ -165,15 +169,15 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 }
 
 - (void)_authenticationRequestForRequestToken {
-	if (self.oauthRequestTokenMethod) {
-		[self performMethod:self.oauthRequestTokenMethod atURL:self.authenticationURL withParameters:nil withTarget:self andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
+	if (self.oauthRequestTokenURL) {
+		[self performMethod:nil atURL:self.oauthRequestTokenURL withParameters:nil withTarget:self andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
 	}
 }
 
 - (void)_authenticationRequestForRequestTokenSuccessfulLoad:(MPOAuthAPIRequestLoader *)inLoader withData:(NSData *)inData {
 	NSDictionary *oauthResponseParameters = inLoader.oauthResponse.oauthParameters;
 	NSString *xoauthRequestAuthURL = [oauthResponseParameters objectForKey:@"xoauth_request_auth_url"]; // a common custom extension, used by Yahoo!
-	NSURL *userAuthURL = xoauthRequestAuthURL ? [NSURL URLWithString:xoauthRequestAuthURL] : [NSURL URLWithString:self.oauthAuthorizeTokenMethod relativeToURL:self.authenticationURL];
+	NSURL *userAuthURL = xoauthRequestAuthURL ? [NSURL URLWithString:xoauthRequestAuthURL] : self.oauthAuthorizeTokenURL;
 	NSURL *callbackURL = [self.delegate respondsToSelector:@selector(callbackURLForCompletedUserAuthorization)] ? [self.delegate callbackURLForCompletedUserAuthorization] : nil;
 	NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:	[oauthResponseParameters objectForKey:@"oauth_token"], @"oauth_token",
 																			callbackURL, @"oauth_callback",
@@ -196,8 +200,8 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 }
 
 - (void)_authenticationRequestForAccessToken {
-	if (self.oauthGetAccessTokenMethod) {
-		[self performMethod:self.oauthGetAccessTokenMethod atURL:self.authenticationURL withParameters:nil withTarget:self andAction:nil];
+	if (self.oauthGetAccessTokenURL) {
+		[self performMethod:nil atURL:self.oauthGetAccessTokenURL withParameters:nil withTarget:self andAction:nil];
 	}
 }
 
@@ -208,11 +212,11 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 }
 
 - (void)performMethod:(NSString *)inMethod atURL:(NSURL *)inURL withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction {
-	if (!inMethod) {
+	if (!inMethod && ![inURL path] && ![inURL query]) {
 		[NSException raise:@"MPOAuthNilMethodRequestException" format:@"Nil was passed as the method to be performed on %@", inURL];
 	}
 	
-	NSURL *requestURL = [NSURL URLWithString:inMethod relativeToURL:inURL];
+	NSURL *requestURL = inMethod ? [NSURL URLWithString:inMethod relativeToURL:inURL] : inURL;
 	MPOAuthURLRequest *aRequest = [[MPOAuthURLRequest alloc] initWithURL:requestURL andParameters:inParameters];
 	MPOAuthAPIRequestLoader *loader = [[MPOAuthAPIRequestLoader alloc] initWithRequest:aRequest];
 
@@ -287,8 +291,8 @@ NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
 	sessionHandleParameter.name = @"oauth_session_handle";
 	sessionHandleParameter.value = _credentials.sessionHandle;
 	
-	[self performMethod:self.oauthGetAccessTokenMethod
-				  atURL:self.authenticationURL
+	[self performMethod:nil
+				  atURL:self.oauthGetAccessTokenURL
 		 withParameters:[NSArray arrayWithObject:sessionHandleParameter]
 			 withTarget:nil
 			  andAction:nil];

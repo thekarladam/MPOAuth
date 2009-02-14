@@ -34,9 +34,9 @@ typedef enum {
 	MPOAuthCredentialConcreteStore	*_credentials;
 	NSURL							*_baseURL;
 	NSURL							*_authenticationURL;
-	NSString						*_oauthRequestTokenMethod;
-	NSString						*_oauthAuthorizeTokenMethod;
-	NSString						*_oauthGetAccessTokenMethod;
+	NSURL							*_oauthRequestTokenURL;
+	NSURL							*_oauthAuthorizeTokenURL;
+	NSURL							*_oauthGetAccessTokenURL;
 	MPOAuthSignatureScheme			_signatureScheme;
 	NSMutableArray					*_activeLoaders;
 	id <MPOAuthAPIDelegate>			_delegate;
@@ -48,9 +48,9 @@ typedef enum {
 @property (nonatomic, readwrite, assign) MPOAuthSignatureScheme signatureScheme;
 @property (nonatomic, readwrite, assign) id <MPOAuthAPIDelegate> delegate;
 
-@property (nonatomic, readwrite, retain) NSString *oauthRequestTokenMethod;
-@property (nonatomic, readwrite, retain) NSString *oauthAuthorizeTokenMethod;
-@property (nonatomic, readwrite, retain) NSString *oauthGetAccessTokenMethod;
+@property (nonatomic, readwrite, retain) NSURL *oauthRequestTokenURL;
+@property (nonatomic, readwrite, retain) NSURL *oauthAuthorizeTokenURL;
+@property (nonatomic, readwrite, retain) NSURL *oauthGetAccessTokenURL;
 
 
 - (id)initWithCredentials:(NSDictionary *)inCredentials andBaseURL:(NSURL *)inURL;
