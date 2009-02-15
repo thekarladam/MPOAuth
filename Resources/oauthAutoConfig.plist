@@ -14,20 +14,20 @@
 	<key>.google.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
-		<string>OAuthGetRequestToken</string>
+		<string>https://www.google.com/accounts/OAuthGetRequestToken</string>
 		<key>MPOAuthUserAuthorizationURL</key>
-		<string>OAuthAuthorizeToken</string>
+		<string>https://www.google.com/accounts/OAuthAuthorizeToken</string>
 		<key>MPOAuthAccessTokenURL</key>
-		<string>OAuthGetAccessToken</string>
+		<string>https://www.google.com/accounts/OAuthGetAccessToken</string>
 	</dict>
 	<key>.freebaseapps.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
-		<string>request_token</string>
+		<string>https://www.freebase.com/api/oauth/request_token</string>
 		<key>MPOAuthUserAuthorizationURL</key>
-		<string>authorize_token</string>
+		<string>https://www.freebase.com/signin/authorize_token</string>
 		<key>MPOAuthAccessTokenURL</key>
-		<string>access_token</string>
+		<string>https://www.freebase.com/api/oauth/access_token</string>
 	</dict>
 	<key>.fireeagle.yahooapis.com</key>
 	<dict>
@@ -35,7 +35,7 @@
 		<string>https://fireeagle.yahooapis.com/oauth/request_token</string>
 		<key>MPOAuthUserAuthorizationURL</key>
 		<string>https://fireeagle.yahoo.net/auth/</string>
-		<key>UserMobileAuthorizationURL</key>
+		<key>MPOAuthUserAuthorizationMobileURL</key>
 		<string>https://fireeagle.yahoo.net/mobile_auth/</string>
 		<key>MPOAuthAccessTokenURL</key>
 		<string>https://fireeagle.yahooapis.com/oauth/access_token</string>
@@ -43,56 +43,58 @@
 	<key>.getsatisfaction.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
-		<string>request_token</string>
+		<string>http://getsatisfaction.com/api/request_token</string>
 		<key>MPOAuthUserAuthorizationURL</key>
-		<string>authorize</string>
+		<string>http://getsatisfaction.com/api/authorize</string>
 		<key>MPOAuthAccessTokenURL</key>
-		<string>access_token</string>
+		<string>http://getsatisfaction.com/api/access_token</string>
 	</dict>
 	<key>.ironmoney.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
-		<string>/oauth/request</string>
+		<string>https://ironmoney.com/oauth/request</string>
 		<key>MPOAuthUserAuthorizationURL</key>
-		<string>/oauth/authorize</string>
+		<string>https://ironmoney.com/oauth/authorize</string>
 		<key>MPOAuthAccessTokenURL</key>
-		<string>/oauth/access</string>
+		<string>https://ironmoney.com/oauth/access</string>
 	</dict>
 	<key>.netflix.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
-		<string>/oauth/request_token</string>
+		<string>http://api.netflix.com/oauth/request_token</string>
 		<key>MPOAuthUserAuthorizationURL</key>
-		<string>/oauth/login</string>
+		<string>https://api-user.netflix.com/oauth/login</string>
 		<key>MPOAuthAccessTokenURL</key>
-		<string>/oauth/access_token</string>
+		<string>http://api.netflix.com/oauth/access_token</string>
 	</dict>
 	<key>.proofile.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
-		<string>/oauth/request_token</string>
+		<string>http://api.proofile.org/oauth/request_token</string>
 		<key>MPOAuthUserAuthorizationURL</key>
-		<string>/oauth/authorize</string>
+		<string>http://api.proofile.org/oauth/authorize</string>
 		<key>MPOAuthAccessTokenURL</key>
-		<string>/oauth/access_token</string>
+		<string>http://api.proofile.org/oauth/access_token</string>
 	</dict>
 	<key>.tripit.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
-		<string>/oauth/request_token</string>
+		<string>https://api.tripit.com/oauth/request_token</string>
 		<key>MPOAuthUserAuthorizationURL</key>
-		<string>/oauth/authorize</string>
+		<string>https://www.tripit.com/oauth/authorize</string>
+		<key>MPOAuthUserAuthorizationMobileURL</key>
+		<string>https://m.tripit.com/oauth/authorize</string>
 		<key>MPOAuthAccessTokenURL</key>
-		<string>/oauth/access_token</string>
+		<string>https://api.tripit.com/oauth/access_token</string>
 	</dict>
 	<key>.smugmug.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
-		<string>/services/oauth/getRequestToken.mg</string>
+		<string>http://api.smugmug.com/services/oauth/getRequestToken.mg</string>
 		<key>MPOAuthUserAuthorizationURL</key>
-		<string>/services/oauth/authorize.mg</string>
+		<string>http://api.smugmug.com/services/oauth/authorize.mg</string>
 		<key>MPOAuthAccessTokenURL</key>
-		<string>/services/oauth/getAccessToken.mg</string>
+		<string>http://api.smugmug.com/services/oauth/getAccessToken.mg</string>
 	</dict>
 	<key>.twitter.com</key>
 	<dict>
@@ -103,5 +105,13 @@
 		<key>MPOAuthAccessTokenURL</key>
 		<string>http://twitter.com/oauth/access_token</string>
 	</dict>
-</dict>
+	<key>.soundcloud.com</key>
+	<dict>
+		<key>MPOAuthRequestTokenURL</key>
+		<string>http://api.soundcloud.com/oauth/request_token</string>
+		<key>MPOAuthUserAuthorizationURL</key>
+		<string>http://soundcloud.com/oauth/authorize_token</string>
+		<key>MPOAuthAccessTokenURL</key>
+		<string>http://api.soundcloud.com/oauth/request_token</string>
+	</dict></dict>
 </plist>
