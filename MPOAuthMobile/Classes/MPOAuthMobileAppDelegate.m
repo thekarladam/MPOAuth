@@ -10,7 +10,6 @@
 #import "RootViewController.h"
 #import "UserAuthViewController.h"
 
-
 @implementation MPOAuthMobileAppDelegate
 
 @synthesize window;
@@ -41,8 +40,7 @@
 - (NSURL *)callbackURLForCompletedUserAuthorization {
 	// The x-com-mpoauth-mobile URI is a claimed URI Type
 	// check Info.plist for details
-	//return [NSURL URLWithString:@"x-com-mpoauth-mobile://success"];
-	return nil;
+	return [NSURL URLWithString:@"x-com-mpoauth-mobile://success"];
 }
 
 - (BOOL)automaticallyRequestAuthenticationFromURL:(NSURL *)inAuthURL withCallbackURL:(NSURL *)inCallbackURL {

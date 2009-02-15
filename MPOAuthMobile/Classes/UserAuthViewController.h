@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UserAuthViewController : UIViewController {
+@interface UserAuthViewController : UIViewController <UIWebViewDelegate> {
 	IBOutlet UIWebView *webview;
 	NSURL *_userAuthURL;
 }

@@ -32,24 +32,9 @@
     // Release anything that's not essential, such as cached data
 }
 
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+	[webview setDelegate:self];
 	[webview loadRequest:[NSURLRequest requestWithURL:self.userAuthURL]];
 }
 
@@ -57,16 +42,18 @@
     return YES;
 }
 
-
 #pragma mark - UIWebView Delegate Methods -
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	// this is a ghetto way to handle this, but it's for when you must use http:// URIs
 	// so that this demo will work correctly, this is an example, DONT.BE.GHETTO
 	NSURL *userAuthURL = [(id <MPOAuthAPIDelegate>)[UIApplication sharedApplication].delegate callbackURLForCompletedUserAuthorization];
-	if ([webview.request.URL isEqual:userAuthURL]) {
+	if ([request.URL isEqual:userAuthURL]) {
 		[[self navigationController] popViewControllerAnimated:YES];
+		return NO;
 	}
+	
+	return YES;
 }
 
 
