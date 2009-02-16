@@ -108,6 +108,9 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 	self.credentials = nil;
 	self.baseURL = nil;
 	self.authenticationURL = nil;
+	self.oauthRequestTokenURL = nil;
+	self.oauthAuthorizeTokenURL = nil;
+	self.oauthGetAccessTokenURL = nil;
 	self.activeLoaders = nil;
 	
 	[self.refreshTimer invalidate];

@@ -43,9 +43,11 @@
 		[parameterDictionary addEntriesFromDictionary:[MPURLRequestParameter parameterDictionaryFromString:queryString]];
 		
 		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [absoluteString substringToIndex:parameterRange.location], [MPURLRequestParameter parameterStringForDictionary:[parameterDictionary autorelease]]]];
-	} else {
+	} else if ([inParameterDictionary count]) {
 		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", absoluteString, [MPURLRequestParameter parameterStringForDictionary:inParameterDictionary]]];
 	}
+	
+	[parameterDictionary release];
 
 	return composedURL;
 }
