@@ -14,7 +14,7 @@
 - (id)initWithURL:(NSURL *)inURL {
 	if (self = [super initWithNibName:@"UserAuthViewController" bundle:nil]) {
 		self.title = @"User Auth";
-		self.navigationItem.prompt = @"Request Authorizion for this application";
+		self.navigationItem.prompt = @"Request Authorization for this application";
 		self.userAuthURL = inURL;
 	}
 	
@@ -22,6 +22,8 @@
 }
 
 - (void)dealloc {
+	self.userAuthURL = nil;
+	
     [super dealloc];
 }
 
