@@ -119,6 +119,11 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 	[_dataBuffer appendData:data];
 }
 
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse {
+	MPLog( @"[%@ %@]: %@, %@", [self className], NSStringFromSelector(_cmd), request, redirectResponse);
+	return request;
+}
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[self _interrogateResponseForOAuthData];
 	

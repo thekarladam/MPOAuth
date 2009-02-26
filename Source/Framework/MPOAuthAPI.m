@@ -173,6 +173,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 
 - (void)_authenticationRequestForRequestToken {
 	if (self.oauthRequestTokenURL) {
+		MPLog(@"--> Performing Request Token Request: %@", self.oauthRequestTokenURL);
 		[self performMethod:nil atURL:self.oauthRequestTokenURL withParameters:nil withTarget:self andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
 	}
 }
@@ -190,6 +191,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 	BOOL delegateWantsToBeInvolved = [self.delegate respondsToSelector:@selector(automaticallyRequestAuthenticationFromURL:withCallbackURL:)];
 
 	if (!delegateWantsToBeInvolved || (delegateWantsToBeInvolved && [self.delegate automaticallyRequestAuthenticationFromURL:userAuthURL withCallbackURL:callbackURL])) {
+		MPLog(@"--> Automatically Performing User Auth Request: %@", userAuthURL);
 		[self _authenticationRequestForUserPermissionsConfirmationAtURL:userAuthURL];
 	}
 }
@@ -204,6 +206,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 
 - (void)_authenticationRequestForAccessToken {
 	if (self.oauthGetAccessTokenURL) {
+		MPLog(@"--> Performing Access Token Request: %@", self.oauthGetAccessTokenURL);
 		[self performMethod:nil atURL:self.oauthGetAccessTokenURL withParameters:nil withTarget:self andAction:nil];
 	}
 }

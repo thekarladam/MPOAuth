@@ -30,7 +30,7 @@
 }
 
 - (NSURL *)urlByAddingParameterDictionary:(NSDictionary *)inParameterDictionary {
-	NSMutableDictionary *parameterDictionary = [[NSMutableDictionary alloc] init];
+	NSMutableDictionary *parameterDictionary = [inParameterDictionary mutableCopy];
 	NSString *queryString = [self query];
 	NSString *absoluteString = [self absoluteString];
 	NSRange parameterRange = [absoluteString rangeOfString:@"?"];
@@ -39,12 +39,12 @@
 	if (parameterRange.location != NSNotFound) {
 		parameterRange.length = [absoluteString length] - parameterRange.location;
 		
-		[parameterDictionary addEntriesFromDictionary:inParameterDictionary];
+		//[parameterDictionary addEntriesFromDictionary:inParameterDictionary];
 		[parameterDictionary addEntriesFromDictionary:[MPURLRequestParameter parameterDictionaryFromString:queryString]];
 		
-		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [absoluteString substringToIndex:parameterRange.location], [MPURLRequestParameter parameterStringForDictionary:[parameterDictionary autorelease]]]];
-	} else if ([inParameterDictionary count]) {
-		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", absoluteString, [MPURLRequestParameter parameterStringForDictionary:inParameterDictionary]]];
+		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [absoluteString substringToIndex:parameterRange.location], [MPURLRequestParameter parameterStringForDictionary:parameterDictionary]]];
+	} else if ([parameterDictionary count]) {
+		composedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", absoluteString, [MPURLRequestParameter parameterStringForDictionary:parameterDictionary]]];
 	}
 	
 	[parameterDictionary release];

@@ -299,6 +299,7 @@
 				CB920E700EF3D1E700A89BBD /* MPOAuth.h */,
 				CBDC70580EEA04B9008C4B9B /* MPOAuthAPI.h */,
 				CBDC70590EEA04B9008C4B9B /* MPOAuthAPI.m */,
+				CBCC973D0F3D56AD00DBEF2D /* MPDebug.h */,
 				CB437A620F30531200FF1798 /* Resources */,
 				CBDC70770EEA11D1008C4B9B /* Additions */,
 				CB6EC3C50EED02C60012512C /* Crypto */,
@@ -321,7 +322,6 @@
 				CB6EC3700EECE9030012512C /* MPOAuthSignatureParameter.m */,
 				CBDC70820EEA2680008C4B9B /* MPURLRequestParameter.h */,
 				CBDC70830EEA2680008C4B9B /* MPURLRequestParameter.m */,
-				CBCC973D0F3D56AD00DBEF2D /* MPDebug.h */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -680,6 +680,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MPOAuthConnection_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = "MPOAuth-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
