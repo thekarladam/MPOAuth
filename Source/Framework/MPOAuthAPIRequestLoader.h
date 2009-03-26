@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *MPOAuthNotificationRequestTokenReceived;
+extern NSString *MPOAuthNotificationRequestTokenRejected;
 extern NSString *MPOAuthNotificationAccessTokenReceived;
+extern NSString *MPOAuthNotificationAccessTokenRejected;
 extern NSString *MPOAuthNotificationAccessTokenRefreshed;
 extern NSString *MPOAuthNotificationErrorHasOccurred;
 

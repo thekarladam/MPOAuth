@@ -11,7 +11,9 @@
 #import "MPOAuthParameterFactory.h"
 
 extern NSString *MPOAuthNotificationRequestTokenReceived;
+extern NSString *MPOAuthNotificationRequestTokenRejected;
 extern NSString *MPOAuthNotificationAccessTokenReceived;
+extern NSString *MPOAuthNotificationAccessTokenRejected;
 extern NSString *MPOAuthNotificationAccessTokenRefreshed;
 extern NSString *MPOAuthNotificationOAuthCredentialsReady;
 extern NSString *MPOAuthNotificationErrorHasOccurred;

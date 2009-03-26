@@ -79,6 +79,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 		self.signatureScheme = MPOAuthSignatureSchemeHMACSHA1;
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requestTokenReceived:) name:MPOAuthNotificationRequestTokenReceived object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requestTokenRejected:) name:MPOAuthNotificationRequestTokenRejected object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_accessTokenReceived:) name:MPOAuthNotificationAccessTokenReceived object:nil];		
 		
 		[self authenticate];
@@ -272,6 +273,11 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 	[self addToKeychainUsingName:@"oauth_token_request_secret" andValue:[[inNotification userInfo] objectForKey:@"oauth_token_secret"]];
 }
 
+- (void)_requestTokenRejected:(NSNotification *)inNotification {
+	[self removeValueFromKeychainUsingName:@"oauth_token_request"];
+	[self removeValueFromKeychainUsingName:@"oauth_token_request_secret"];	
+}
+
 - (void)_accessTokenReceived:(NSNotification *)inNotification {
 	[self removeValueFromKeychainUsingName:@"oauth_token_request"];
 	[self removeValueFromKeychainUsingName:@"oauth_token_request_secret"];
@@ -279,7 +285,9 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 	[self addToKeychainUsingName:@"oauth_token_access" andValue:[[inNotification userInfo] objectForKey:@"oauth_token"]];
 	[self addToKeychainUsingName:@"oauth_token_access_secret" andValue:[[inNotification userInfo] objectForKey:@"oauth_token_secret"]];
 	
-	[self addToKeychainUsingName:@"oauth_session_handle" andValue:[[inNotification userInfo] objectForKey:@"oauth_session_handle"]];
+	if ([[inNotification userInfo] objectForKey:@"oauth_session_handle"]) {
+		[self addToKeychainUsingName:@"oauth_session_handle" andValue:[[inNotification userInfo] objectForKey:@"oauth_session_handle"]];
+	}
 	
 	NSTimeInterval tokenRefreshInterval = (NSTimeInterval)[[[inNotification userInfo] objectForKey:@"oauth_expires_in"] intValue];
 	NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceNow:tokenRefreshInterval];
@@ -293,9 +301,12 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 #pragma mark -
 
 - (void)_automaticallyRefreshAccessToken:(NSTimer *)inTimer {
-	MPURLRequestParameter *sessionHandleParameter = [[MPURLRequestParameter alloc] init];
-	sessionHandleParameter.name = @"oauth_session_handle";
-	sessionHandleParameter.value = _credentials.sessionHandle;
+	MPURLRequestParameter *sessionHandleParameter = nil;
+	if (_credentials.sessionHandle) {
+		sessionHandleParameter = [[MPURLRequestParameter alloc] init];
+		sessionHandleParameter.name = @"oauth_session_handle";
+		sessionHandleParameter.value = _credentials.sessionHandle;
+	}
 	
 	[self performMethod:nil
 				  atURL:self.oauthGetAccessTokenURL

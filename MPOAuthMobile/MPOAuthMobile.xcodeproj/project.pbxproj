@@ -90,6 +90,7 @@
 		CBDC0D980F2068A100F30E8F /* NSURL+MPURLParameterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MPURLParameterAdditions.m"; sourceTree = "<group>"; };
 		CBDC0D990F2068A100F30E8F /* NSURLResponse+Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLResponse+Encoding.h"; sourceTree = "<group>"; };
 		CBDC0D9A0F2068A100F30E8F /* NSURLResponse+Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLResponse+Encoding.m"; sourceTree = "<group>"; };
+		CBF8CC5A0F7BEE78007591B9 /* MPDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPDebug.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				CBDC0D7F0F2068A100F30E8F /* MPOAuth.h */,
+				CBF8CC5A0F7BEE78007591B9 /* MPDebug.h */,
 				CBCC93090F395DC900DBEF2D /* Resources */,
 				CBDC0D780F2068A100F30E8F /* Crypto */,
 				CBDC0D800F2068A100F30E8F /* MPOAuthAPI+KeychainAdditions.h */,
