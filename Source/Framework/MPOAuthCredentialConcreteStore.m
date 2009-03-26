@@ -189,10 +189,12 @@
 	
 	NSString *generatedNonce = nil;
 	CFUUIDRef generatedUUID = CFUUIDCreate(kCFAllocatorDefault);
+	
 	generatedNonce = (NSString *)CFUUIDCreateString(kCFAllocatorDefault, generatedUUID);
 	CFRelease(generatedUUID);
 	
 	aRequestParameter.value = generatedNonce;
+	[generatedNonce release];
 	
 	return [aRequestParameter autorelease];
 }
