@@ -42,7 +42,7 @@
 		OSStatus success = SecItemAdd( (CFDictionaryRef)keychainItemAttributeDictionary, NULL);
 		
 		if (success == errSecNotAvailable) {
-			[NSException raise:@"Keychain Not Available" format:@"Keychain Access Not Current Available"];
+			[NSException raise:@"Keychain Not Available" format:@"Keychain Access Not Currently Available"];
 		} else if (success == errSecDuplicateItem) {
 			[NSException raise:@"Keychain duplicate item exception" format:@"Item already exists for %@", keychainItemAttributeDictionary];
 		}
