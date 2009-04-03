@@ -52,6 +52,10 @@
 		CBE715CB0EFAC8DC00EF25AA /* MPURLRequestParameterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE715CA0EFAC8DC00EF25AA /* MPURLRequestParameterTests.m */; };
 		CBE715DC0EFACB1100EF25AA /* MPOAuthURLRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE715DB0EFACB1100EF25AA /* MPOAuthURLRequestTests.m */; };
 		CBE715E00EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE715DF0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m */; };
+		CBF29A660F81ADA60028044A /* MPWSLRDDiscoverer.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF29A640F81ADA60028044A /* MPWSLRDDiscoverer.h */; };
+		CBF29A670F81ADA60028044A /* MPWSLRDDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF29A650F81ADA60028044A /* MPWSLRDDiscoverer.m */; };
+		CBF29A750F8210D90028044A /* MPWSXRDDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF29A730F8210D90028044A /* MPWSXRDDocument.h */; };
+		CBF29A760F8210D90028044A /* MPWSXRDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF29A740F8210D90028044A /* MPWSXRDDocument.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +164,10 @@
 		CBE715DB0EFACB1100EF25AA /* MPOAuthURLRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthURLRequestTests.m; sourceTree = "<group>"; };
 		CBE715DE0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPOAuthSignatureParameterTests.h; sourceTree = "<group>"; };
 		CBE715DF0EFACBD300EF25AA /* MPOAuthSignatureParameterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPOAuthSignatureParameterTests.m; sourceTree = "<group>"; };
+		CBF29A640F81ADA60028044A /* MPWSLRDDiscoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWSLRDDiscoverer.h; sourceTree = "<group>"; };
+		CBF29A650F81ADA60028044A /* MPWSLRDDiscoverer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWSLRDDiscoverer.m; sourceTree = "<group>"; };
+		CBF29A730F8210D90028044A /* MPWSXRDDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWSXRDDocument.h; sourceTree = "<group>"; };
+		CBF29A740F8210D90028044A /* MPWSXRDDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWSXRDDocument.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +311,7 @@
 				CB437A620F30531200FF1798 /* Resources */,
 				CBDC70770EEA11D1008C4B9B /* Additions */,
 				CB6EC3C50EED02C60012512C /* Crypto */,
+				CBF29A500F81AC580028044A /* Discovery */,
 				CBE7155B0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditions.h */,
 				CBE7155C0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsiPhone.m */,
 				CBE7155D0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsMac.m */,
@@ -370,6 +379,17 @@
 			path = "Unit Tests";
 			sourceTree = "<group>";
 		};
+		CBF29A500F81AC580028044A /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				CBF29A640F81ADA60028044A /* MPWSLRDDiscoverer.h */,
+				CBF29A650F81ADA60028044A /* MPWSLRDDiscoverer.m */,
+				CBF29A730F8210D90028044A /* MPWSXRDDocument.h */,
+				CBF29A740F8210D90028044A /* MPWSXRDDocument.m */,
+			);
+			name = Discovery;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -388,6 +408,8 @@
 				CB920E420EF3D0B000A89BBD /* MPOAuthURLResponse.h in Headers */,
 				CBE7155E0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditions.h in Headers */,
 				CBCC973E0F3D56AD00DBEF2D /* MPDebug.h in Headers */,
+				CBF29A660F81ADA60028044A /* MPWSLRDDiscoverer.h in Headers */,
+				CBF29A750F8210D90028044A /* MPWSXRDDocument.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +567,8 @@
 				CB920E320EF3D04B00A89BBD /* sha1.c in Sources */,
 				CBE7155F0EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsiPhone.m in Sources */,
 				CBE715600EFAB2BF00EF25AA /* MPOAuthAPI+KeychainAdditionsMac.m in Sources */,
+				CBF29A670F81ADA60028044A /* MPWSLRDDiscoverer.m in Sources */,
+				CBF29A760F8210D90028044A /* MPWSXRDDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +705,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MPOAuthConnection_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "MPOAuth-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
