@@ -160,7 +160,7 @@
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p %@>", [self className], self, [self URLEncodedParameterString]];
+	return [NSString stringWithFormat:@"<%@: %p %@>", NSStringFromClass([self class]), self, [self URLEncodedParameterString]];
 }
 
 @end
