@@ -310,7 +310,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 	
 	[self performMethod:nil
 				  atURL:self.oauthGetAccessTokenURL
-		 withParameters:[NSArray arrayWithObject:sessionHandleParameter]
+		 withParameters:sessionHandleParameter ? [NSArray arrayWithObject:sessionHandleParameter] : nil
 			 withTarget:nil
 			  andAction:nil];
 	
