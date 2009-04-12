@@ -9,7 +9,7 @@
 #import "MPOAuthAPI+KeychainAdditions.h"
 #import <Security/Security.h>
 
-#if TARGET_OS_IPHONE && (! TARGET_IPHONE_SIMULATOR)
+#if TARGET_OS_IPHONE && (!TARGET_IPHONE_SIMULATOR || __IPHONE_3_0)
 
 @interface MPOAuthAPI (TokenAdditionsiPhone)
 - (NSString *)findValueFromKeychainUsingName:(NSString *)inName returningItem:(NSDictionary **)outKeychainItemRef;

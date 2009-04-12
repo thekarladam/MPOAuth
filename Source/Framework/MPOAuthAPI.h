@@ -24,6 +24,14 @@ typedef enum {
 	MPOAuthSignatureSchemeRSASHA1
 } MPOAuthSignatureScheme;
 
+typedef enum {
+	MPOAuthAuthenticationStateUnauthenticated		= 0,
+	MPOAuthAuthenticationStateRequestRequestToken	= 1,
+	MPOAuthAuthenticationStateRequestUserAccess		= 2,
+	MPOAuthAuthenticationStateRequestAccessToken	= 3,
+	MPOAuthAuthenticationStateAuthenticated			= 4
+} MPOAuthAuthenticationState;
+
 @protocol MPOAuthAPIDelegate;
 
 @protocol MPOAuthAPIInternalClient
@@ -43,6 +51,7 @@ typedef enum {
 	NSMutableArray					*_activeLoaders;
 	id <MPOAuthAPIDelegate>			_delegate;
 	NSTimer							*_refreshTimer;
+	MPOAuthAuthenticationState		_oauthAuthenticationState;
 }
 
 @property (nonatomic, readonly, retain) NSURL *baseURL;
@@ -54,11 +63,14 @@ typedef enum {
 @property (nonatomic, readwrite, retain) NSURL *oauthAuthorizeTokenURL;
 @property (nonatomic, readwrite, retain) NSURL *oauthGetAccessTokenURL;
 
+@property (nonatomic, readonly, assign) MPOAuthAuthenticationState authenticationState;
+
 
 - (id)initWithCredentials:(NSDictionary *)inCredentials andBaseURL:(NSURL *)inURL;
 - (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL;
 
 - (void)authenticate;
+- (BOOL)isAuthenticated;
 
 - (void)performMethod:(NSString *)inMethod withTarget:(id)inTarget andAction:(SEL)inAction;
 - (void)performMethod:(NSString *)inMethod atURL:(NSURL *)inURL withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction;
@@ -66,6 +78,8 @@ typedef enum {
 - (NSData *)dataForMethod:(NSString *)inMethod;
 - (NSData *)dataForMethod:(NSString *)inMethod withParameters:(NSArray *)inParameters;
 - (NSData *)dataForURL:(NSURL *)inURL andMethod:(NSString *)inMethod withParameters:(NSArray *)inParameters;
+
+- (void)discardServerCredentials;
 
 @end
 

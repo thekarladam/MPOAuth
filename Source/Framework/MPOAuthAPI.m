@@ -16,21 +16,28 @@
 #import "NSURL+MPURLParameterAdditions.h"
 #import "MPOAuthAPI+KeychainAdditions.h"
 
-#define kMPOAuthTokenRefreshDateDefaultsKey		@"MPOAuthAutomaticTokenRefreshLastExpiryDate"
+#define kMPOAuthTokenRefreshDateDefaultsKey			@"MPOAuthAutomaticTokenRefreshLastExpiryDate"
 
-NSString *kMPOAuthCredentialConsumerKey			= @"kMPOAuthCredentialConsumerKey";
-NSString *kMPOAuthCredentialConsumerSecret		= @"kMPOAuthCredentialConsumerSecret";
-NSString *kMPOAuthCredentialRequestToken		= @"kMPOAuthCredentialRequestToken";
-NSString *kMPOAuthCredentialRequestTokenSecret	= @"kMPOAuthCredentialRequestTokenSecret";
-NSString *kMPOAuthCredentialAccessToken			= @"kMPOAuthCredentialAccessToken";
-NSString *kMPOAuthCredentialAccessTokenSecret	= @"kMPOAuthCredentialAccessTokenSecret";
-NSString *kMPOAuthCredentialSessionHandle		= @"kMPOAuthCredentialSessionHandle";
+NSString *kMPOAuthCredentialConsumerKey				= @"kMPOAuthCredentialConsumerKey";
+NSString *kMPOAuthCredentialConsumerSecret			= @"kMPOAuthCredentialConsumerSecret";
+NSString *kMPOAuthCredentialRequestToken			= @"kMPOAuthCredentialRequestToken";
+NSString *kMPOAuthCredentialRequestTokenSecret		= @"kMPOAuthCredentialRequestTokenSecret";
+NSString *kMPOAuthCredentialAccessToken				= @"kMPOAuthCredentialAccessToken";
+NSString *kMPOAuthCredentialAccessTokenSecret		= @"kMPOAuthCredentialAccessTokenSecret";
+NSString *kMPOAuthCredentialSessionHandle			= @"kMPOAuthCredentialSessionHandle";
 
-NSString *kMPOAuthSignatureMethod				= @"kMPOAuthSignatureMethod";
+NSString *kMPOAuthSignatureMethod					= @"kMPOAuthSignatureMethod";
 
-NSString *MPOAuthRequestTokenURLKey				= @"MPOAuthRequestTokenURL";
-NSString *MPOAuthUserAuthorizationURLKey		= @"MPOAuthUserAuthorizationURL";
-NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
+NSString *MPOAuthRequestTokenURLKey					= @"MPOAuthRequestTokenURL";
+NSString *MPOAuthUserAuthorizationURLKey			= @"MPOAuthUserAuthorizationURL";
+NSString *MPOAuthUserAuthorizationMobileURLKey		= @"MPOAuthUserAuthorizationMobileURL";
+NSString *MPOAuthAccessTokenURLKey					= @"MPOAuthAccessTokenURL";
+
+NSString *MPOAuthCredentialRequestTokenKey			= @"oauth_token_request";
+NSString *MPOAuthCredentialRequestTokenSecretKey	= @"oauth_token_request_secret";
+NSString *MPOAuthCredentialAccessTokenKey			= @"oauth_token_access";
+NSString *MPOAuthCredentialAccessTokenSecretKey		= @"oauth_token_access_secret";
+NSString *MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 
 @interface MPOAuthAPI ()
 @property (nonatomic, readwrite, retain) NSObject <MPOAuthCredentialStore, MPOAuthParameterFactory> *credentials;
@@ -38,6 +45,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 @property (nonatomic, readwrite, retain) NSURL *baseURL;
 @property (nonatomic, readwrite, retain) NSMutableArray *activeLoaders;
 @property (nonatomic, readwrite, retain) NSTimer *refreshTimer;
+@property (nonatomic, readwrite, assign) MPOAuthAuthenticationState authenticationState;
 
 - (void)_initAuthorizationEndpointsForURL:(NSURL *)inBaseURL;
 - (void)_authenticationRequestForRequestToken;
@@ -57,15 +65,16 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 	if (self = [super init]) {
 		self.authenticationURL = inAuthURL;
 		self.baseURL = inBaseURL;
-
+		self.authenticationState = MPOAuthAuthenticationStateUnauthenticated;
+		
 		// load authorization endpoints from file
 		[self _initAuthorizationEndpointsForURL:inAuthURL];
 		
-		NSString *requestToken = [self findValueFromKeychainUsingName:@"oauth_token_request"];
-		NSString *requestTokenSecret = [self findValueFromKeychainUsingName:@"oauth_token_request_secret"];
-		NSString *accessToken = [self findValueFromKeychainUsingName:@"oauth_token_access"];
-		NSString *accessTokenSecret = [self findValueFromKeychainUsingName:@"oauth_token_access_secret"];
-		NSString *sessionHandle = [self findValueFromKeychainUsingName:@"oauth_session_handle"];
+		NSString *requestToken = [self findValueFromKeychainUsingName:MPOAuthCredentialRequestTokenKey];
+		NSString *requestTokenSecret = [self findValueFromKeychainUsingName:MPOAuthCredentialRequestTokenSecretKey];
+		NSString *accessToken = [self findValueFromKeychainUsingName:MPOAuthCredentialAccessTokenKey];
+		NSString *accessTokenSecret = [self findValueFromKeychainUsingName:MPOAuthCredentialAccessTokenSecretKey];
+		NSString *sessionHandle = [self findValueFromKeychainUsingName:MPOAuthCredentialSessionHandleKey];
 		
 		_credentials = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:inCredentials];
 		[_credentials setRequestToken:requestToken];
@@ -94,7 +103,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 	for ( NSString *domainString in [oauthEndpointsDictionary keyEnumerator]) {
 		if ([inBaseURL domainMatches:domainString]) {
 			NSDictionary *oauthEndpoints = [oauthEndpointsDictionary objectForKey:domainString];
-			NSAssert( [oauthEndpoints count] == 3, @"Incorrect number of oauth authorization methods");
+			NSAssert( [oauthEndpoints count] >= 3, @"Incorrect number of oauth authorization methods");
 			
 			self.oauthRequestTokenURL = [NSURL URLWithString:[oauthEndpoints objectForKey:MPOAuthRequestTokenURLKey]];
 			self.oauthAuthorizeTokenURL = [NSURL URLWithString:[oauthEndpoints objectForKey:MPOAuthUserAuthorizationURLKey]];
@@ -172,9 +181,14 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 	}
 }
 
+- (BOOL)isAuthenticated {
+	return (self.authenticationState == MPOAuthAuthenticationStateAuthenticated);
+}
+
 - (void)_authenticationRequestForRequestToken {
 	if (self.oauthRequestTokenURL) {
 		MPLog(@"--> Performing Request Token Request: %@", self.oauthRequestTokenURL);
+		self.authenticationState = MPOAuthAuthenticationStateRequestRequestToken;
 		[self performMethod:nil atURL:self.oauthRequestTokenURL withParameters:nil withTarget:self andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
 	}
 }
@@ -193,6 +207,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 
 	if (!delegateWantsToBeInvolved || (delegateWantsToBeInvolved && [self.delegate automaticallyRequestAuthenticationFromURL:userAuthURL withCallbackURL:callbackURL])) {
 		MPLog(@"--> Automatically Performing User Auth Request: %@", userAuthURL);
+		self.authenticationState = MPOAuthAuthenticationStateRequestUserAccess;
 		[self _authenticationRequestForUserPermissionsConfirmationAtURL:userAuthURL];
 	}
 }
@@ -208,6 +223,7 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 - (void)_authenticationRequestForAccessToken {
 	if (self.oauthGetAccessTokenURL) {
 		MPLog(@"--> Performing Access Token Request: %@", self.oauthGetAccessTokenURL);
+		self.authenticationState = MPOAuthAuthenticationStateRequestAccessToken;
 		[self performMethod:nil atURL:self.oauthGetAccessTokenURL withParameters:nil withTarget:self andAction:nil];
 	}
 }
@@ -262,6 +278,18 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 
 #pragma mark -
 
+- (void)discardServerCredentials {
+	[self removeValueFromKeychainUsingName:MPOAuthCredentialRequestTokenKey];
+	[self removeValueFromKeychainUsingName:MPOAuthCredentialRequestTokenSecretKey];	
+	[self removeValueFromKeychainUsingName:MPOAuthCredentialAccessTokenKey];
+	[self removeValueFromKeychainUsingName:MPOAuthCredentialAccessTokenSecretKey];	
+
+	self.authenticationState = MPOAuthAuthenticationStateUnauthenticated;
+}
+
+#pragma mark -
+#pragma mark - Private APIs -
+
 - (void)_performedLoad:(MPOAuthAPIRequestLoader *)inLoader receivingData:(NSData *)inData {
 //	NSLog(@"loaded %@, and got %@", inLoader, inData);
 }
@@ -269,25 +297,27 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 #pragma mark -
 
 - (void)_requestTokenReceived:(NSNotification *)inNotification {
-	[self addToKeychainUsingName:@"oauth_token_request" andValue:[[inNotification userInfo] objectForKey:@"oauth_token"]];
-	[self addToKeychainUsingName:@"oauth_token_request_secret" andValue:[[inNotification userInfo] objectForKey:@"oauth_token_secret"]];
+	[self addToKeychainUsingName:MPOAuthCredentialRequestTokenKey andValue:[[inNotification userInfo] objectForKey:@"oauth_token"]];
+	[self addToKeychainUsingName:MPOAuthCredentialRequestTokenSecretKey andValue:[[inNotification userInfo] objectForKey:@"oauth_token_secret"]];
 }
 
 - (void)_requestTokenRejected:(NSNotification *)inNotification {
-	[self removeValueFromKeychainUsingName:@"oauth_token_request"];
-	[self removeValueFromKeychainUsingName:@"oauth_token_request_secret"];	
+	[self removeValueFromKeychainUsingName:MPOAuthCredentialRequestTokenKey];
+	[self removeValueFromKeychainUsingName:MPOAuthCredentialRequestTokenSecretKey];	
 }
 
 - (void)_accessTokenReceived:(NSNotification *)inNotification {
-	[self removeValueFromKeychainUsingName:@"oauth_token_request"];
-	[self removeValueFromKeychainUsingName:@"oauth_token_request_secret"];
+	[self removeValueFromKeychainUsingName:MPOAuthCredentialRequestTokenKey];
+	[self removeValueFromKeychainUsingName:MPOAuthCredentialRequestTokenSecretKey];
 	
-	[self addToKeychainUsingName:@"oauth_token_access" andValue:[[inNotification userInfo] objectForKey:@"oauth_token"]];
-	[self addToKeychainUsingName:@"oauth_token_access_secret" andValue:[[inNotification userInfo] objectForKey:@"oauth_token_secret"]];
+	[self addToKeychainUsingName:MPOAuthCredentialAccessTokenKey andValue:[[inNotification userInfo] objectForKey:@"oauth_token"]];
+	[self addToKeychainUsingName:MPOAuthCredentialAccessTokenSecretKey andValue:[[inNotification userInfo] objectForKey:@"oauth_token_secret"]];
 	
-	if ([[inNotification userInfo] objectForKey:@"oauth_session_handle"]) {
-		[self addToKeychainUsingName:@"oauth_session_handle" andValue:[[inNotification userInfo] objectForKey:@"oauth_session_handle"]];
+	if ([[inNotification userInfo] objectForKey:MPOAuthCredentialSessionHandleKey]) {
+		[self addToKeychainUsingName:MPOAuthCredentialSessionHandleKey andValue:[[inNotification userInfo] objectForKey:MPOAuthCredentialSessionHandleKey]];
 	}
+	
+	self.authenticationState = MPOAuthAuthenticationStateAuthenticated;
 	
 	NSTimeInterval tokenRefreshInterval = (NSTimeInterval)[[[inNotification userInfo] objectForKey:@"oauth_expires_in"] intValue];
 	NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceNow:tokenRefreshInterval];
@@ -307,6 +337,8 @@ NSString *MPOAuthAccessTokenURLKey				= @"MPOAuthAccessTokenURL";
 		sessionHandleParameter.name = @"oauth_session_handle";
 		sessionHandleParameter.value = _credentials.sessionHandle;
 	}
+	
+	self.authenticationState = MPOAuthAuthenticationStateRequestAccessToken;
 	
 	[self performMethod:nil
 				  atURL:self.oauthGetAccessTokenURL

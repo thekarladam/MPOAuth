@@ -106,7 +106,7 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 #pragma mark -
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-		MPLog(@"%p: [%@ %@] %@, %@", self, [self className], NSStringFromSelector(_cmd), connection, error);
+		MPLog(@"%p: [%@ %@] %@, %@", self, NSStringFromClass([self class]), NSStringFromSelector(_cmd), connection, error);
 		[_target performSelector:_action withObject:self withObject:self.data];	
 }
 
@@ -123,7 +123,7 @@ NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOc
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse {
-	MPLog( @"[%@ %@]: %@, %@", [self className], NSStringFromSelector(_cmd), request, redirectResponse);
+	MPLog( @"[%@ %@]: %@, %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), request, redirectResponse);
 	return request;
 }
 
