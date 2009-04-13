@@ -139,6 +139,7 @@ NSString *MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 @synthesize activeLoaders = _activeLoaders;
 @synthesize delegate = _delegate;
 @synthesize refreshTimer = _refreshTimer;
+@synthesize authenticationState = _oauthAuthenticationState;
 
 #pragma mark -
 
@@ -284,6 +285,12 @@ NSString *MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 	[self removeValueFromKeychainUsingName:MPOAuthCredentialAccessTokenKey];
 	[self removeValueFromKeychainUsingName:MPOAuthCredentialAccessTokenSecretKey];	
 
+	[_credentials setRequestToken:nil];
+	[_credentials setRequestTokenSecret:nil];
+	[_credentials setAccessToken:nil];
+	[_credentials setAccessTokenSecret:nil];
+	[_credentials setSessionHandle:nil];
+	
 	self.authenticationState = MPOAuthAuthenticationStateUnauthenticated;
 }
 
