@@ -17,7 +17,7 @@
 @property (nonatomic, readwrite, retain) NSDate *expirationDate;
 @property (nonatomic, readwrite, retain) NSDictionary *urlRelationships;
 
-- (void)_parseStringForContent:(NSString *)inString;
+- (BOOL)_parseStringForContent:(NSString *)inString;
 @end
 
 @implementation MPWSXRDDocument
@@ -56,11 +56,11 @@
 	const char *cStringForDoc = [inString UTF8String];
 	xmlDocPtr xrdDocument = xmlParseMemory(cStringForDoc, strlen(cStringForDoc));
 	if (xrdDocument) {
-		xmlNodePtr rootNode = xmlDocGetRootElement(xrdDocument);
+//		xmlNodePtr rootNode = xmlDocGetRootElement(xrdDocument);
 		xmlXPathContextPtr xpathContext = xmlXPathNewContext(xrdDocument);
 		xmlXPathObjectPtr xpathObject = NULL;
 		
-		xpathObject = xmlXPathEvalExpression("/xrd[0]/subject", xpathContext);
+		xpathObject = xmlXPathEvalExpression((const xmlChar *)"/xrd[0]/subject", xpathContext);
 		if (xpathObject) {
 			xmlNodeSetPtr subjectNodes = xpathObject->nodesetval;
 			int resultsCount = subjectNodes ? subjectNodes->nodeNr : 0;
