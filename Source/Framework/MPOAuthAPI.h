@@ -10,13 +10,18 @@
 #import "MPOAuthCredentialStore.h"
 #import "MPOAuthParameterFactory.h"
 
-extern NSString *MPOAuthNotificationRequestTokenReceived;
-extern NSString *MPOAuthNotificationRequestTokenRejected;
-extern NSString *MPOAuthNotificationAccessTokenReceived;
-extern NSString *MPOAuthNotificationAccessTokenRejected;
-extern NSString *MPOAuthNotificationAccessTokenRefreshed;
-extern NSString *MPOAuthNotificationOAuthCredentialsReady;
-extern NSString *MPOAuthNotificationErrorHasOccurred;
+extern NSString * const MPOAuthNotificationAccessTokenReceived;
+extern NSString * const MPOAuthNotificationAccessTokenRejected;
+extern NSString * const MPOAuthNotificationAccessTokenRefreshed;
+extern NSString * const MPOAuthNotificationOAuthCredentialsReady;
+extern NSString * const MPOAuthNotificationErrorHasOccurred;
+
+extern NSString * const MPOAuthCredentialRequestTokenKey;
+extern NSString * const MPOAuthCredentialRequestTokenSecretKey;
+extern NSString * const MPOAuthCredentialAccessTokenKey;
+extern NSString * const MPOAuthCredentialAccessTokenSecretKey;
+extern NSString * const MPOAuthCredentialSessionHandleKey;
+
 
 typedef enum {
 	MPOAuthSignatureSchemePlainText,
@@ -26,42 +31,31 @@ typedef enum {
 
 typedef enum {
 	MPOAuthAuthenticationStateUnauthenticated		= 0,
-	MPOAuthAuthenticationStateRequestRequestToken	= 1,
-	MPOAuthAuthenticationStateRequestUserAccess		= 2,
-	MPOAuthAuthenticationStateRequestAccessToken	= 3,
-	MPOAuthAuthenticationStateAuthenticated			= 4
+	MPOAuthAuthenticationStateAuthenticating		= 1,
+	MPOAuthAuthenticationStateAuthenticated			= 2
 } MPOAuthAuthenticationState;
-
-@protocol MPOAuthAPIDelegate;
 
 @protocol MPOAuthAPIInternalClient
 @end
 
-@class MPOAuthCredentialConcreteStore;
+@class MPOAuthAuthenticationMethod;
 
 @interface MPOAuthAPI : NSObject <MPOAuthAPIInternalClient> {
-	@private
-	MPOAuthCredentialConcreteStore	*_credentials;
-	NSURL							*_baseURL;
-	NSURL							*_authenticationURL;
-	NSURL							*_oauthRequestTokenURL;
-	NSURL							*_oauthAuthorizeTokenURL;
-	NSURL							*_oauthGetAccessTokenURL;
-	MPOAuthSignatureScheme			_signatureScheme;
-	NSMutableArray					*_activeLoaders;
-	id <MPOAuthAPIDelegate>			_delegate;
-	NSTimer							*_refreshTimer;
-	MPOAuthAuthenticationState		_oauthAuthenticationState;
+@private
+	id <MPOAuthCredentialStore, MPOAuthParameterFactory>		credentials_;
+	NSURL														*baseURL_;
+	NSURL														*authenticationURL_;
+	MPOAuthAuthenticationMethod									*authenticationMethod_;
+	MPOAuthSignatureScheme										signatureScheme_;
+	NSMutableArray												*activeLoaders_;
+	MPOAuthAuthenticationState									oauthAuthenticationState_;
 }
 
+@property (nonatomic, readonly, retain) id <MPOAuthCredentialStore, MPOAuthParameterFactory> credentials;
 @property (nonatomic, readonly, retain) NSURL *baseURL;
 @property (nonatomic, readonly, retain) NSURL *authenticationURL;
+@property (nonatomic, readwrite, retain) MPOAuthAuthenticationMethod *authenticationMethod;
 @property (nonatomic, readwrite, assign) MPOAuthSignatureScheme signatureScheme;
-@property (nonatomic, readwrite, assign) id <MPOAuthAPIDelegate> delegate;
-
-@property (nonatomic, readwrite, retain) NSURL *oauthRequestTokenURL;
-@property (nonatomic, readwrite, retain) NSURL *oauthAuthorizeTokenURL;
-@property (nonatomic, readwrite, retain) NSURL *oauthGetAccessTokenURL;
 
 @property (nonatomic, readonly, assign) MPOAuthAuthenticationState authenticationState;
 
@@ -74,17 +68,17 @@ typedef enum {
 
 - (void)performMethod:(NSString *)inMethod withTarget:(id)inTarget andAction:(SEL)inAction;
 - (void)performMethod:(NSString *)inMethod atURL:(NSURL *)inURL withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction;
+- (void)performPOSTMethod:(NSString *)inMethod atURL:(NSURL *)inURL withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction;
+- (void)performURLRequest:(NSURLRequest *)inRequest withTarget:(id)inTarget andAction:(SEL)inAction;
 
 - (NSData *)dataForMethod:(NSString *)inMethod;
 - (NSData *)dataForMethod:(NSString *)inMethod withParameters:(NSArray *)inParameters;
 - (NSData *)dataForURL:(NSURL *)inURL andMethod:(NSString *)inMethod withParameters:(NSArray *)inParameters;
 
-- (void)discardServerCredentials;
+- (id)credentialNamed:(NSString *)inCredentialName;
+- (void)setCredential:(id)inCredential withName:(NSString *)inName;
+- (void)removeCredentialNamed:(NSString *)inName;
 
-@end
+- (void)discardCredentials;
 
-
-@protocol MPOAuthAPIDelegate <NSObject>
-- (NSURL *)callbackURLForCompletedUserAuthorization;
-- (BOOL)automaticallyRequestAuthenticationFromURL:(NSURL *)inAuthURL withCallbackURL:(NSURL *)inCallbackURL;
 @end

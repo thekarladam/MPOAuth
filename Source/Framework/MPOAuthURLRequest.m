@@ -9,6 +9,8 @@
 #import "MPOAuthURLRequest.h"
 #import "MPURLRequestParameter.h"
 #import "MPOAuthSignatureParameter.h"
+
+#import "NSURL+MPURLParameterAdditions.h"
 #import "NSString+URLEscapingAdditions.h"
 
 @interface MPOAuthURLRequest ()
@@ -22,6 +24,15 @@
 		self.url = inURL;
 		_parameters = inParameters ? [inParameters mutableCopy] : [[NSMutableArray alloc] initWithCapacity:10];
 		self.HTTPMethod = @"GET";
+	}
+	return self;
+}
+
+- (id)initWithURLRequest:(NSURLRequest *)inRequest {
+	if (self = [super init]) {
+		self.url = [[inRequest URL] urlByRemovingQuery];
+		self.parameters = [[MPURLRequestParameter parametersFromString:[[inRequest URL] query]] mutableCopy];
+		self.HTTPMethod = [inRequest HTTPMethod];
 	}
 	return self;
 }
@@ -66,6 +77,8 @@
 		[aRequest setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
 		[aRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 		[aRequest setHTTPBody:postData];
+	} else {
+		[NSException raise:@"UnhandledHTTPMethodException" format:@"The requested HTTP method, %@, is not supported", self.HTTPMethod];
 	}
 	
 	[parameterString release];

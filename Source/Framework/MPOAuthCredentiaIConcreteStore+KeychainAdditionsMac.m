@@ -1,25 +1,25 @@
 //
-//  MPOAuthAPI+TokenAdditionsMac.m
+//  MPOAuthCredentialConcreteStore+TokenAdditionsMac.m
 //  MPOAuthConnection
 //
 //  Created by Karl Adam on 08.12.13.
 //  Copyright 2008 matrixPointer. All rights reserved.
 //
 
-#import "MPOAuthAPI+KeychainAdditions.h"
+#import "MPOAuthCredentialConcreteStore+KeychainAdditions.h"
 
 #if !TARGET_OS_IPHONE || (TARGET_IPHONE_SIMULATOR && !__IPHONE_3_0)
 
-@interface MPOAuthAPI (KeychainAdditionsMac)
+@interface MPOAuthCredentialConcreteStore (KeychainAdditionsMac)
 - (NSString *)findValueFromKeychainUsingName:(NSString *)inName returningItem:(SecKeychainItemRef *)outKeychainItemRef;
 @end
 
-@implementation MPOAuthAPI (KeychainAdditions)
+@implementation MPOAuthCredentialConcreteStore (KeychainAdditions)
 
 - (void)addToKeychainUsingName:(NSString *)inName andValue:(NSString *)inValue {
-	NSString *serverName = [_baseURL host];
+	NSString *serverName = [self.baseURL host];
 	NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
-	NSString *securityDomain = [_authenticationURL host];
+	NSString *securityDomain = [self.authenticationURL host];
 	NSString *uniqueName = [NSString stringWithFormat:@"%@.%@", bundleID, inName];
 	SecKeychainItemRef existingKeychainItem = NULL;
 	
@@ -46,8 +46,8 @@
 
 - (NSString *)findValueFromKeychainUsingName:(NSString *)inName returningItem:(SecKeychainItemRef *)outKeychainItemRef {
 	NSString *foundPassword = nil;
-	NSString *serverName = [_baseURL host];
-	NSString *securityDomain = [_authenticationURL host];
+	NSString *serverName = [self.baseURL host];
+	NSString *securityDomain = [self.authenticationURL host];
 	NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
 	NSString *uniqueName = [NSString stringWithFormat:@"%@.%@", bundleID, inName];
 	
@@ -60,8 +60,8 @@
 													  [uniqueName length], [uniqueName UTF8String],
 													  0, NULL,	/* path */
 													  0,
-													  (SecProtocolType)NULL,
-													  (SecAuthenticationType)NULL,
+													  kSecProtocolTypeAny,
+													  kSecAuthenticationTypeAny,
 													  (UInt32 *)&passwordLength,
 													  (void **)&passwordString,
 													  outKeychainItemRef);

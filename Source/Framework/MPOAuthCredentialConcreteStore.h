@@ -11,8 +11,13 @@
 #import "MPOAuthParameterFactory.h"
 
 @interface MPOAuthCredentialConcreteStore : NSObject <MPOAuthCredentialStore, MPOAuthParameterFactory> {
-	NSMutableDictionary *_store;
+	NSMutableDictionary *store_;
+	NSURL				*baseURL_;
+	NSURL				*authenticationURL_;
 }
+
+@property (nonatomic, readonly, retain) NSURL *baseURL;
+@property (nonatomic, readonly, retain) NSURL *authenticationURL;
 
 @property (nonatomic, readonly) NSString *tokenSecret;
 @property (nonatomic, readonly) NSString *signingKey;
@@ -24,6 +29,11 @@
 
 @property (nonatomic, readwrite, retain) NSString *sessionHandle;
 
-- (id)initWithCredentials:(NSDictionary *)inCredentials;
+- (id)initWithCredentials:(NSDictionary *)inCredentials forBaseURL:(NSURL *)inBaseURL;
+- (id)initWithCredentials:(NSDictionary *)inCredentials forBaseURL:(NSURL *)inBaseURL withAuthenticationURL:(NSURL *)inAuthenticationURL;
+
+- (void)setCredential:(id)inCredential withName:(NSString *)inName;
+- (void)removeCredentialNamed:(NSString *)inName;
+	
 
 @end

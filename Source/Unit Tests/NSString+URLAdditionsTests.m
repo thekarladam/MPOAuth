@@ -71,16 +71,19 @@
 	NSURL *parameterizedURL = [NSURL URLWithString:@"http://example.com/index.php?a=b&c=d"];
 
 	NSDictionary *parameterDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"y", @"x", @"beta", @"zeta", nil];
+	NSArray *parameters = [MPURLRequestParameter parametersFromDictionary:parameterDictionary];
+	parameters = [parameters sortedArrayUsingSelector:@selector(compare:)];
 
 	// This tests are actually a little bit disingenious but they're a quick sanity check to make sure things are spit out
 	// as expected
-	STAssertEqualObjects(	[nakedURL urlByAddingParameterDictionary:parameterDictionary],
+	STAssertEqualObjects(	[nakedURL urlByAddingParameters:parameters],
 							[NSURL URLWithString:@"http://apple.com?x=y&zeta=beta"],
 							@"-urlByAddingParameters failed to correctly add the requested parameters"
 						 );
+
 	
-	STAssertEqualObjects(	[parameterizedURL urlByAddingParameterDictionary:parameterDictionary],
-							[NSURL URLWithString:@"http://example.com/index.php?a=b&zeta=beta&x=y&c=d"],
+	STAssertEqualObjects(	[parameterizedURL urlByAddingParameters:parameters],
+							[NSURL URLWithString:@"http://example.com/index.php?a=b&c=d&x=y&zeta=beta"],
 							@"-urlByAddingParameters failed to correctly add the requested parameters"
 						 );
 	

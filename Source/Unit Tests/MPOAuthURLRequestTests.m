@@ -18,7 +18,7 @@
 	NSDictionary *credentials = [NSDictionary dictionaryWithObjectsAndKeys:	@"dpf43f3p2l4k3l03", kMPOAuthCredentialConsumerKey,
 								 @"kd94hf93k423kf44", kMPOAuthCredentialConsumerSecret,
 								 nil];
-	MPOAuthCredentialConcreteStore *credentialStore = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentials];
+	MPOAuthCredentialConcreteStore *credentialStore = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentials forBaseURL:nil];
 	credentialStore.signatureMethod = @"PLAINTEXT";
 	
 	NSURL *url = [NSURL URLWithString:@"http://example.com/request_token"];
@@ -92,7 +92,9 @@
 	STAssertEqualObjects([MPURLRequestParameter parameterStringForDictionary:parameterDictionary], @"a=b&c=d", @"Incorrectly Normalized Request Parameters, Core 9.1.1");
 		
 	parameterDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"a", @"x!y", @"a", @"x", nil];
-	STAssertEqualObjects([MPURLRequestParameter parameterStringForDictionary:parameterDictionary], @"x=a&x%21y=a", @"Incorrectly Normalized Request Parameters, Core 9.1.1");
+	NSArray *parameters = [MPURLRequestParameter parametersFromDictionary:parameterDictionary];
+	parameters = [parameters sortedArrayUsingSelector:@selector(compare:)];
+	STAssertEqualObjects([MPURLRequestParameter parameterStringForParameters:parameters], @"x=a&x%21y=a", @"Incorrectly Normalized Request Parameters, Core 9.1.1");
 }
 
 @end

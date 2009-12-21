@@ -23,6 +23,7 @@
 @property (nonatomic, readwrite, retain) NSMutableArray *parameters;
 
 - (id)initWithURL:(NSURL *)inURL andParameters:(NSArray *)parameters;
+- (id)initWithURLRequest:(NSURLRequest *)inRequest;
 
 - (void)addParameters:(NSArray *)inParameters;
 

@@ -1,5 +1,5 @@
 //
-//  MPOAuthAPI+TokenAdditionsMac.h
+//  MPOAuthCredentialConcreteStore+TokenAdditionsMac.h
 //  MPOAuthConnection
 //
 //  Created by Karl Adam on 08.12.13.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MPOAuthAPI.h"
+#import "MPOAuthCredentialConcreteStore.h"
 
-@interface MPOAuthAPI (KeychainAdditions)
+@interface MPOAuthCredentialConcreteStore (KeychainAdditions)
 
 - (void)addToKeychainUsingName:(NSString *)inName andValue:(NSString *)inValue;
 - (NSString *)findValueFromKeychainUsingName:(NSString *)inName;

@@ -8,89 +8,166 @@
 
 #import "MPOAuthCredentialConcreteStore.h"
 #import "MPURLRequestParameter.h"
+
+#import "MPOAuthCredentialConcreteStore+KeychainAdditions.h"
 #import "NSString+URLEscapingAdditions.h"
+
+extern NSString * const MPOAuthCredentialRequestTokenKey;
+extern NSString * const MPOAuthCredentialRequestTokenSecretKey;
+extern NSString * const MPOAuthCredentialAccessTokenKey;
+extern NSString * const MPOAuthCredentialAccessTokenSecretKey;
+extern NSString * const MPOAuthCredentialSessionHandleKey;
+
+@interface MPOAuthCredentialConcreteStore ()
+@property (nonatomic, readwrite, retain) NSMutableDictionary *store;
+@property (nonatomic, readwrite, retain) NSURL *baseURL;
+@property (nonatomic, readwrite, retain) NSURL *authenticationURL;
+@end
 
 @implementation MPOAuthCredentialConcreteStore
 
-- (id)initWithCredentials:(NSDictionary *)inCredentials {
+- (id)initWithCredentials:(NSDictionary *)inCredentials forBaseURL:(NSURL *)inBaseURL {
+	return [self initWithCredentials:inCredentials forBaseURL:inBaseURL withAuthenticationURL:inBaseURL];
+}
+
+- (id)initWithCredentials:(NSDictionary *)inCredentials forBaseURL:(NSURL *)inBaseURL withAuthenticationURL:(NSURL *)inAuthenticationURL {
 	if (self = [super init]) {
-		_store = [[NSMutableDictionary alloc] initWithDictionary:inCredentials];
+		store_ = [[NSMutableDictionary alloc] initWithDictionary:inCredentials];
+		self.baseURL = inBaseURL;
+		self.authenticationURL = inAuthenticationURL;
+		
+		NSString *requestToken = [self findValueFromKeychainUsingName:kMPOAuthCredentialRequestToken];
+		NSString *requestTokenSecret = [self findValueFromKeychainUsingName:kMPOAuthCredentialRequestTokenSecret];
+		NSString *accessToken = [self findValueFromKeychainUsingName:kMPOAuthCredentialAccessToken];
+		NSString *accessTokenSecret = [self findValueFromKeychainUsingName:kMPOAuthCredentialAccessTokenSecret];
+		NSString *sessionHandle = [self findValueFromKeychainUsingName:kMPOAuthCredentialSessionHandle];
+		
+		self.requestToken = requestToken;
+		self.requestTokenSecret = requestTokenSecret;
+		self.accessToken = accessToken;
+		self.accessTokenSecret = accessTokenSecret;
+		self.sessionHandle = sessionHandle;
 	}
 	return self;
 }
 
 - (oneway void)dealloc {
-	[_store release];
+	self.store = nil;
+	self.baseURL = nil;
+	self.authenticationURL = nil;
 	
 	[super dealloc];
 }
 
+@synthesize store = store_;
+@synthesize baseURL = baseURL_;
+@synthesize authenticationURL = authenticationURL_;
+
+#pragma mark -
+
 - (NSString *)consumerKey {
-	return [_store objectForKey:kMPOAuthCredentialConsumerKey];
+	return [self.store objectForKey:kMPOAuthCredentialConsumerKey];
 }
 
 - (NSString *)consumerSecret {
-	return [_store objectForKey:kMPOAuthCredentialConsumerSecret];
+	return [self.store objectForKey:kMPOAuthCredentialConsumerSecret];
+}
+
+- (NSString *)username {
+	return [self.store objectForKey:kMPOAuthCredentialUsername];
+}
+
+- (NSString *)password {
+	return [self.store objectForKey:kMPOAuthCredentialPassword];
 }
 
 - (NSString *)requestToken {
-	return [_store objectForKey:kMPOAuthCredentialRequestToken];
+	return [self.store objectForKey:kMPOAuthCredentialRequestToken];
 }
 
 - (void)setRequestToken:(NSString *)inToken {
 	if (inToken) {
-		[_store setObject:inToken forKey:kMPOAuthCredentialRequestToken];
+		[self.store setObject:inToken forKey:kMPOAuthCredentialRequestToken];
 	} else {
-		[_store removeObjectForKey:kMPOAuthCredentialRequestToken];
+		[self.store removeObjectForKey:kMPOAuthCredentialRequestToken];
+		[self removeValueFromKeychainUsingName:kMPOAuthCredentialRequestToken];
 	}
 }
 
 - (NSString *)requestTokenSecret {
-	return [_store objectForKey:kMPOAuthCredentialRequestTokenSecret];
+	return [self.store objectForKey:kMPOAuthCredentialRequestTokenSecret];
 }
 
 - (void)setRequestTokenSecret:(NSString *)inTokenSecret {
 	if (inTokenSecret) {
-		[_store setObject:inTokenSecret forKey:kMPOAuthCredentialRequestTokenSecret];
+		[self.store setObject:inTokenSecret forKey:kMPOAuthCredentialRequestTokenSecret];
 	} else {
-		[_store removeObjectForKey:kMPOAuthCredentialRequestTokenSecret];
+		[self.store removeObjectForKey:kMPOAuthCredentialRequestTokenSecret];
+		[self removeValueFromKeychainUsingName:kMPOAuthCredentialRequestTokenSecret];
 	}	
 }
 
 - (NSString *)accessToken {
-	return [_store objectForKey:kMPOAuthCredentialAccessToken];
+	return [self.store objectForKey:kMPOAuthCredentialAccessToken];
 }
 
 - (void)setAccessToken:(NSString *)inToken {
 	if (inToken) {
-		[_store setObject:inToken forKey:kMPOAuthCredentialAccessToken];
+		[self.store setObject:inToken forKey:kMPOAuthCredentialAccessToken];
 	} else {
-		[_store removeObjectForKey:kMPOAuthCredentialAccessToken];
+		[self.store removeObjectForKey:kMPOAuthCredentialAccessToken];
+		[self removeValueFromKeychainUsingName:kMPOAuthCredentialAccessToken];
 	}	
 }
 
 - (NSString *)accessTokenSecret {
-	return [_store objectForKey:kMPOAuthCredentialAccessTokenSecret];
+	return [self.store objectForKey:kMPOAuthCredentialAccessTokenSecret];
 }
 
 - (void)setAccessTokenSecret:(NSString *)inTokenSecret {
 	if (inTokenSecret) {
-		[_store setObject:inTokenSecret forKey:kMPOAuthCredentialAccessTokenSecret];
+		[self.store setObject:inTokenSecret forKey:kMPOAuthCredentialAccessTokenSecret];
 	} else {
-		[_store removeObjectForKey:kMPOAuthCredentialAccessTokenSecret];
+		[self.store removeObjectForKey:kMPOAuthCredentialAccessTokenSecret];
+		[self removeValueFromKeychainUsingName:kMPOAuthCredentialAccessTokenSecret];
 	}	
 }
 
 - (NSString *)sessionHandle {
-	return [_store objectForKey:kMPOAuthCredentialSessionHandle];
+	return [self.store objectForKey:kMPOAuthCredentialSessionHandle];
 }
 
 - (void)setSessionHandle:(NSString *)inSessionHandle {
 	if (inSessionHandle) {
-		[_store setObject:inSessionHandle forKey:kMPOAuthCredentialSessionHandle];
+		[self.store setObject:inSessionHandle forKey:kMPOAuthCredentialSessionHandle];
 	} else {
-		[_store removeObjectForKey:kMPOAuthCredentialSessionHandle];
+		[self.store removeObjectForKey:kMPOAuthCredentialSessionHandle];
+		[self removeValueFromKeychainUsingName:kMPOAuthCredentialSessionHandle];
 	}
+}
+
+#pragma mark -
+
+- (NSString *)credentialNamed:(NSString *)inCredentialName {
+	return [store_ objectForKey:inCredentialName];
+}
+
+- (void)setCredential:(id)inCredential withName:(NSString *)inName {
+	[self.store setObject:inCredential forKey:inName];
+	[self addToKeychainUsingName:inName andValue:inCredential];
+}
+
+- (void)removeCredentialNamed:(NSString *)inName {
+	[self.store removeObjectForKey:inName];
+	[self removeValueFromKeychainUsingName:inName];
+}
+
+- (void)discardOAuthCredentials {
+	self.requestToken = nil;
+	self.requestTokenSecret = nil;
+	self.accessToken = nil;
+	self.accessTokenSecret = nil;
+	self.sessionHandle = nil;
 }
 
 #pragma mark -
@@ -121,7 +198,7 @@
 }
 
 - (NSString *)signatureMethod {
-	return [_store objectForKey:kMPOAuthSignatureMethod];
+	return [self.store objectForKey:kMPOAuthSignatureMethod];
 }
 
 - (NSArray *)oauthParameters {
@@ -139,7 +216,7 @@
 }
 
 - (void)setSignatureMethod:(NSString *)inSignatureMethod {
-	[_store setObject:inSignatureMethod forKey:kMPOAuthSignatureMethod];
+	[self.store setObject:inSignatureMethod forKey:kMPOAuthSignatureMethod];
 }
 
 - (MPURLRequestParameter *)oauthConsumerKeyParameter {
@@ -200,7 +277,7 @@
 }
 
 - (MPURLRequestParameter *)oauthVersionParameter {
-	MPURLRequestParameter *versionParameter = [_store objectForKey:@"versionParameter"];
+	MPURLRequestParameter *versionParameter = [self.store objectForKey:@"versionParameter"];
 	
 	if (!versionParameter) {
 		versionParameter = [[MPURLRequestParameter alloc] init];

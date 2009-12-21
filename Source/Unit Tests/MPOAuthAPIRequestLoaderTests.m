@@ -38,10 +38,10 @@
 	NSDictionary *credentials = [NSDictionary dictionaryWithObjectsAndKeys:	@"dpf43f3p2l4k3l03", kMPOAuthCredentialConsumerKey,
 																			@"kd94hf93k423kf44", kMPOAuthCredentialConsumerSecret,
 								 nil];
-	MPOAuthCredentialConcreteStore *credentialStore = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentials];
+	NSURL *url = [NSURL URLWithString:@"http://localhost:4567/request_token"];
+	MPOAuthCredentialConcreteStore *credentialStore = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentials forBaseURL:url withAuthenticationURL:url];
 	credentialStore.signatureMethod = @"PLAINTEXT";
 	
-	NSURL *url = [NSURL URLWithString:@"http://localhost:4567/request_token"];
 	MPOAuthURLRequest *urlRequest = [[MPOAuthURLRequest alloc] initWithURL:url andParameters:nil];
 	[urlRequest setHTTPMethod:@"POST"];
 	MPOAuthAPIRequestLoader *requestLoader = [[MPOAuthAPIRequestLoader alloc] initWithRequest:urlRequest];

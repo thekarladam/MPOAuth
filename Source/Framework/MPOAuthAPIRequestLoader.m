@@ -16,13 +16,13 @@
 #import "NSURLResponse+Encoding.h"
 #import "MPDebug.h"
 
-NSString *MPOAuthNotificationRequestTokenReceived	= @"MPOAuthNotificationRequestTokenReceived";
-NSString *MPOAuthNotificationRequestTokenRejected	= @"MPOAuthNotificationRequestTokenRejected";
-NSString *MPOAuthNotificationAccessTokenReceived	= @"MPOAuthNotificationAccessTokenReceived";
-NSString *MPOAuthNotificationAccessTokenRejected	= @"MPOAuthNotificationAccessTokenRejected";
-NSString *MPOAuthNotificationAccessTokenRefreshed	= @"MPOAuthNotificationAccessTokenRefreshed";
-NSString *MPOAuthNotificationOAuthCredentialsReady	= @"MPOAuthNotificationOAuthCredentialsReady";
-NSString *MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOccurred";
+NSString * const MPOAuthNotificationRequestTokenReceived	= @"MPOAuthNotificationRequestTokenReceived";
+NSString * const MPOAuthNotificationRequestTokenRejected	= @"MPOAuthNotificationRequestTokenRejected";
+NSString * const MPOAuthNotificationAccessTokenReceived		= @"MPOAuthNotificationAccessTokenReceived";
+NSString * const MPOAuthNotificationAccessTokenRejected		= @"MPOAuthNotificationAccessTokenRejected";
+NSString * const MPOAuthNotificationAccessTokenRefreshed	= @"MPOAuthNotificationAccessTokenRefreshed";
+NSString * const MPOAuthNotificationOAuthCredentialsReady	= @"MPOAuthNotificationOAuthCredentialsReady";
+NSString * const MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErrorHasOccurred";
 
 @interface MPOAuthURLResponse ()
 @property (nonatomic, readwrite, retain) NSURLResponse *urlResponse;

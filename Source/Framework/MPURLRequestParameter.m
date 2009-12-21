@@ -100,18 +100,10 @@
 }
 
 + (NSString *)parameterStringForDictionary:(NSDictionary *)inParameterDictionary {
-	NSMutableString *queryString = [[NSMutableString alloc] init];
-	int i = 0;
+	NSArray *parameters = [self parametersFromDictionary:inParameterDictionary];
+	NSString *queryString = [self parameterStringForParameters:parameters];
 	
-	for (NSString *aKey in [inParameterDictionary allKeys]) {
-		if (i > 0) {
-			[queryString appendString:@"&"];
-		}
-		[queryString appendFormat:@"%@=%@", [aKey stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding], [[inParameterDictionary objectForKey:aKey] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-		i++;
-	}
-	
-	return [queryString autorelease];
+	return queryString;
 }
 
 #pragma mark -

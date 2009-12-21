@@ -20,15 +20,6 @@
 		<key>MPOAuthAccessTokenURL</key>
 		<string>https://www.google.com/accounts/OAuthGetAccessToken</string>
 	</dict>
-	<key>.freebaseapps.com</key>
-	<dict>
-		<key>MPOAuthRequestTokenURL</key>
-		<string>https://www.freebase.com/api/oauth/request_token</string>
-		<key>MPOAuthUserAuthorizationURL</key>
-		<string>https://www.freebase.com/signin/authorize_token</string>
-		<key>MPOAuthAccessTokenURL</key>
-		<string>https://www.freebase.com/api/oauth/access_token</string>
-	</dict>
 	<key>.fireeagle.yahooapis.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
@@ -39,6 +30,33 @@
 		<string>https://fireeagle.yahoo.net/mobile_auth/</string>
 		<key>MPOAuthAccessTokenURL</key>
 		<string>https://fireeagle.yahooapis.com/oauth/access_token</string>
+	</dict>
+	<key>.freebaseapps.com</key>
+	<dict>
+		<key>MPOAuthRequestTokenURL</key>
+		<string>https://www.freebase.com/api/oauth/request_token</string>
+		<key>MPOAuthUserAuthorizationURL</key>
+		<string>https://www.freebase.com/signin/authorize_token</string>
+		<key>MPOAuthAccessTokenURL</key>
+		<string>https://www.freebase.com/api/oauth/access_token</string>
+	</dict>
+	<key>.foursquare.com</key>
+	<dict>
+		<key>MPOAuthAuthenticationPreferredMethods</key>
+		<array>
+			<string>MPOAuthAuthenticationMethodAuthExchange</string>
+		</array>
+		<key>MPOAuthAuthenticationMethodAuthExchange</key>
+		<dict>
+			<key>MPOAuthAccessTokenURL</key>
+			<string>https://api.foursquare.com/v1/authexchange</string>
+		</dict>
+		<key>MPOAuthRequestTokenURL</key>
+		<string>http://www.foursquare.com/oauth/request_token</string>
+		<key>MPOAuthUserAuthorizationURL</key>
+		<string>http://www.foursquare.com/oauth/authorize</string>
+		<key>MPOAuthAccessTokenURL</key>
+		<string>http://www.foursquare.com/oauth/access_token</string>
 	</dict>
 	<key>.getsatisfaction.com</key>
 	<dict>
@@ -113,5 +131,6 @@
 		<string>http://soundcloud.com/oauth/authorize_token</string>
 		<key>MPOAuthAccessTokenURL</key>
 		<string>http://api.soundcloud.com/oauth/request_token</string>
-	</dict></dict>
+	</dict>
+</dict>
 </plist>

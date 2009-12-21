@@ -52,6 +52,19 @@
 	return composedURL;
 }
 
+- (NSURL *)urlByRemovingQuery {
+	NSURL *composedURL = self;
+	NSString *absoluteString = [self absoluteString];
+	NSRange queryRange = [absoluteString rangeOfString:@"?"];
+	
+	if (queryRange.location != NSNotFound) {
+		NSString *urlSansQuery = [absoluteString substringToIndex:queryRange.location];
+		composedURL = [NSURL URLWithString:urlSansQuery];
+	}
+	
+	return composedURL;
+}
+
 - (NSString *)absoluteNormalizedString {
 	NSString *normalizedString = [self absoluteString];
 

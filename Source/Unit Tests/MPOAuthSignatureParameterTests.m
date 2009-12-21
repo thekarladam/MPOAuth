@@ -29,7 +29,7 @@
 														  andParameters:parameters];
 	
 	NSDictionary *credentialsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"abcdefghijklmnopqestuvwxyz", kMPOAuthCredentialConsumerKey, nil];
-	MPOAuthCredentialConcreteStore *mockCredentials = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentialsDictionary];
+	MPOAuthCredentialConcreteStore *mockCredentials = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentialsDictionary forBaseURL:nil];
 	mockCredentials.signatureMethod = @"HMAC-SHA1";
 	
 	[parameters addObjectsFromArray:[mockCredentials oauthParameters]];
@@ -71,7 +71,7 @@
 - (void)testURIEscapedGeneratedSignatures_Core941 {
 	NSDictionary *credentialsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"abcdefghijklmnopqestuvwxyz", kMPOAuthCredentialConsumerKey,
 																					@"djr9rjt0jd78jf88", kMPOAuthCredentialConsumerSecret, nil];
-	MPOAuthCredentialConcreteStore *mockCredentials = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentialsDictionary];
+	MPOAuthCredentialConcreteStore *mockCredentials = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:credentialsDictionary forBaseURL:nil];
 	mockCredentials.signatureMethod = @"PLAINTEXT";
 	
 	mockCredentials.requestToken = @"empty";

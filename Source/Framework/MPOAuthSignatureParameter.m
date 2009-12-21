@@ -11,7 +11,7 @@
 #import "NSString+URLEscapingAdditions.h"
 #import "NSURL+MPURLParameterAdditions.h"
 
-#include "hmac.h"
+#import <CommonCrypto/CommonHMAC.h>
 #include "Base64Transcoder.h"
 
 @interface MPOAuthSignatureParameter ()
@@ -29,8 +29,14 @@
 + (NSString *)HMAC_SHA1SignatureForText:(NSString *)inText usingSecret:(NSString *)inSecret {
 	NSData *secretData = [inSecret dataUsingEncoding:NSUTF8StringEncoding];
 	NSData *textData = [inText dataUsingEncoding:NSUTF8StringEncoding];
-	unsigned char result[20];
-	hmac_sha1((unsigned char *)[textData bytes], [textData length], (unsigned char *)[secretData bytes], [secretData length], result);
+	unsigned char result[CC_SHA1_DIGEST_LENGTH];
+	//hmac_sha1((unsigned char *)[textData bytes], [textData length], (unsigned char *)[secretData bytes], [secretData length], result);
+
+	CCHmacContext hmacContext;
+	bzero(&hmacContext, sizeof(CCHmacContext));
+    CCHmacInit(&hmacContext, kCCHmacAlgSHA1, secretData.bytes, secretData.length);
+    CCHmacUpdate(&hmacContext, textData.bytes, textData.length);
+    CCHmacFinal(&hmacContext, result);
 	
 	//Base64 Encoding
 	char base64Result[32];

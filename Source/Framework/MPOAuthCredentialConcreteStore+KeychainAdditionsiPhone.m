@@ -1,25 +1,25 @@
 //
-//  MPOAuthAPI+TokenAdditionsiPhone.m
+//  MPOAuthCredentialConcreteStore+TokenAdditionsiPhone.m
 //  MPOAuthConnection
 //
 //  Created by Karl Adam on 08.12.13.
 //  Copyright 2008 matrixPointer. All rights reserved.
 //
 
-#import "MPOAuthAPI+KeychainAdditions.h"
+#import "MPOAuthCredentialConcreteStore+KeychainAdditions.h"
 #import <Security/Security.h>
 
 #if TARGET_OS_IPHONE && (!TARGET_IPHONE_SIMULATOR || __IPHONE_3_0)
 
-@interface MPOAuthAPI (TokenAdditionsiPhone)
+@interface MPOAuthCredentialConcreteStore (TokenAdditionsiPhone)
 - (NSString *)findValueFromKeychainUsingName:(NSString *)inName returningItem:(NSDictionary **)outKeychainItemRef;
 @end
 
-@implementation MPOAuthAPI (KeychainAdditions)
+@implementation MPOAuthCredentialConcreteStore (KeychainAdditions)
 
 - (void)addToKeychainUsingName:(NSString *)inName andValue:(NSString *)inValue {
-	NSString *serverName = [_baseURL host];
-	NSString *securityDomain = [_authenticationURL host];
+	NSString *serverName = [self.baseURL host];
+	NSString *securityDomain = [self.authenticationURL host];
 //	NSString *itemID = [NSString stringWithFormat:@"%@.oauth.%@", [[NSBundle mainBundle] bundleIdentifier], inName];
 	NSDictionary *searchDictionary = nil;
 	NSDictionary *keychainItemAttributeDictionary = [NSDictionary dictionaryWithObjectsAndKeys:	(id)kSecClassInternetPassword, kSecClass,
@@ -55,8 +55,8 @@
 
 - (NSString *)findValueFromKeychainUsingName:(NSString *)inName returningItem:(NSDictionary **)outKeychainItemRef {
 	NSString *foundPassword = nil;
-	NSString *serverName = [_baseURL host];
-	NSString *securityDomain = [_authenticationURL host];
+	NSString *serverName = [self.baseURL host];
+	NSString *securityDomain = [self.authenticationURL host];
 	NSDictionary *attributesDictionary = nil;
 	NSData *foundValue = nil;
 	OSStatus status = noErr;
@@ -86,13 +86,25 @@
 }
 
 - (void)removeValueFromKeychainUsingName:(NSString *)inName {
-	NSDictionary *aKeychainItem = NULL;
+	NSString *serverName = [self.baseURL host];
+	NSString *securityDomain = [self.authenticationURL host];
+
+	NSMutableDictionary *searchDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:	(id)kSecClassInternetPassword, (id)kSecClass,
+																								 securityDomain, (id)kSecAttrSecurityDomain,
+																								 serverName, (id)kSecAttrServer,
+																								 inName, (id)kSecAttrAccount,
+																								 nil];
 	
-	[self findValueFromKeychainUsingName:inName returningItem:&aKeychainItem];
-	
-	if (aKeychainItem) {
-		SecItemDelete((CFDictionaryRef)aKeychainItem);
+	OSStatus success = SecItemDelete((CFDictionaryRef)searchDictionary);
+
+	if (success == errSecNotAvailable) {
+		[NSException raise:@"Keychain Not Available" format:@"Keychain Access Not Currently Available"];
+	} else if (success == errSecParam) {
+		[NSException raise:@"Keychain parameter error" format:@"One or more parameters passed to the function were not valid from %@", searchDictionary];
+	} else if (success == errSecAllocate) {
+		[NSException raise:@"Keychain memory error" format:@"Failed to allocate memory"];			
 	}
+		
 }
 
 @end

@@ -13,6 +13,7 @@
 
 - (NSURL *)urlByAddingParameters:(NSArray *)inParameters;
 - (NSURL *)urlByAddingParameterDictionary:(NSDictionary *)inParameters;
+- (NSURL *)urlByRemovingQuery;
 - (NSString *)absoluteNormalizedString;
 
 - (BOOL)domainMatches:(NSString *)inString;

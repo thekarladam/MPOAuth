@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *MPOAuthNotificationRequestTokenReceived;
-extern NSString *MPOAuthNotificationRequestTokenRejected;
-extern NSString *MPOAuthNotificationAccessTokenReceived;
-extern NSString *MPOAuthNotificationAccessTokenRejected;
-extern NSString *MPOAuthNotificationAccessTokenRefreshed;
-extern NSString *MPOAuthNotificationErrorHasOccurred;
+extern NSString * const MPOAuthNotificationRequestTokenReceived;
+extern NSString * const MPOAuthNotificationRequestTokenRejected;
+extern NSString * const MPOAuthNotificationAccessTokenReceived;
+extern NSString * const MPOAuthNotificationAccessTokenRejected;
+extern NSString * const MPOAuthNotificationAccessTokenRefreshed;
+extern NSString * const MPOAuthNotificationErrorHasOccurred;
 
 @protocol MPOAuthCredentialStore;
 @protocol MPOAuthParameterFactory;
