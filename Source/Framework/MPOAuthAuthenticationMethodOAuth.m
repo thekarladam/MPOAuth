@@ -118,7 +118,7 @@ NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 	NSURL *callbackURL = nil;
 	
 	if (!self.oauth10aModeActive) {
-		[self.delegate respondsToSelector:@selector(callbackURLForCompletedUserAuthorization)] ? [self.delegate callbackURLForCompletedUserAuthorization] : nil;
+		callbackURL = [self.delegate respondsToSelector:@selector(callbackURLForCompletedUserAuthorization)] ? [self.delegate callbackURLForCompletedUserAuthorization] : nil;
 	}
 	
 	NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:	[oauthResponseParameters objectForKey:	@"oauth_token"], @"oauth_token",
