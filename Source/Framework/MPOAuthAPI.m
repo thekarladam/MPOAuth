@@ -45,6 +45,10 @@ NSString *kMPOAuthSignatureMethod					= @"kMPOAuthSignatureMethod";
 }
 
 - (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL {
+	return [self initWithCredentials:inCredentials authenticationURL:inBaseURL andBaseURL:inBaseURL autoStart:YES];	
+}
+
+- (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL autoStart:(BOOL)aFlag {
 	if (self = [super init]) {
 		self.authenticationURL = inAuthURL;
 		self.baseURL = inBaseURL;
@@ -55,8 +59,9 @@ NSString *kMPOAuthSignatureMethod					= @"kMPOAuthSignatureMethod";
 
 		activeLoaders_ = [[NSMutableArray alloc] initWithCapacity:10];
 		
-		
-		[self authenticate];
+		if (aFlag) {
+			[self authenticate];
+		}
 	}
 	return self;	
 }

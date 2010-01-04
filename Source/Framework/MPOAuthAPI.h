@@ -62,6 +62,7 @@ typedef enum {
 
 - (id)initWithCredentials:(NSDictionary *)inCredentials andBaseURL:(NSURL *)inURL;
 - (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL;
+- (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL autoStart:(BOOL)aFlag;
 
 - (void)authenticate;
 - (BOOL)isAuthenticated;
