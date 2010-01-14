@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MPOAuthAuthenticationMethod.h"
 #import "MPOAuthAPI.h"
+#import "MPOAuthAPIRequestLoader.h"
 
 extern NSString * const MPOAuthNotificationRequestTokenReceived;
 extern NSString * const MPOAuthNotificationRequestTokenRejected;
@@ -29,10 +30,15 @@ extern NSString * const MPOAuthNotificationRequestTokenRejected;
 @property (nonatomic, readwrite, retain) NSURL *oauthAuthorizeTokenURL;
 
 - (void)authenticate;
+- (void)loader:(MPOAuthAPIRequestLoader *)inLoader didFailWithError:(NSError*)error;
+
 @end
 
 @protocol MPOAuthAuthenticationMethodOAuthDelegate <NSObject>
 - (NSURL *)callbackURLForCompletedUserAuthorization;
 - (BOOL)automaticallyRequestAuthenticationFromURL:(NSURL *)inAuthURL withCallbackURL:(NSURL *)inCallbackURL;
+
+@optional
+- (void)authenticationDidFailWithError:(NSError*)error;
 @end
 

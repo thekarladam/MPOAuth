@@ -41,6 +41,7 @@ NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 - (void)_authenticationRequestForRequestToken;
 - (void)_authenticationRequestForUserPermissionsConfirmationAtURL:(NSURL *)inURL;
 - (void)_authenticationRequestForAccessToken;
+
 @end
 
 @implementation MPOAuthAuthenticationMethodOAuth
@@ -131,6 +132,13 @@ NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 	if (!delegateWantsToBeInvolved || (delegateWantsToBeInvolved && [self.delegate automaticallyRequestAuthenticationFromURL:userAuthURL withCallbackURL:callbackURL])) {
 		MPLog(@"--> Automatically Performing User Auth Request: %@", userAuthURL);
 		[self _authenticationRequestForUserPermissionsConfirmationAtURL:userAuthURL];
+	}
+}
+
+- (void)loader:(MPOAuthAPIRequestLoader *)inLoader didFailWithError:(NSError*)error
+{
+	if ([self.delegate respondsToSelector:@selector(authenticationDidFailWithError:)]) {
+		[self.delegate authenticationDidFailWithError: error];
 	}
 }
 
