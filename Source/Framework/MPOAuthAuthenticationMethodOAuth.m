@@ -16,7 +16,6 @@
 
 #import "NSURL+MPURLParameterAdditions.h"
 
-
 #define kMPOAuthTokenRefreshDateDefaultsKey			@"MPOAuthAutomaticTokenRefreshLastExpiryDate"
 
 NSString *MPOAuthRequestTokenURLKey					= @"MPOAuthRequestTokenURL";
@@ -135,8 +134,7 @@ NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 	}
 }
 
-- (void)loader:(MPOAuthAPIRequestLoader *)inLoader didFailWithError:(NSError*)error
-{
+- (void)loader:(MPOAuthAPIRequestLoader *)inLoader didFailWithError:(NSError *)error {
 	if ([self.delegate respondsToSelector:@selector(authenticationDidFailWithError:)]) {
 		[self.delegate authenticationDidFailWithError: error];
 	}

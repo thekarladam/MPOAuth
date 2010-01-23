@@ -30,7 +30,6 @@
 	NSData *secretData = [inSecret dataUsingEncoding:NSUTF8StringEncoding];
 	NSData *textData = [inText dataUsingEncoding:NSUTF8StringEncoding];
 	unsigned char result[CC_SHA1_DIGEST_LENGTH];
-	//hmac_sha1((unsigned char *)[textData bytes], [textData length], (unsigned char *)[secretData bytes], [secretData length], result);
 
 	CCHmacContext hmacContext;
 	bzero(&hmacContext, sizeof(CCHmacContext));
