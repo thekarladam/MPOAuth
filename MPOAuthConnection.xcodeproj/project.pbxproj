@@ -104,14 +104,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D1107260486CEB800E47090 /* MPOAuthConnection */;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = MPOAuthConnection;
 		};
 		CB00AD58110A605B0089972A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CB00ACEE110A5F470089972A /* libMPOAuth */;
+			remoteGlobalIDString = CB00ACEE110A5F470089972A;
 			remoteInfo = libMPOAuth;
 		};
 		CB920E750EF3D46000A89BBD /* PBXContainerItemProxy */ = {
