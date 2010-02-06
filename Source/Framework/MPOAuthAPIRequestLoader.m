@@ -172,8 +172,13 @@ NSString * const MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErr
 																			object:nil
 																		  userInfo:foundParameters];
 						
-					}
+					}						
 				}
+				
+				// something's messed up, so throw an error
+				[[NSNotificationCenter defaultCenter] postNotificationName:MPOAuthNotificationErrorHasOccurred
+																	object:nil
+																  userInfo:foundParameters];
 			}
 		} else if ([response length] > 11 && [[response substringToIndex:11] isEqualToString:@"oauth_token"]) {
 			NSString *aParameterValue = nil;

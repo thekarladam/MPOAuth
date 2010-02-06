@@ -27,6 +27,7 @@ NSString * const MPOAuthCredentialRequestTokenSecretKey		= @"oauth_token_request
 NSString * const MPOAuthCredentialAccessTokenKey			= @"oauth_token_access";
 NSString * const MPOAuthCredentialAccessTokenSecretKey		= @"oauth_token_access_secret";
 NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
+NSString * const MPOAuthCredentialVerifierKey				= @"oauth_verifier";
 
 //TODO: Remove this!
 @interface MPOAuthAPI ()
@@ -81,10 +82,10 @@ NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 		[self _authenticationRequestForRequestToken];
 	} else if (!credentials.accessToken) {
 		[self _authenticationRequestForAccessToken];
-	} else if (credentials.accessToken) {
+	} else if (credentials.accessToken && [[NSUserDefaults standardUserDefaults] objectForKey:kMPOAuthTokenRefreshDateDefaultsKey]) {
 		NSTimeInterval expiryDateInterval = [[NSUserDefaults standardUserDefaults] doubleForKey:kMPOAuthTokenRefreshDateDefaultsKey];
 		NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceReferenceDate:expiryDateInterval];
-		
+			
 		if ([tokenExpiryDate compare:[NSDate date]] == NSOrderedAscending) {
 			[self refreshAccessToken];
 		}
@@ -106,7 +107,6 @@ NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 		}
 		
 		NSArray *params = [NSArray arrayWithObject:callbackParameter];
-		
 		[self.oauthAPI performMethod:nil atURL:self.oauthRequestTokenURL withParameters:params withTarget:self andAction:@selector(_authenticationRequestForRequestTokenSuccessfulLoad:withData:)];
 	}
 }
@@ -149,9 +149,21 @@ NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 }
 
 - (void)_authenticationRequestForAccessToken {
+	NSArray *params = nil;
+	
+	if (self.delegate && [self.delegate respondsToSelector: @selector(oauthVerifierForCompletedUserAuthorization)]) {
+		MPURLRequestParameter *verifierParameter = nil;
+
+		NSString *verifier = [self.delegate oauthVerifierForCompletedUserAuthorization];
+		if (verifier) {
+			verifierParameter = [[[MPURLRequestParameter alloc] initWithName:@"oauth_verifier" andValue:verifier] autorelease];
+			params = [NSArray arrayWithObject:verifierParameter];
+		}
+	}
+	
 	if (self.oauthGetAccessTokenURL) {
 		MPLog(@"--> Performing Access Token Request: %@", self.oauthGetAccessTokenURL);
-		[self.oauthAPI performMethod:nil atURL:self.oauthGetAccessTokenURL withParameters:nil withTarget:self andAction:nil];
+		[self.oauthAPI performMethod:nil atURL:self.oauthGetAccessTokenURL withParameters:params withTarget:self andAction:nil];
 	}
 }
 
@@ -184,12 +196,16 @@ NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 
 	[self.oauthAPI setAuthenticationState:MPOAuthAuthenticationStateAuthenticated];
 	
-	NSTimeInterval tokenRefreshInterval = (NSTimeInterval)[[[inNotification userInfo] objectForKey:@"oauth_expires_in"] intValue];
-	NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceNow:tokenRefreshInterval];
-	[[NSUserDefaults standardUserDefaults] setDouble:[tokenExpiryDate timeIntervalSinceReferenceDate] forKey:kMPOAuthTokenRefreshDateDefaultsKey];
+	if ([[inNotification userInfo] objectForKey:@"oauth_expires_in"]) {
+		NSTimeInterval tokenRefreshInterval = (NSTimeInterval)[[[inNotification userInfo] objectForKey:@"oauth_expires_in"] intValue];
+		NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceNow:tokenRefreshInterval];
+		[[NSUserDefaults standardUserDefaults] setDouble:[tokenExpiryDate timeIntervalSinceReferenceDate] forKey:kMPOAuthTokenRefreshDateDefaultsKey];
 	
-	if (tokenRefreshInterval > 0.0) {
-		[self setTokenRefreshInterval:tokenRefreshInterval];
+		if (tokenRefreshInterval > 0.0) {
+			[self setTokenRefreshInterval:tokenRefreshInterval];
+		}
+	} else {
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kMPOAuthTokenRefreshDateDefaultsKey];
 	}
 }
 

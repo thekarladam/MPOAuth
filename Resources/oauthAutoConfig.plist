@@ -11,6 +11,15 @@
 		<key>MPOAuthAccessTokenURL</key>
 		<string>https://api.login.yahoo.com/oauth/v2/get_token</string>
 	</dict>
+	<key>.twitter.com</key>
+	<dict>
+		<key>MPOAuthRequestTokenURL</key>
+		<string>http://twitter.com/oauth/request_token</string>
+		<key>MPOAuthUserAuthorizationURL</key>
+		<string>http://twitter.com/oauth/authorize</string>
+		<key>MPOAuthAccessTokenURL</key>
+		<string>http://twitter.com/oauth/access_token</string>
+	</dict>
 	<key>.google.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
@@ -76,6 +85,15 @@
 		<key>MPOAuthAccessTokenURL</key>
 		<string>https://ironmoney.com/oauth/access</string>
 	</dict>
+	<key>.meetup.com</key>
+	<dict>
+		<key>MPOAuthRequestTokenURL</key>
+		<string>http://www.meetup.com/oauth/request/</string>
+		<key>MPOAuthUserAuthorizationURL</key>
+		<string>http://www.meetup.com/authorize/</string>
+		<key>MPOAuthAccessTokenURL</key>
+		<string>http://www.meetup.com/oauth/access/</string>
+	</dict>
 	<key>.netflix.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
@@ -94,6 +112,24 @@
 		<key>MPOAuthAccessTokenURL</key>
 		<string>http://api.proofile.org/oauth/access_token</string>
 	</dict>
+	<key>.smugmug.com</key>
+	<dict>
+		<key>MPOAuthRequestTokenURL</key>
+		<string>http://api.smugmug.com/services/oauth/getRequestToken.mg</string>
+		<key>MPOAuthUserAuthorizationURL</key>
+		<string>http://api.smugmug.com/services/oauth/authorize.mg</string>
+		<key>MPOAuthAccessTokenURL</key>
+		<string>http://api.smugmug.com/services/oauth/getAccessToken.mg</string>
+	</dict>
+	<key>.soundcloud.com</key>
+	<dict>
+		<key>MPOAuthRequestTokenURL</key>
+		<string>http://api.soundcloud.com/oauth/request_token</string>
+		<key>MPOAuthUserAuthorizationURL</key>
+		<string>http://soundcloud.com/oauth/authorize_token</string>
+		<key>MPOAuthAccessTokenURL</key>
+		<string>http://api.soundcloud.com/oauth/request_token</string>
+	</dict>
 	<key>.tripit.com</key>
 	<dict>
 		<key>MPOAuthRequestTokenURL</key>
@@ -104,33 +140,6 @@
 		<string>https://m.tripit.com/oauth/authorize</string>
 		<key>MPOAuthAccessTokenURL</key>
 		<string>https://api.tripit.com/oauth/access_token</string>
-	</dict>
-	<key>.smugmug.com</key>
-	<dict>
-		<key>MPOAuthRequestTokenURL</key>
-		<string>http://api.smugmug.com/services/oauth/getRequestToken.mg</string>
-		<key>MPOAuthUserAuthorizationURL</key>
-		<string>http://api.smugmug.com/services/oauth/authorize.mg</string>
-		<key>MPOAuthAccessTokenURL</key>
-		<string>http://api.smugmug.com/services/oauth/getAccessToken.mg</string>
-	</dict>
-	<key>.twitter.com</key>
-	<dict>
-		<key>MPOAuthRequestTokenURL</key>
-		<string>http://twitter.com/oauth/request_token</string>
-		<key>MPOAuthUserAuthorizationURL</key>
-		<string>http://twitter.com/oauth/authorize</string>
-		<key>MPOAuthAccessTokenURL</key>
-		<string>http://twitter.com/oauth/access_token</string>
-	</dict>
-	<key>.soundcloud.com</key>
-	<dict>
-		<key>MPOAuthRequestTokenURL</key>
-		<string>http://api.soundcloud.com/oauth/request_token</string>
-		<key>MPOAuthUserAuthorizationURL</key>
-		<string>http://soundcloud.com/oauth/authorize_token</string>
-		<key>MPOAuthAccessTokenURL</key>
-		<string>http://api.soundcloud.com/oauth/request_token</string>
 	</dict>
 </dict>
 </plist>
