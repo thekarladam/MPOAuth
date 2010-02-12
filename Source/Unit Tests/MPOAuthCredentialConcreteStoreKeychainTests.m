@@ -12,7 +12,7 @@
 @implementation MPOAuthCredentialConcreteStoreKeychainTests
 
 - (void)setUp {
-	store_ = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:nil forBaseURL:nil];
+	store_ = [[MPOAuthCredentialConcreteStore alloc] initWithCredentials:nil forBaseURL:[NSURL URLWithString:@"http://example.com/oauth"]];
 }
 
 - (void)tearDown {
@@ -21,6 +21,9 @@
 }
 
 - (void)testWritingToAndReadingFromKeychain {
+	NSString *testValue = [store_ findValueFromKeychainUsingName:@"test_name"];
+	STAssertNil(testValue, @"The value read from the keychain for \"test_name\" should start as nil");
+	
 	[store_ addToKeychainUsingName:@"test_name" andValue:@"test_value"];
 	NSString *savedValue = [store_ findValueFromKeychainUsingName:@"test_name"];
 	STAssertEqualObjects(savedValue, @"test_value", @"The value read from the keychain \"%@\" was different from the one written to the keychain: %@", savedValue, @"test_value");

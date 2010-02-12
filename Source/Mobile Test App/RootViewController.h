@@ -13,7 +13,14 @@
 @interface RootViewController : UIViewController {
 	MPOAuthAPI	*_oauthAPI;
 	UITextField *methodInput;
+	UITextField *parametersInput;
 	UITextView	*textOutput;
 }
+
+@property (nonatomic, retain) IBOutlet UITextField *methodInput;
+@property (nonatomic, retain) IBOutlet UITextField *parametersInput;
+
+- (IBAction)clearCredentials;
+- (IBAction)reauthenticate;
 
 @end

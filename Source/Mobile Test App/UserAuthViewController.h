@@ -3,7 +3,7 @@
 //  MPOAuthMobile
 //
 //  Created by Karl Adam on 09.02.03.
-//  Copyright 2009 Yahoo. All rights reserved.
+//  Copyright 2009 matrixPointer. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

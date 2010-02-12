@@ -3,11 +3,12 @@
 //  MPOAuthMobile
 //
 //  Created by Karl Adam on 09.02.03.
-//  Copyright 2009 Yahoo. All rights reserved.
+//  Copyright 2009 matrixPointer. All rights reserved.
 //
 
 #import "UserAuthViewController.h"
 #import "MPOAuthAPI.h"
+#import "MPOAuthAuthenticationMethodOAuth.h"
 
 @implementation UserAuthViewController
 
@@ -49,7 +50,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	// this is a ghetto way to handle this, but it's for when you must use http:// URIs
 	// so that this demo will work correctly, this is an example, DONT.BE.GHETTO
-	NSURL *userAuthURL = [(id <MPOAuthAPIDelegate>)[UIApplication sharedApplication].delegate callbackURLForCompletedUserAuthorization];
+	NSURL *userAuthURL = [(id <MPOAuthAuthenticationMethodOAuthDelegate>)[UIApplication sharedApplication].delegate callbackURLForCompletedUserAuthorization];
 	if ([request.URL isEqual:userAuthURL]) {
 		[[self navigationController] popViewControllerAnimated:YES];
 		return NO;

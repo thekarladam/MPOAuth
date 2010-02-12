@@ -141,10 +141,10 @@ NSString * const MPOAuthCredentialVerifierKey				= @"oauth_verifier";
 }
 
 - (void)_authenticationRequestForUserPermissionsConfirmationAtURL:(NSURL *)userAuthURL {
-#ifndef TARGET_OS_IPHONE
-	[[NSWorkspace sharedWorkspace] openURL:userAuthURL];
-#else
+#if TARGET_OS_IPHONE
 	[[UIApplication sharedApplication] openURL:userAuthURL];
+#else
+	[[NSWorkspace sharedWorkspace] openURL:userAuthURL];
 #endif
 }
 
