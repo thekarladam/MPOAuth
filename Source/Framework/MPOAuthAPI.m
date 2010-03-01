@@ -140,6 +140,7 @@ NSString *kMPOAuthSignatureMethod					= @"kMPOAuthSignatureMethod";
 	MPOAuthURLRequest *aRequest = [[MPOAuthURLRequest alloc] initWithURL:requestURL andParameters:inParameters];
 	MPOAuthAPIRequestLoader *loader = [[MPOAuthAPIRequestLoader alloc] initWithRequest:aRequest];
 	
+	aRequest.HTTPMethod = inHTTPMethod;
 	loader.credentials = self.credentials;
 	loader.target = inTarget;
 	loader.action = inAction ? inAction : @selector(_performedLoad:receivingData:);
