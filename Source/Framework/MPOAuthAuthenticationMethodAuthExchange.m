@@ -90,6 +90,9 @@
 	}
 	
 	[self.oauthAPI setAuthenticationState:MPOAuthAuthenticationStateAuthenticated];
+	
+	xmlFreeDoc(accessTokenXML);
+	xmlFreeParserCtxt(parserContext);
 }
 
 @end
