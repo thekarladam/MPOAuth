@@ -13,6 +13,15 @@
 	</dict>
 	<key>.twitter.com</key>
 	<dict>
+		<key>MPOAuthAuthenticationPreferredMethods</key>
+		<array>
+			<string>MPOAuthAuthenticationMethodXAuth</string>
+		</array>
+		<key>MPOAuthAuthenticationMethodXAuth</key>
+		<dict>
+			<key>MPOAuthAccessTokenURL</key>
+			<string>https://api.twitter.com/oauth/access_token</string>
+		</dict>
 		<key>MPOAuthRequestTokenURL</key>
 		<string>http://twitter.com/oauth/request_token</string>
 		<key>MPOAuthUserAuthorizationURL</key>

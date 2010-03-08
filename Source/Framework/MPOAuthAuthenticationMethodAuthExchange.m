@@ -16,8 +16,6 @@
 #import <libxml/xpath.h>
 #import <libxml/xpathInternals.h>
 
-//TODO: Remove this!
-#define kMPOAuthTokenRefreshDateDefaultsKey			@"MPOAuthAutomaticTokenRefreshLastExpiryDate"
 @interface MPOAuthAPI ()
 @property (nonatomic, readwrite, assign) MPOAuthAuthenticationState authenticationState;
 @end
@@ -50,7 +48,7 @@
 							  withTarget:self
 							   andAction:nil];
 	} else if (credentials.accessToken && credentials.accessTokenSecret) {
-		NSTimeInterval expiryDateInterval = [[NSUserDefaults standardUserDefaults] doubleForKey:kMPOAuthTokenRefreshDateDefaultsKey];
+		NSTimeInterval expiryDateInterval = [[NSUserDefaults standardUserDefaults] doubleForKey:MPOAuthTokenRefreshDateDefaultsKey];
 		NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceReferenceDate:expiryDateInterval];
 		
 		if ([tokenExpiryDate compare:[NSDate date]] == NSOrderedAscending) {

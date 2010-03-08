@@ -27,6 +27,7 @@ NSString *kMPOAuthCredentialAccessTokenSecret		= @"kMPOAuthCredentialAccessToken
 NSString *kMPOAuthCredentialSessionHandle			= @"kMPOAuthCredentialSessionHandle";
 
 NSString *kMPOAuthSignatureMethod					= @"kMPOAuthSignatureMethod";
+NSString * const MPOAuthTokenRefreshDateDefaultsKey		= @"MPOAuthAutomaticTokenRefreshLastExpiryDate";
 
 @interface MPOAuthAPI ()
 @property (nonatomic, readwrite, retain) id <MPOAuthCredentialStore, MPOAuthParameterFactory> credentials;

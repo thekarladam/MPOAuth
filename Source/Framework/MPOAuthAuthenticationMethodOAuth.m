@@ -16,8 +16,6 @@
 
 #import "NSURL+MPURLParameterAdditions.h"
 
-#define kMPOAuthTokenRefreshDateDefaultsKey			@"MPOAuthAutomaticTokenRefreshLastExpiryDate"
-
 NSString *MPOAuthRequestTokenURLKey					= @"MPOAuthRequestTokenURL";
 NSString *MPOAuthUserAuthorizationURLKey			= @"MPOAuthUserAuthorizationURL";
 NSString *MPOAuthUserAuthorizationMobileURLKey		= @"MPOAuthUserAuthorizationMobileURL";
@@ -29,7 +27,6 @@ NSString * const MPOAuthCredentialAccessTokenSecretKey		= @"oauth_token_access_s
 NSString * const MPOAuthCredentialSessionHandleKey			= @"oauth_session_handle";
 NSString * const MPOAuthCredentialVerifierKey				= @"oauth_verifier";
 
-//TODO: Remove this!
 @interface MPOAuthAPI ()
 @property (nonatomic, readwrite, assign) MPOAuthAuthenticationState authenticationState;
 @end
@@ -82,8 +79,8 @@ NSString * const MPOAuthCredentialVerifierKey				= @"oauth_verifier";
 		[self _authenticationRequestForRequestToken];
 	} else if (!credentials.accessToken) {
 		[self _authenticationRequestForAccessToken];
-	} else if (credentials.accessToken && [[NSUserDefaults standardUserDefaults] objectForKey:kMPOAuthTokenRefreshDateDefaultsKey]) {
-		NSTimeInterval expiryDateInterval = [[NSUserDefaults standardUserDefaults] doubleForKey:kMPOAuthTokenRefreshDateDefaultsKey];
+	} else if (credentials.accessToken && [[NSUserDefaults standardUserDefaults] objectForKey:MPOAuthTokenRefreshDateDefaultsKey]) {
+		NSTimeInterval expiryDateInterval = [[NSUserDefaults standardUserDefaults] doubleForKey:MPOAuthTokenRefreshDateDefaultsKey];
 		NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceReferenceDate:expiryDateInterval];
 			
 		if ([tokenExpiryDate compare:[NSDate date]] == NSOrderedAscending) {
@@ -199,13 +196,13 @@ NSString * const MPOAuthCredentialVerifierKey				= @"oauth_verifier";
 	if ([[inNotification userInfo] objectForKey:@"oauth_expires_in"]) {
 		NSTimeInterval tokenRefreshInterval = (NSTimeInterval)[[[inNotification userInfo] objectForKey:@"oauth_expires_in"] intValue];
 		NSDate *tokenExpiryDate = [NSDate dateWithTimeIntervalSinceNow:tokenRefreshInterval];
-		[[NSUserDefaults standardUserDefaults] setDouble:[tokenExpiryDate timeIntervalSinceReferenceDate] forKey:kMPOAuthTokenRefreshDateDefaultsKey];
+		[[NSUserDefaults standardUserDefaults] setDouble:[tokenExpiryDate timeIntervalSinceReferenceDate] forKey:MPOAuthTokenRefreshDateDefaultsKey];
 	
 		if (tokenRefreshInterval > 0.0) {
 			[self setTokenRefreshInterval:tokenRefreshInterval];
 		}
 	} else {
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kMPOAuthTokenRefreshDateDefaultsKey];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:MPOAuthTokenRefreshDateDefaultsKey];
 	}
 }
 

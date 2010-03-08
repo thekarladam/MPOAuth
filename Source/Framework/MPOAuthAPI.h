@@ -22,6 +22,7 @@ extern NSString * const MPOAuthCredentialAccessTokenKey;
 extern NSString * const MPOAuthCredentialAccessTokenSecretKey;
 extern NSString * const MPOAuthCredentialSessionHandleKey;
 
+extern NSString * const MPOAuthTokenRefreshDateDefaultsKey;
 
 typedef enum {
 	MPOAuthSignatureSchemePlainText,
