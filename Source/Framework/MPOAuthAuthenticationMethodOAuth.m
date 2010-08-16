@@ -59,6 +59,8 @@ NSString * const MPOAuthCredentialVerifierKey				= @"oauth_verifier";
 }
 
 - (oneway void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	self.oauthRequestTokenURL = nil;
 	self.oauthAuthorizeTokenURL = nil;
 
