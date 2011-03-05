@@ -11,6 +11,10 @@
 #import "MPOAuthAPI.h"
 #import "MPOAuthAPIRequestLoader.h"
 
+extern NSString * const MPOAuthRequestTokenURLKey;
+extern NSString * const MPOAuthUserAuthorizationURLKey;
+extern NSString * const MPOAuthUserAuthorizationMobileURLKey;
+
 extern NSString * const MPOAuthNotificationRequestTokenReceived;
 extern NSString * const MPOAuthNotificationRequestTokenRejected;
 

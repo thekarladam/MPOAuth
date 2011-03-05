@@ -152,7 +152,7 @@ NSString * const MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErr
 		foundParameters = [MPURLRequestParameter parameterDictionaryFromString:response];
 		self.oauthResponse.oauthParameters = foundParameters;
 		
-		if (status == 401 || ([response length] > 13 && [[response substringToIndex:13] isEqualToString:@"oauth_problem"])) {
+		if (status == 401 || [foundParameters objectForKey:@"oauth_problem"]) {
 			NSString *aParameterValue = nil;
 			MPLog(@"oauthProblem = %@", foundParameters);
 			
@@ -180,7 +180,7 @@ NSString * const MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErr
 																	object:nil
 																  userInfo:foundParameters];
 			}
-		} else if ([response length] > 11 && [[response substringToIndex:11] isEqualToString:@"oauth_token"]) {
+		} else if ([foundParameters objectForKey:@"oauth_token"]) {
 			NSString *aParameterValue = nil;
 			MPLog(@"foundParameters = %@", foundParameters);
 

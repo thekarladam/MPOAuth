@@ -46,7 +46,9 @@
 										  authenticationURL:[NSURL URLWithString:@"https://twitter.com/oauth/"]
 												 andBaseURL:[NSURL URLWithString:@"https://twitter.com/"]];
 		
-		[(MPOAuthAuthenticationMethodOAuth *)[_oauthAPI authenticationMethod] setDelegate:(id <MPOAuthAuthenticationMethodOAuthDelegate>)[UIApplication sharedApplication].delegate];
+		if ([[_oauthAPI authenticationMethod] respondsToSelector:@selector(setDelegate:)]) {
+			[(MPOAuthAuthenticationMethodOAuth *)[_oauthAPI authenticationMethod] setDelegate:(id <MPOAuthAuthenticationMethodOAuthDelegate>)[UIApplication sharedApplication].delegate];
+		}
 	} else {
 		[_oauthAPI authenticate];
 	}

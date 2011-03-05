@@ -24,6 +24,9 @@ extern NSString * const MPOAuthCredentialSessionHandleKey;
 
 extern NSString * const MPOAuthTokenRefreshDateDefaultsKey;
 
+extern NSString * const MPOAuthBaseURLKey;
+extern NSString * const MPOAuthAuthenticationURLKey;
+
 typedef enum {
 	MPOAuthSignatureSchemePlainText,
 	MPOAuthSignatureSchemeHMACSHA1,
@@ -64,12 +67,15 @@ typedef enum {
 - (id)initWithCredentials:(NSDictionary *)inCredentials andBaseURL:(NSURL *)inURL;
 - (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL;
 - (id)initWithCredentials:(NSDictionary *)inCredentials authenticationURL:(NSURL *)inAuthURL andBaseURL:(NSURL *)inBaseURL autoStart:(BOOL)aFlag;
+- (id)initWithCredentials:(NSDictionary *)inCredentials withConfiguration:(NSDictionary *)inConfiguration autoStart:(BOOL)aFlag;
 
 - (void)authenticate;
 - (BOOL)isAuthenticated;
 
 - (void)performMethod:(NSString *)inMethod withTarget:(id)inTarget andAction:(SEL)inAction;
+- (void)performMethod:(NSString *)inMethod withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction;
 - (void)performMethod:(NSString *)inMethod atURL:(NSURL *)inURL withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction;
+- (void)performPOSTMethod:(NSString *)inMethod withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction;
 - (void)performPOSTMethod:(NSString *)inMethod atURL:(NSURL *)inURL withParameters:(NSArray *)inParameters withTarget:(id)inTarget andAction:(SEL)inAction;
 - (void)performURLRequest:(NSURLRequest *)inRequest withTarget:(id)inTarget andAction:(SEL)inAction;
 

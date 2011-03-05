@@ -30,7 +30,7 @@ NSString * const MPOAuthAccessTokenURLKey					= @"MPOAuthAccessTokenURL";
 
 - (id)initWithAPI:(MPOAuthAPI *)inAPI forURL:(NSURL *)inURL withConfiguration:(NSDictionary *)inConfig {
 	if ([[self class] isEqual:[MPOAuthAuthenticationMethod class]]) {
-		NSDictionary *configuration = nil;
+		NSDictionary *configuration = inConfig;
 		Class methodClass = [[self class] _authorizationMethodClassForURL:inURL withConfiguration:&configuration];
 		[self release];
 		

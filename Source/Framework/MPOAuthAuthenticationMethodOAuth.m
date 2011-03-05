@@ -16,9 +16,9 @@
 
 #import "NSURL+MPURLParameterAdditions.h"
 
-NSString *MPOAuthRequestTokenURLKey					= @"MPOAuthRequestTokenURL";
-NSString *MPOAuthUserAuthorizationURLKey			= @"MPOAuthUserAuthorizationURL";
-NSString *MPOAuthUserAuthorizationMobileURLKey		= @"MPOAuthUserAuthorizationMobileURL";
+NSString * const MPOAuthRequestTokenURLKey					= @"MPOAuthRequestTokenURL";
+NSString * const MPOAuthUserAuthorizationURLKey				= @"MPOAuthUserAuthorizationURL";
+NSString * const MPOAuthUserAuthorizationMobileURLKey		= @"MPOAuthUserAuthorizationMobileURL";
 
 NSString * const MPOAuthCredentialRequestTokenKey			= @"oauth_token_request";
 NSString * const MPOAuthCredentialRequestTokenSecretKey		= @"oauth_token_request_secret";
