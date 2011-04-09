@@ -73,7 +73,9 @@
 			[parameterScanner scanUpToString:@"&" intoString:&value];
 			[parameterScanner scanString:@"&" intoString:NULL];		
 			
-			[foundParameters setObject:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:name];
+			if (name && value) {
+				[foundParameters setObject:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:name];
+			}
 		}
 		
 		[parameterScanner release];
