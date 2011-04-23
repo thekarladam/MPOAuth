@@ -60,7 +60,7 @@
 	return [self.parameters filteredArrayUsingPredicate:filterPredicate];
 }
 
-- (NSString *)buildAuthString:(NSString*)parameterString {
+- (NSString *)authorizationHeaderValueFromParameterString:(NSString *)parameterString {
 	NSDictionary *paramsDict = [MPURLRequestParameter parameterDictionaryFromString:parameterString];
 	NSString *signature = [[paramsDict objectForKey:@"oauth_signature"] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	NSString *nonce = [[paramsDict objectForKey:@"oauth_nonce"] stringByAddingURIPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -100,7 +100,7 @@
 	} else if  ([[self HTTPMethod] isEqualToString:@"POST"]) {
 		NSArray *nonOauthParameters = [self nonOAuthParameters];
 		urlString = [self.url absoluteString];
-		[aRequest setValue: [self buildAuthString:parameterString] forHTTPHeaderField:@"Authorization"];
+		[aRequest setValue: [self authorizationHeaderValueFromParameterString:parameterString] forHTTPHeaderField:@"Authorization"];
 
 		if ([nonOauthParameters count] && [aRequest HTTPBody]) {
 			[NSException raise:@"MalformedHTTPPOSTMethodException" format:@"The request has both an HTTP Body and additional parameters. This is not supported."];
