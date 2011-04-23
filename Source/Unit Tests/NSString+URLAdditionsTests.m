@@ -3,7 +3,7 @@
 //  MPOAuthConnection
 //
 //  Created by Karl Adam on 09.01.29.
-//  Copyright 2009 Yahoo. All rights reserved.
+//  Copyright 2009 matrixPointer. All rights reserved.
 //
 
 #import "NSString+URLAdditionsTests.h"
