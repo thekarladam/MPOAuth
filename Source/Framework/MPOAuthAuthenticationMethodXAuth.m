@@ -3,7 +3,7 @@
 //  MPOAuth
 //
 //  Created by Karl Adam on 10.03.07.
-//  Copyright 2010 Yahoo. All rights reserved.
+//  Copyright 2010 matrixPointer. All rights reserved.
 //
 
 #import "MPOAuthAuthenticationMethodXAuth.h"
