@@ -13,7 +13,7 @@
 @implementation UserAuthViewController
 
 - (id)initWithURL:(NSURL *)inURL {
-	if (self = [super initWithNibName:@"UserAuthViewController" bundle:nil]) {
+	if ((self = [super initWithNibName:@"UserAuthViewController" bundle:nil])) {
 		self.title = @"User Auth";
 		self.navigationItem.prompt = @"Request Authorization for this application";
 		self.userAuthURL = inURL;

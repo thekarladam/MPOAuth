@@ -51,7 +51,7 @@
 	if ([inMethod isEqual:kMPOAuthSignatureMethodHMACSHA1]) {
 		self = [self initUsingHMAC_SHA1WithText:inText andSecret:inSecret forRequest:inRequest];
 	} else if ([inMethod isEqualToString:kMPOAuthSignatureMethodPlaintext]) {
-		if (self = [super init]) {
+		if ((self = [super init])) {
 			self.name = @"oauth_signature";
 			self.value = inSecret;
 		}
@@ -65,7 +65,7 @@
 }
 
 - (id)initUsingHMAC_SHA1WithText:(NSString *)inText andSecret:(NSString *)inSecret forRequest:(MPOAuthURLRequest *)inRequest {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		NSString *signatureBaseString = [MPOAuthSignatureParameter signatureBaseStringUsingParameterString:inText forRequest:inRequest];
 
 		self.name = @"oauth_signature";

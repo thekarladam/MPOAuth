@@ -44,7 +44,7 @@ NSString * const MPOAuthCredentialVerifierKey				= @"oauth_verifier";
 @implementation MPOAuthAuthenticationMethodOAuth
 
 - (id)initWithAPI:(MPOAuthAPI *)inAPI forURL:(NSURL *)inURL withConfiguration:(NSDictionary *)inConfig {
-	if (self = [super initWithAPI:inAPI forURL:inURL withConfiguration:inConfig]) {
+	if ((self = [super initWithAPI:inAPI forURL:inURL withConfiguration:inConfig])) {
 		
 		NSAssert( [inConfig count] >= 3, @"Incorrect number of oauth authorization methods");
 		self.oauthRequestTokenURL = [NSURL URLWithString:[inConfig objectForKey:MPOAuthRequestTokenURLKey]];
