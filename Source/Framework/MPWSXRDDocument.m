@@ -23,13 +23,13 @@
 @implementation MPWSXRDDocument
 
 - (id)initFromURL:(NSURL *)inURL {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 	}
 	return self;
 }
 
 - (id)iniWithString:(NSString *)inString {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		[self _parseStringForContent:inString];
 	}
 	return self;

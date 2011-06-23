@@ -23,7 +23,7 @@
 @implementation MPOAuthAuthenticationMethodAuthExchange
 
 - (id)initWithAPI:(MPOAuthAPI *)inAPI forURL:(NSURL *)inURL withConfiguration:(NSDictionary *)inConfig {
-	if (self = [super initWithAPI:inAPI forURL:inURL withConfiguration:inConfig]) {
+	if ((self = [super initWithAPI:inAPI forURL:inURL withConfiguration:inConfig])) {
 		self.oauthGetAccessTokenURL = [NSURL URLWithString:[inConfig objectForKey:MPOAuthAccessTokenURLKey]];
 	}
 	return self;

@@ -46,7 +46,7 @@ NSString * const MPOAuthNotificationErrorHasOccurred		= @"MPOAuthNotificationErr
 }
 
 - (id)initWithRequest:(MPOAuthURLRequest *)inRequest {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		self.oauthRequest = inRequest;
 		_dataBuffer = [[NSMutableData alloc] init];
 	}

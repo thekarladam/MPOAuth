@@ -11,7 +11,7 @@
 @implementation OAuthClientController
 
 - (id)init {
-	if (self = [super init]) {		
+	if ((self = [super init])) {		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestTokenReceived:) name:MPOAuthNotificationRequestTokenReceived object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessTokenReceived:) name:MPOAuthNotificationAccessTokenReceived object:nil];
 	}
